@@ -6,25 +6,24 @@ import averageSymbol from "../../assets/img/symbol-average.svg";
 function Dashboardheader(props) {
   return (
     <>
-      <DashboardheaderWrapper>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-md-4 col-sm-6">
+      <div className="container">
+        <DashboardheaderWrapper>
+          <div className="row align-items-center justify-content-center">
+            <div className="col-md-4 text-center">
               <img
                 src={averageSymbol}
                 style={{ marginBottom: "15px" }}
                 width="25px"
                 alt=""
               />
-              <h1 className="h1 d-inline ml-2">21540$</h1>
+              <h1 className="h1 d-inline ml-2 text-primary">21540$</h1>
             </div>
-            <div className="col-md-4 col-sm-6">
+            <div className="col-md-4 justify-content-center text-center">
               <p className="header--24h">Volume: 200.3 mio</p>
               <p className="header--24h">Biggest Order: 2.3 mio</p>
               <p className="header--24h">Low/High: 18900/22500 $</p>
             </div>
-            <div className="col-md-4 col-sm-6">
-              {" "}
+            <div className="col-md-4">
               <img
                 src={chartSample}
                 alt=""
@@ -34,8 +33,8 @@ function Dashboardheader(props) {
               />
             </div>
           </div>
-        </div>
-      </DashboardheaderWrapper>
+        </DashboardheaderWrapper>
+      </div>
     </>
   );
 }
@@ -46,7 +45,8 @@ export default Dashboardheader;
 
 const DashboardheaderWrapper = styled.div`
   padding-top: 20px;
-  margin-bottom: 40px;
+  margin: 0 auto;
+  width: 80%;
   color: var(--secondary);
   .header--24h {
     margin: 0;

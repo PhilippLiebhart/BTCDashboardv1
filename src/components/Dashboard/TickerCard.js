@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import chartSample from "../../assets/img/chart-sample.svg";
+import Websockettest from "../../hooks/websockettest";
 
 const TickerCard = () => {
   return (
@@ -9,7 +10,7 @@ const TickerCard = () => {
       <TickerCardWrapper>
         <div className="row">
           <div className="col-6">
-            <ExchangeName>BINANCE</ExchangeName>
+            <ExchangeName>PHEMEX</ExchangeName>
           </div>
           <div className="col-6">
             {" "}
@@ -25,7 +26,9 @@ const TickerCard = () => {
         <hr />
         <div className="row">
           <div className="col-7">
-            <Price>21453 $</Price>
+            <Price>
+              <Websockettest />
+            </Price>
             <Percent>+50 % </Percent>
           </div>
           <div className="col-5">

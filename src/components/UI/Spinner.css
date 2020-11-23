@@ -1,0 +1,43 @@
+h1 {
+  color: rgba(0, 250, 255, 299);
+}
+.PULSE {
+  /* Chrome, Safari, Opera */
+  -webkit-animation: PULSE 1s infinite ease;
+
+  /* Internet Explorer */
+  -ms-animation: PULSE 1s infinite ease;
+
+  /* Standard Syntax */
+  animation: PULSE 1.55s infinite ease;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes PULSE {
+  0% {
+    color: rgba(255, 0, 255);
+  }
+  110% {
+    color: black;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes PULSE {
+  0% {
+    color: rgba(255, 255, 0);
+  }
+  110% {
+    color: black;
+  }
+}
+
+/* Standard Syntax */
+@keyframes PULSE {
+  0% {
+    color: var(--dark);
+  }
+  110% {
+    color: black;
+  }
+}

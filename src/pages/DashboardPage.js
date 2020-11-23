@@ -1,8 +1,6 @@
-import PropTypes from "prop-types";
-import { useEffect } from "react";
 import styled from "styled-components";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
-import Finhubnewsfeed from "../components/Dashboard/FinHubNewsfeed";
+import Finhubnewsfeed from "../components/Dashboard/FinhubNewsfeed";
 import Tickercard from "../components/Dashboard/TickerCard";
 import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
 function Dashboardpage(props) {
@@ -10,21 +8,20 @@ function Dashboardpage(props) {
     <>
       <DashboardWrapper>
         <div className="container-fluid">
-          <div className="section">
+          <div className="section  mb-5">
             <DashboardHeader />
           </div>
-          <div className="section d-flex flex-wrap justify-content-center">
-            <Tickercard />
-            <Tickercard />
+        </div>
+        <div className="section d-flex flex-wrap justify-content-center">
+          <Tickercard />
+        </div>
+        <div className="section">
+          <div className="container  d-flex flex-wrap">
+            <Finhubnewsfeed />
+            <TwitterWidgetWrapper>
+              <TwitterWidget />
+            </TwitterWidgetWrapper>
           </div>
-        </div>
-        <div className="section">
-          <TwitterWidgetWrapper>
-            <TwitterWidget />
-          </TwitterWidgetWrapper>
-        </div>
-        <div className="section">
-          <Finhubnewsfeed />
         </div>
       </DashboardWrapper>
     </>

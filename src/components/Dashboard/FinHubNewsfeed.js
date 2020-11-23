@@ -1,21 +1,40 @@
-import PropTypes from "prop-types";
-import { useEffect } from "react";
+import styled from "styled-components";
+import Spinner from "../UI/Spinner";
 
 import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
+import FinhubnewsItem from "../../pages/FinhubNewsItem";
 
 function Finhubnewsfeed(props) {
-  const [FinhubNews] = useFinhubNewsfeed();
+  const [finhubNews] = useFinhubNewsfeed();
 
-  console.log("GET NEWS FEEEEEED:", FinhubNews);
+  console.log("GET NEWS FEEEEEED:", finhubNews);
+
+  const headlineList = finhubNews.slice(0, 5).map((newsItem, index) => {
+    return (
+      <>
+        <FinhubnewsItem
+          key={newsItem.id}
+          id={newsItem.id}
+          headline={newsItem.headline}
+          summary={newsItem.summary}
+          url={newsItem.url}
+          time={newsItem.datetime}
+        />
+      </>
+    );
+  });
 
   return (
-    <>
-      <h1>
-        {FinhubNews.length < 1 ? <p>I AM LOADING NEWS</p> : <p>NEWS LOADED</p>}
-      </h1>
-    </>
+    <NewsFeedWrapper>
+      <h3 className="h6 text-left">Finhub Crypto News:</h3>
+      {finhubNews.length < 1 ? <Spinner /> : headlineList}
+    </NewsFeedWrapper>
   );
 }
+
+const NewsFeedWrapper = styled.div`
+  width: 500px;
+`;
 
 Finhubnewsfeed.propTypes = {};
 

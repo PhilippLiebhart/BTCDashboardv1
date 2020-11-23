@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 
 const useFinhubNewsfeed = () => {
-  const [FinhubNews, setFinhubNews] = useState([]);
-
-  console.log("ENVVV", process.env);
+  const [finhubNews, setFinhubNews] = useState([]);
 
   useEffect(() => {
     Axios.get(
-      `https://finnhub.io/api/v1/news?category=general&token=${process.env.REACT_APP_FINHUB_API_TOKEN}`
-    ).then((res) => setFinhubNews(res.data));
+      `https://finnhub.io/api/v1/news?category=crypto&minId=10&token=${process.env.REACT_APP_FINHUB_API_TOKEN}`
+    )
+      .then((res) => {
+        console.log("RED", res);
+        setFinhubNews(res.data);
+      })
+      .catch((err) => console.error("FinHUB AXIOS ERROR!", err));
   }, []);
 
-  return [FinhubNews];
+  return [finhubNews];
 };
 
 export default useFinhubNewsfeed;
