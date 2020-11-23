@@ -33,10 +33,6 @@ const TickerCard = () => {
           </div>
         </div>
       </TickerCardWrapper>
-      <TickerCardWrapper>hula</TickerCardWrapper>
-      <TickerCardWrapper>hula</TickerCardWrapper>
-      <TickerCardWrapper>hula</TickerCardWrapper>
-      <TickerCardWrapper>hula</TickerCardWrapper>
     </>
   );
 };
@@ -53,12 +49,12 @@ const TickerCardWrapper = styled.div`
   border-radius: 10px;
   text-align: left;
 
-  background-color: #222831;
-  color: #00adb5;
+  background-color: var(--dark);
+  color: var(--primary);
 
   hr {
     height: 1px;
-    border-color: white;
+    border-color: var(--secondary);
     width: 100%;
     padding: 0;
     margin-top: 12px;
