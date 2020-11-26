@@ -2,9 +2,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import chartSample from "../../assets/img/chart-sample.svg";
-import Websockettest from "../../hooks/websockettest";
+//import Websockettest from "../../hooks/websockettest";
+
+import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerCard = () => {
+  const [tick, dayMarket] = usePhemexTicker();
+
   return (
     <>
       <TickerCardWrapper>
@@ -26,13 +30,13 @@ const TickerCard = () => {
         <hr />
         <div className="row">
           <div className="col-7">
-            <Price>
-              <Websockettest />
-            </Price>
-            <Percent>+50 % </Percent>
+            <Price>{tick.last}</Price>
+            <Percent className="text-warning">+50 % </Percent>
           </div>
           <div className="col-5">
-            <Volume>Volume 2.3mio</Volume>
+            <Volume>Vol {dayMarket?.market24h?.volume / 10000}</Volume>
+            <Volume>High {dayMarket?.market24h?.high / 10000}</Volume>
+            <Volume>Low {dayMarket?.market24h?.low / 10000}</Volume>
           </div>
         </div>
       </TickerCardWrapper>

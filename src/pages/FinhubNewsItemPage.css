@@ -1,0 +1,38 @@
+summary {
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0.25rem;
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-top: -10px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+details > summary::before {
+  position: absolute;
+  content: "+";
+  right: 20px;
+}
+details[open] > summary::after {
+  position: absolute;
+  content: "-";
+  right: 20px;
+}
+details[open] > summary::before {
+  position: absolute;
+  content: "";
+  right: 20px;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}

@@ -3,7 +3,10 @@ import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import Finhubnewsfeed from "../components/Dashboard/FinhubNewsfeed";
 import Tickercard from "../components/Dashboard/TickerCard";
 import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
+import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
+import Orderbook from "../components/Dashboard/Orderbook";
 function Dashboardpage(props) {
+  console.log("### DASHBOARDPAGE RENDER ###");
   return (
     <>
       <DashboardWrapper>
@@ -11,16 +14,17 @@ function Dashboardpage(props) {
           <div className="section  mb-5">
             <DashboardHeader />
           </div>
-        </div>
-        <div className="section d-flex flex-wrap justify-content-center">
-          <Tickercard />
-        </div>
-        <div className="section">
-          <div className="container  d-flex flex-wrap">
+          <div className="section d-flex flex-wrap justify-content-center mb-5">
+            <div>
+              {" "}
+              <Tickercard />
+              <FearAndGreedIndex />
+            </div>
+
             <Finhubnewsfeed />
-            <TwitterWidgetWrapper>
-              <TwitterWidget />
-            </TwitterWidgetWrapper>
+
+            <TwitterWidget />
+            <Orderbook />
           </div>
         </div>
       </DashboardWrapper>
@@ -39,6 +43,7 @@ const DashboardWrapper = styled.div`
 `;
 
 const TwitterWidgetWrapper = styled.div`
+  height: fit-content;
   margin: 0 auto;
   width: fit-content;
 

@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import "./FinhubNewsItemPage.css";
+
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
   console.log("TIMEEEEE", time);
 
@@ -21,7 +23,32 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
 
   return (
     <>
-      <div className="card bg-dark mb-1">
+      <main>
+        <details closed>
+          <summary>
+            <div className="card-header">
+              <p className="h5 text-primary text-left mb-0">
+                <NewsItemDate className="h6 text-secondary small">
+                  {formattedTime}
+                </NewsItemDate>{" "}
+                {headline}
+              </p>
+            </div>
+          </summary>
+          <div class="faq__content">
+            <div className="card-body text-secondary">
+              {summary}
+              <h6 className="text-primary text-right mt-1 small">
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  read more...
+                </a>
+              </h6>
+            </div>
+          </div>
+        </details>
+      </main>
+
+      {/* <div className="card bg-dark mb-1">
         <div className="card-header" id="hula">
           <p className="h5 text-primary text-left mb-0">
             <NewsItemDate className="text-secondary">
@@ -39,7 +66,7 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
             </a>
           </h6>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

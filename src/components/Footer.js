@@ -148,9 +148,7 @@ function Footer(props) {
         <hr className="p-0 m-0 b-0" />
         <div className="body-bg  py-2">
           <div className="container text-center">
-            <p className=" text-primary mb-0 py-2">
-              © 2019 BBBootstrap All risghts reserved.
-            </p>
+            <p className=" text-primary mb-0 py-2">© 2020 BTC DASH</p>
           </div>
         </div>
       </footer>

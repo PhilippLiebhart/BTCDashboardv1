@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Spinner from "../UI/Spinner";
 
 import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
-import FinhubnewsItem from "../../pages/FinhubNewsItem";
+import FinhubnewsItem from "../../pages/FinhubNewsItemPage";
 
 function Finhubnewsfeed(props) {
   const [finhubNews] = useFinhubNewsfeed();
@@ -34,6 +34,23 @@ function Finhubnewsfeed(props) {
 
 const NewsFeedWrapper = styled.div`
   width: 500px;
+  height: fit-content;
+  padding: 16px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: left;
+
+  background-color: var(--dark);
+  color: var(--primary);
+
+  hr {
+    height: 1px;
+    border-color: var(--secondary);
+    width: 100%;
+    padding: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
 `;
 
 Finhubnewsfeed.propTypes = {};

@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 
+const PHEMEX_CONFIG = {
+  pingMethod: "server.ping",
+  tickMethod: "tick.subscribe",
+  tickParams: [".BTC"],
+};
+
 export default function Websockettest(props) {
   let ws = new WebSocket("wss://phemex.com/ws");
 
   const { readyState } = ws;
   console.log("READYSTATE:", readyState);
 
-  const [ticker, setTicker] = useState({ last: 0 });
+  const [tick, setTick] = useState({ last: 0 });
   //console.log("MY TICKER STATE", ticker);
 
   const sendHeartbeat = () => {
@@ -53,13 +59,13 @@ export default function Websockettest(props) {
 
     if (tick) {
       //console.log("TICK LAST", tick.last);
-      setTicker(tick);
+      setTick(tick);
     } else {
       console.log("still undeined");
     }
   };
 
-  let lastPrice = ticker.last / 10000;
+  let lastPrice = tick.last / 10000;
 
   return lastPrice.toFixed(2);
 }

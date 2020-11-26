@@ -19,4 +19,15 @@ export const ListBasic = () => (
   </TimelineWrapper>
 );
 
-const TimelineWrapper = styled.div``;
+const TimelineWrapper = styled.div`
+  .timeline-Widget {
+    background-color: blue !important;
+  }
+  .timeline-TweetList-tweet > customisable-border {
+    background-color: blue !important;
+    color: red !important;
+  }
+  p {
+    color: red !important;
+  }
+`;
