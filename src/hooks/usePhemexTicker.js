@@ -17,11 +17,12 @@ const PHEMEX_HEARTBEAT = {
   method: "server.ping",
   params: [],
 };
+let ws = new WebSocket("wss://phemex.com/ws");
 
-export default function usePhemexTicker(props) {
-  let ws = new WebSocket("wss://phemex.com/ws");
-
+const usePhemexTicker = (props) => {
   const { readyState } = ws;
+
+  console.log("-----------------------", ws);
 
   const [tick, setTick] = useState({ last: 0 });
   const [dayMarket, setDayMarket] = useState({});
@@ -81,7 +82,7 @@ export default function usePhemexTicker(props) {
     console.log("phemex ws message", message);
 
     if (tick) {
-      setTick({ ...tick, last: (tick.last / 10000).toFixed(2) });
+      setTick({ last: (tick.last / 10000).toFixed(2) });
     } else if (market24h?.symbol === "BTCUSD") {
       setDayMarket({ market24h });
     } else if (book) {
@@ -101,4 +102,6 @@ export default function usePhemexTicker(props) {
   };
 
   return [tick, dayMarket, orderbook];
-}
+};
+
+export default usePhemexTicker;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
-import Finhubnewsfeed from "../components/Dashboard/FinhubNewsfeed";
+//import FinhubNewsfeed from "../components/Dashboard/FinhubNewsfeed";
 import Tickercard from "../components/Dashboard/TickerCard";
 import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
+import FinHubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
 import Orderbook from "../components/Dashboard/Orderbook";
 function Dashboardpage(props) {
   console.log("### DASHBOARDPAGE RENDER ###");
@@ -21,7 +22,7 @@ function Dashboardpage(props) {
               <FearAndGreedIndex />
             </div>
 
-            <Finhubnewsfeed />
+            <FinHubNewsfeed />
 
             <TwitterWidget />
             <Orderbook />

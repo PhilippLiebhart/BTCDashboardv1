@@ -4,7 +4,7 @@ import Spinner from "../UI/Spinner";
 import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
 import FinhubnewsItem from "../../pages/FinhubNewsItemPage";
 
-function Finhubnewsfeed(props) {
+function FinHubNewsfeed(props) {
   const [finhubNews] = useFinhubNewsfeed();
 
   console.log("GET NEWS FEEEEEED:", finhubNews);
@@ -53,6 +53,6 @@ const NewsFeedWrapper = styled.div`
   }
 `;
 
-Finhubnewsfeed.propTypes = {};
+FinHubNewsfeed.propTypes = {};
 
-export default Finhubnewsfeed;
+export default FinHubNewsfeed;

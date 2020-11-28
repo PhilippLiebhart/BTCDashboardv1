@@ -8,7 +8,7 @@ import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerCard = () => {
   const [tick, dayMarket] = usePhemexTicker();
-
+  console.log(tick);
   return (
     <>
       <TickerCardWrapper>
