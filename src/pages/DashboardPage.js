@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
-import Finhubnewsfeed from "../components/Dashboard/FinhubNewsfeed";
+import FinhubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
 import Tickercard from "../components/Dashboard/TickerCard";
 import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
@@ -21,7 +21,7 @@ function Dashboardpage(props) {
               <FearAndGreedIndex />
             </div>
 
-            <Finhubnewsfeed />
+            <FinhubNewsfeed />
 
             <TwitterWidget />
             <Orderbook />
