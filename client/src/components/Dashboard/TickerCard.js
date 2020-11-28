@@ -8,7 +8,8 @@ import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerCard = () => {
   const [tick, dayMarket] = usePhemexTicker();
-
+  //todo strange behaviour - tick only avalable if console.log is there
+  console.log(tick);
   return (
     <>
       <TickerCardWrapper>

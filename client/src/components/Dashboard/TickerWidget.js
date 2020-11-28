@@ -1,20 +1,32 @@
-// const [mean, setMean] = useState();
+const { default: TickerCard } = require("./TickerCard");
 
-// useEffect(() => {
-//   setMean(
-//     (
-//       (parseFloat(tick.price) +
-//         parseFloat(binanceTick.price) +
-//         parseFloat(bybitTick.price)) /
-//       3
-//     ).toFixed(2)
-//   );
-// }, [tick, binanceTick, bybitTick]);
+const TickerWIdget = () => {
+  // const [mean, setMean] = useState();
 
-//todo CLOCK, dailyChange, connectionStatus, tickerDirection
+  // useEffect(() => {
+  //   setMean(
+  //     (
+  //       (parseFloat(tick.price) +
+  //         parseFloat(binanceTick.price) +
+  //         parseFloat(bybitTick.price)) /
+  //       3
+  //     ).toFixed(2)
+  //   );
+  // }, [tick, binanceTick, bybitTick]);
 
-// const WEBSOCKET_STATUS = {
-//     Open: "green",
-//     Closed: "red",
-//     Connecting: "yellow",
-//   };
+  //todo CLOCK, dailyChange, connectionStatus, tickerDirection
+
+  // const WEBSOCKET_STATUS = {
+  //     Open: "green",
+  //     Closed: "red",
+  //     Connecting: "yellow",
+  //   };
+
+  return (
+    <>
+      <TickerCard name="PHEMEX" />
+    </>
+  );
+};
+
+export default TickerWIdget;

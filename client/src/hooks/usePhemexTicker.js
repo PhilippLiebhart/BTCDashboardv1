@@ -18,9 +18,9 @@ const PHEMEX_HEARTBEAT = {
   params: [],
 };
 
-export default function usePhemexTicker(props) {
-  let ws = new WebSocket("wss://phemex.com/ws");
+let ws = new WebSocket("wss://phemex.com/ws");
 
+export default function usePhemexTicker(props) {
   const { readyState } = ws;
 
   const [tick, setTick] = useState({ last: 0 });
