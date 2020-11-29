@@ -11,16 +11,14 @@ function Finhubnewsfeed(props) {
 
   const headlineList = finhubNews.slice(0, 5).map((newsItem, index) => {
     return (
-      <>
-        <FinhubnewsItem
-          key={newsItem.id}
-          id={newsItem.id}
-          headline={newsItem.headline}
-          summary={newsItem.summary}
-          url={newsItem.url}
-          time={newsItem.datetime}
-        />
-      </>
+      <FinhubnewsItem
+        key={newsItem.id}
+        id={newsItem.id}
+        headline={newsItem.headline}
+        summary={newsItem.summary}
+        url={newsItem.url}
+        time={newsItem.datetime}
+      />
     );
   });
 

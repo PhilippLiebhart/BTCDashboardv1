@@ -3,7 +3,6 @@ import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const Orderbook = (props) => {
   const [tick, dayMarket, orderbook] = usePhemexTicker();
-  console.log("#############PHEMEX BOOOOOOOOK", orderbook);
   return (
     <div className="d-flex flex-nowrap p-3">
       <div>
@@ -18,7 +17,7 @@ const Orderbook = (props) => {
           <tbody>
             {orderbook.data?.asks?.map((order, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td className="p-0 m-0 text-center">{order[0] / 10000}</td>
                   <td className="p-0 m-0 text-center">{order[1]}</td>
                 </tr>
@@ -39,7 +38,7 @@ const Orderbook = (props) => {
           <tbody>
             {orderbook.data?.bids?.map((order, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td className="p-0 m-0 text-center">{order[0] / 10000}</td>
                   <td className="p-0 m-0 text-center">{order[1]}</td>
                 </tr>

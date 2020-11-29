@@ -6,7 +6,7 @@ function Homepage(props) {
   return (
     <>
       <div className="container">
-        <div class="jumbotron p-5 mt-5">
+        <div className="jumbotron p-5 mt-5">
           <div className="row">
             <div className="col">
               {" "}

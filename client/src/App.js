@@ -1,7 +1,6 @@
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
 import Dashboardpage from "./pages/DashboardPage";
 import Homepage from "./pages/HomePage";
 import Layout from "./components/Layout";

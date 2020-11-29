@@ -1,8 +1,14 @@
-const { default: TickerCard } = require("./TickerCard");
+import TickerCard from "./TickerCard";
+
+import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerWIdget = () => {
   // const [mean, setMean] = useState();
+  const [tick, dayMarket, orderbook, connStatus] = usePhemexTicker();
 
+  //todo strange behaviour - tick only avalable if console.log is there
+  console.log("----------------------------", tick);
+  //console.log("----------------------------", orderbook);
   // useEffect(() => {
   //   setMean(
   //     (
@@ -16,15 +22,16 @@ const TickerWIdget = () => {
 
   //todo CLOCK, dailyChange, connectionStatus, tickerDirection
 
-  // const WEBSOCKET_STATUS = {
-  //     Open: "green",
-  //     Closed: "red",
-  //     Connecting: "yellow",
-  //   };
-
   return (
     <>
-      <TickerCard name="PHEMEX" />
+      <TickerCard
+        name="PHEMEX"
+        last={tick.last}
+        vol={dayMarket?.market24h?.volume / 10000}
+        high={dayMarket?.market24h?.high / 10000}
+        low={dayMarket?.market24h?.low / 10000}
+        status={connStatus}
+      />
     </>
   );
 };

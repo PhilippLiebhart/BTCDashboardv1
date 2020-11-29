@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Ninja Schema
-const ninjaSchema = new Schema(
+const tweetSchema = new Schema(
   {
     name: {
       type: String,
@@ -21,6 +21,6 @@ const ninjaSchema = new Schema(
 );
 
 // ninja model - "ninja" will look for ninjas!!
-const Ninja = mongoose.model("Ninja", ninjaSchema);
+const Tweet = mongoose.model("twitterStream", tweetSchema);
 
-module.exports = Ninja;
+module.exports = Tweet;

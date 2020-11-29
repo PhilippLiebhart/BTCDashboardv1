@@ -12,6 +12,8 @@
     "@babel/preset-env": "^7.12.7",
     "express": "^4.17.1",
     "got": "^11.8.0",
+    "mongoose": "^5.10.18",
+    "morgan": "^1.10.0",
     "needle": "^2.5.2",
     "nodemon": "^2.0.6",
     "oauth-1.0a": "^2.2.6"

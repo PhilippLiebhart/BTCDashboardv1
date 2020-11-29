@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import FinhubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
-import Tickercard from "../components/Dashboard/TickerCard";
 import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
 import Orderbook from "../components/Dashboard/Orderbook";
+import TickerWIdget from "../components/Dashboard/TickerWidget";
 function Dashboardpage(props) {
   console.log("### DASHBOARDPAGE RENDER ###");
   return (
@@ -17,7 +17,7 @@ function Dashboardpage(props) {
           <div className="section d-flex flex-wrap justify-content-center mb-5">
             <div>
               {" "}
-              <Tickercard />
+              <TickerWIdget />
               <FearAndGreedIndex />
             </div>
 

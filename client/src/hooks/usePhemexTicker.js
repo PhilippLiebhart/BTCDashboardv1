@@ -18,18 +18,25 @@ const PHEMEX_HEARTBEAT = {
   params: [],
 };
 
+const WEBSOCKET_STATUS = {
+  Open: "green",
+  Closed: "red",
+  Connecting: "yellow",
+};
+
 let ws = new WebSocket("wss://phemex.com/ws");
 
 export default function usePhemexTicker(props) {
   const { readyState } = ws;
 
+  const [connStatus, setConnStatus] = useState();
   const [tick, setTick] = useState({ last: 0 });
   const [dayMarket, setDayMarket] = useState({});
   const [orderbook, setOrderbook] = useState({ data: 0, fetched: false });
 
   const sendHeartbeat = () => {
     let heartbeatMessage = {
-      //TODO id egal?
+      //todo id egal?
       id: 123456,
       method: "server.ping",
       params: [],
@@ -42,6 +49,8 @@ export default function usePhemexTicker(props) {
   };
 
   useEffect(() => {
+    setConnStatus(readyState);
+
     const heartbeat = setInterval(() => {
       sendHeartbeat();
     }, 3000);
@@ -78,14 +87,13 @@ export default function usePhemexTicker(props) {
   ws.onmessage = (message) => {
     // TODO passt das so? tick ist ja eigentlich entweder "tick" ODER "market"....
     let { tick, market24h, book } = JSON.parse(message.data);
-    console.log("phemex ws message", message);
+    //console.log("phemex ws message", message);
 
     if (tick) {
       setTick({ ...tick, last: (tick.last / 10000).toFixed(2) });
     } else if (market24h?.symbol === "BTCUSD") {
       setDayMarket({ market24h });
     } else if (book) {
-      console.log("BOOKGOOD", book.asks.length);
       setOrderbook({ data: { ...book }, fetched: true });
 
       //TODO ob das hier so richtig ist?
@@ -100,5 +108,5 @@ export default function usePhemexTicker(props) {
     }
   };
 
-  return [tick, dayMarket, orderbook];
+  return [tick, dayMarket, orderbook, connStatus];
 }
