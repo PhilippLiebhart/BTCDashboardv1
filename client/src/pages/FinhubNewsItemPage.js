@@ -4,8 +4,6 @@ import styled from "styled-components";
 import "./FinhubNewsItemPage.css";
 
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
-  console.log("TIMEEEEE", time);
-
   let unix_timestamp = time;
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.

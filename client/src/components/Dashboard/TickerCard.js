@@ -5,7 +5,6 @@ import chartSample from "../../assets/img/chart-sample.svg";
 //import Websockettest from "../../hooks/websockettest";
 
 const TickerCard = ({ name, last, vol, high, low, status }) => {
-  console.log("STATUS", status);
   return (
     <>
       <TickerCardWrapper>

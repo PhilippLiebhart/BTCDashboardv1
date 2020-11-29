@@ -1,14 +1,17 @@
+import { useEffect } from "react";
 import TickerCard from "./TickerCard";
-
 import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerWIdget = () => {
   // const [mean, setMean] = useState();
   const [tick, dayMarket, orderbook, connStatus] = usePhemexTicker();
 
-  //todo strange behaviour - tick only avalable if console.log is there
-  console.log("----------------------------", tick);
-  //console.log("----------------------------", orderbook);
+  useEffect(() => {
+    //todo strange behaviour - tick only avalable if console.log is there
+    //console.log("----------------------------", tick);
+    console.log("----------------------------", orderbook);
+  }, [tick, dayMarket, orderbook, connStatus]);
+
   // useEffect(() => {
   //   setMean(
   //     (
