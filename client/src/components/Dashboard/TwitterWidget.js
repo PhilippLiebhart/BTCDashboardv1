@@ -1,33 +1,40 @@
 import styled from "styled-components";
+import Tweet from "./TweetCard";
+import Spinner from "../UI/Spinner";
 
-import { Timeline } from "react-twitter-widgets";
+import useTwitterDB from "../../hooks/useTwitterDB";
 
-export const ListBasic = () => (
-  <TimelineWrapper>
-    <Timeline
-      dataSource={{
-        sourceType: "profile",
-        screenName: "IvanOnTech",
-      }}
-      options={{
-        theme: "dark",
-        width: "350",
-        height: "500",
-        borderColor: "#00adb5",
-      }}
+const TwitterWidget = () => {
+  const [tweets] = useTwitterDB();
+
+  const mappedTweets = tweets?.map((tweet) => (
+    <Tweet
+      key={tweet._id}
+      user={tweet.includes.users[0].name}
+      text={tweet.data.text}
     />
-  </TimelineWrapper>
-);
+  ));
+
+  return (
+    <TimelineWrapper>
+      <h3 className="h6 text-left">Twitter Feed:</h3>
+
+      {tweets ? mappedTweets : <Spinner />}
+    </TimelineWrapper>
+  );
+};
 
 const TimelineWrapper = styled.div`
-  .timeline-Widget {
-    background-color: blue !important;
-  }
-  .timeline-TweetList-tweet > customisable-border {
-    background-color: blue !important;
-    color: red !important;
-  }
-  p {
-    color: red !important;
-  }
+  width: 268px;
+  padding: 16px;
+  margin: 10px;
+  height: fit-content;
+
+  border-radius: 10px;
+  text-align: left;
+
+  background-color: var(--dark);
+  color: var(--primary);
 `;
+
+export default TwitterWidget;

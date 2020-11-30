@@ -26,11 +26,11 @@ const WEBSOCKET_STATUS = {
 
 let ws = new WebSocket("wss://phemex.com/ws");
 
-export default function usePhemexTicker(props) {
+const usePhemexTicker = (props) => {
   const { readyState } = ws;
 
   const [connStatus, setConnStatus] = useState();
-  const [tick, setTick] = useState({ last: 0 });
+  const [tickerData, setTickerData] = useState({});
   const [dayMarket, setDayMarket] = useState({});
   const [orderbook, setOrderbook] = useState({ data: 0, fetched: false });
 
@@ -85,18 +85,16 @@ export default function usePhemexTicker(props) {
   }, []);
 
   ws.onmessage = (message) => {
-    // TODO passt das so? tick ist ja eigentlich entweder "tick" ODER "market"....
     let { tick, market24h, book } = JSON.parse(message.data);
-    //console.log("phemex ws message", message);
 
     if (tick) {
-      setTick({ ...tick, last: (tick.last / 10000).toFixed(2) });
+      setTickerData({ tick });
     } else if (market24h?.symbol === "BTCUSD") {
       setDayMarket({ market24h });
     } else if (book) {
       setOrderbook({ data: { ...book }, fetched: true });
 
-      //TODO ob das hier so richtig ist?
+      //todo ob das hier so richtig ist?
       const unsubscribeOrderbook = {
         id: 123456,
         method: "orderbook.unsubscribe",
@@ -108,5 +106,7 @@ export default function usePhemexTicker(props) {
     }
   };
 
-  return [tick, dayMarket, orderbook, connStatus];
-}
+  return [tickerData, dayMarket, orderbook, connStatus];
+};
+
+export default usePhemexTicker;

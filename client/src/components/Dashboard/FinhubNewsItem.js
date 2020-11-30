@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import "./FinhubNewsItemPage.css";
+import "./FinhubNewsItem.css";
 
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
   let unix_timestamp = time;
