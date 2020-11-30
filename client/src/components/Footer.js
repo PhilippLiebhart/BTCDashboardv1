@@ -17,7 +17,7 @@ function Footer(props) {
                 </li>
                 <li className="mb-2">
                   <a href="#" className="text-muted">
-                    About Us
+                    About US
                   </a>
                 </li>
                 <li className="mb-2">
