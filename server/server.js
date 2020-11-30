@@ -129,17 +129,12 @@ function streamConnect() {
   //Listen to the stream
   const options = {
     timeout: 20000,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
-  const stream = needle.get(
-    streamURL,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    options
-  );
+  const stream = needle.get(streamURL, options);
 
   stream
     .on("data", (data) => {
