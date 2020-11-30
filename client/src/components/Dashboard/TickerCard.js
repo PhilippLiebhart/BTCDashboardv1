@@ -4,17 +4,23 @@ import styled from "styled-components";
 import chartSample from "../../assets/img/chart-sample.svg";
 //import Websockettest from "../../hooks/websockettest";
 
+<<<<<<< HEAD:src/components/Dashboard/TickerCard.js
 import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerCard = () => {
   const [tick, dayMarket] = usePhemexTicker();
   console.log(tick);
+=======
+const TickerCard = ({ name, last, vol, high, low, status }) => {
+>>>>>>> feat/mongodb:client/src/components/Dashboard/TickerCard.js
   return (
     <>
       <TickerCardWrapper>
         <div className="row">
           <div className="col-6">
-            <ExchangeName>PHEMEX</ExchangeName>
+            <ExchangeName>
+              {name} <small>Status: {status}</small>
+            </ExchangeName>
           </div>
           <div className="col-6">
             {" "}
@@ -30,13 +36,13 @@ const TickerCard = () => {
         <hr />
         <div className="row">
           <div className="col-7">
-            <Price>{tick.last}</Price>
-            <Percent className="text-warning">+50 % </Percent>
+            <Price>{last}</Price>
+            <Percent className="text-warning">+000 % </Percent>
           </div>
           <div className="col-5">
-            <Volume>Vol {dayMarket?.market24h?.volume / 10000}</Volume>
-            <Volume>High {dayMarket?.market24h?.high / 10000}</Volume>
-            <Volume>Low {dayMarket?.market24h?.low / 10000}</Volume>
+            <Volume>Vol {vol}</Volume>
+            <Volume>High {high}</Volume>
+            <Volume>Low {low}</Volume>
           </div>
         </div>
       </TickerCardWrapper>
@@ -70,6 +76,7 @@ const TickerCardWrapper = styled.div`
 `;
 
 const ExchangeName = styled.h1`
+  display: inline;
   font-size: 0.8rem;
 `;
 

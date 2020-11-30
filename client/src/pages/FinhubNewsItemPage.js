@@ -4,8 +4,6 @@ import styled from "styled-components";
 import "./FinhubNewsItemPage.css";
 
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
-  console.log("TIMEEEEE", time);
-
   let unix_timestamp = time;
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
@@ -24,7 +22,7 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
   return (
     <>
       <main>
-        <details closed>
+        <details closed="closed">
           <summary>
             <div className="card-header">
               <p className="h5 text-primary text-left mb-0">
@@ -35,7 +33,7 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
               </p>
             </div>
           </summary>
-          <div class="faq__content">
+          <div className="faq__content">
             <div className="card-body text-secondary">
               {summary}
               <h6 className="text-primary text-right mt-1 small">
