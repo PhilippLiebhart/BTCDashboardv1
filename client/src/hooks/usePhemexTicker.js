@@ -17,15 +17,7 @@ const PHEMEX_HEARTBEAT = {
   method: "server.ping",
   params: [],
 };
-let ws = new WebSocket("wss://phemex.com/ws");
 
-<<<<<<< HEAD:src/hooks/usePhemexTicker.js
-const usePhemexTicker = (props) => {
-  const { readyState } = ws;
-
-  console.log("-----------------------", ws);
-
-=======
 const WEBSOCKET_STATUS = {
   Open: "green",
   Closed: "red",
@@ -38,7 +30,6 @@ export default function usePhemexTicker(props) {
   const { readyState } = ws;
 
   const [connStatus, setConnStatus] = useState();
->>>>>>> feat/mongodb:client/src/hooks/usePhemexTicker.js
   const [tick, setTick] = useState({ last: 0 });
   const [dayMarket, setDayMarket] = useState({});
   const [orderbook, setOrderbook] = useState({ data: 0, fetched: false });
