@@ -17,8 +17,7 @@ const useFinhubNewsfeed = () => {
       })
       .catch((err) => console.error("FinHUB AXIOS ERROR!", err));
 
-    // and schedule a repeat
-    setTimeout(fetchNews, 15000);
+    setTimeout(fetchNews, 100000);
   };
 
   useEffect(() => {

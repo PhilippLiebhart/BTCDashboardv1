@@ -7,7 +7,7 @@ const TickerWIdget = () => {
   const [tickerData, dayMarket, orderbook, connStatus] = usePhemexTicker();
 
   //todo strange behaviour - tick only avalable if console.log is there
-  console.log("----------------------------", tickerData);
+  //console.log("----------------------------", tickerData);
   console.log("----------------------------", orderbook);
 
   // useEffect(() => {
@@ -27,7 +27,7 @@ const TickerWIdget = () => {
     <>
       <TickerCard
         name="PHEMEX"
-        last={tickerData.last}
+        last={(tickerData?.tick?.last / 10000).toFixed(2)}
         vol={dayMarket?.market24h?.volume / 10000}
         high={dayMarket?.market24h?.high / 10000}
         low={dayMarket?.market24h?.low / 10000}
