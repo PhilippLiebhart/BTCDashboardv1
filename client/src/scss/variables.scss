@@ -5,6 +5,7 @@ $dashBgDark: #393f48;
 $dashPrimaryTeal: #00adb5;
 $dashSecondaryWhite: #fff;
 $dashBgWidget: #222831;
+$dashHrLight: #2c3139;
 
 // Color Overrides
 $primary: $dashPrimaryTeal;
@@ -13,7 +14,7 @@ $secondary: $dashSecondaryWhite;
 // $info:          $cyan !default;
 // $warning:       $yellow !default;
 // $danger:        $red !default;
-// $light:         $gray-100 !default;
+$light: $dashHrLight;
 $dark: $dashBgWidget;
 
 $theme-colors: (

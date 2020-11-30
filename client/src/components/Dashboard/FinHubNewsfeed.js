@@ -2,12 +2,10 @@ import styled from "styled-components";
 import Spinner from "../UI/Spinner";
 
 import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
-import FinhubnewsItem from "../../pages/FinhubNewsItemPage";
+import FinhubnewsItem from "./FinhubNewsItem";
 
-function FinHubNewsfeed(props) {
+const FinhubNewsfeed = (props) => {
   const [finhubNews] = useFinhubNewsfeed();
-
-  console.log("GET NEWS FEEEEEED:", finhubNews);
 
   const headlineList = finhubNews.slice(0, 5).map((newsItem, index) => {
     return (
@@ -28,7 +26,7 @@ function FinHubNewsfeed(props) {
       {finhubNews.length < 1 ? <Spinner /> : headlineList}
     </NewsFeedWrapper>
   );
-}
+};
 
 const NewsFeedWrapper = styled.div`
   width: 500px;
@@ -51,6 +49,6 @@ const NewsFeedWrapper = styled.div`
   }
 `;
 
-FinHubNewsfeed.propTypes = {};
+FinhubNewsfeed.propTypes = {};
 
-export default FinHubNewsfeed;
+export default FinhubNewsfeed;

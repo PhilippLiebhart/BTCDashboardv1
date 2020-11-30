@@ -3,24 +3,28 @@ import Spinner from "../UI/Spinner";
 
 import useFearAndGreedIndex from "../../hooks/useFearAndGreedIndex";
 
-function FearAndGreedIndex(props) {
+const FearAndGreedIndex = (props) => {
   const [fearAndGreedIndex] = useFearAndGreedIndex();
 
   console.log("FEAR AND GREED:", fearAndGreedIndex);
 
+  const greedCard = (
+    <div className="grid">
+      {" "}
+      <h6 className="text-primary m-0 p-0">Fear and Greed Index:</h6>
+      <h4 className="text-white m-0 p-0">{fearAndGreedIndex.value} / 100</h4>
+      <h6 className="text-primary m-0 p-0">
+        {fearAndGreedIndex.value_classification}
+      </h6>
+    </div>
+  );
+
   return (
     <FearAndGreedWrapper>
-      <div className="grid">
-        {" "}
-        <h6 className="text-primary m-0 p-0">Fear and Greed Index:</h6>
-        <h4 className="text-white m-0 p-0">{fearAndGreedIndex.value} / 100</h4>
-        <h6 className="text-primary m-0 p-0">
-          {fearAndGreedIndex.value_classification}
-        </h6>
-      </div>
+      {fearAndGreedIndex ? greedCard : <Spinner />}
     </FearAndGreedWrapper>
   );
-}
+};
 
 const FearAndGreedWrapper = styled.div`
   padding: 16px;

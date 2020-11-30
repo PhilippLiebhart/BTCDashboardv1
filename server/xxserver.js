@@ -1,43 +1,17 @@
-require("dotenv").config();
-const cors = require("cors");
 const express = require("express");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-
+require("dotenv").config();
 const app = express();
 const port = 4000;
-
-// console log for status and paths
-app.use(morgan("dev"));
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// ############## START MONGO DB ###################
-// import mongo db models
-const Tweet = require("./models/tweet");
-
-// connect to mongodb
-const dbURI =
-  "mongodb+srv://admin:hula2020@btcdashcluster.u1o6w.mongodb.net/twitterStream?retryWrites=true&w=majority";
-mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => {
-    console.log("Listening on port 4000");
-    app.listen(4000);
-  })
-  .catch((err) => console.log(err));
-
-app.get("/all-tweets", (request, response) => {
-  Tweet.find()
-    .then((result) => response.send(result))
-    .catch((err) => response.send("ERROR"));
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
 });
-// ############## END MONGO DB ###################
 
-//  ############## START TWITTER API ##############
+// TWITTER API /////////////////////////////////////////////////////
 
 const needle = require("needle");
 
@@ -47,7 +21,7 @@ const needle = require("needle");
 const token = process.env.REACT_APP_BEARER_TOKEN;
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 const streamURL =
-  "https://api.twitter.com/2/tweets/search/stream?tweet.fields=attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld&expansions=referenced_tweets.id,author_id";
+  "https://api.twitter.com/2/tweets/search/stream?tweet.fields=attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld&expansions=referenced_tweets.id";
 
 // Edit rules as desired here below
 const rules = [
@@ -129,47 +103,23 @@ function streamConnect() {
   //Listen to the stream
   const options = {
     timeout: 20000,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   };
 
-  const stream = needle.get(streamURL, options);
+  const stream = needle.get(
+    streamURL,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    options
+  );
 
   stream
     .on("data", (data) => {
       try {
         const json = JSON.parse(data);
         console.log(json);
-
-        // POST TO MONGO DB
-        // create new Tweet from Model
-        const newTweet = new Tweet({
-          data: {
-            public_metrics: json.data.public_metrics,
-            possibly_sensitive: json.data.possibly_sensitive,
-            source: json.data.source,
-            author_id: json.data.author_id,
-            text: json.data.text,
-            created_at: json.data.created_at,
-            id: json.data.id,
-            lang: json.data.lang,
-          },
-          includes: json.includes,
-          matching_rules: json.matching_rules,
-        });
-
-        // save new tweet to db
-        newTweet
-          .save()
-          .then((result) => {
-            console.log("SAVED RESULT", result);
-          })
-          .catch((err) => {
-            console.log("[MONGO DB ERROR]", err);
-          });
-
-        // END POST TO MONGO DB
       } catch (e) {
         // Keep alive signal received. Do nothing.
       }

@@ -4,7 +4,7 @@ import logo from "../assets/img/logo.svg";
 function Navbar(props) {
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark">
+      <nav className="navbar navbar-dark bg-transparent">
         <div className="navbar-brand">
           <img
             src={logo}

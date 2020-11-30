@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
-<<<<<<< HEAD:src/pages/DashboardPage.js
-import Tickercard from "../components/Dashboard/TickerCard";
-=======
-import FinhubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
->>>>>>> feat/mongodb:client/src/pages/DashboardPage.js
-import { ListBasic as TwitterWidget } from "../components/Dashboard/TwitterWidget";
+import TwitterWidget from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
 import FinHubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
 import Orderbook from "../components/Dashboard/Orderbook";
@@ -26,11 +21,9 @@ function Dashboardpage(props) {
               <FearAndGreedIndex />
             </div>
 
-<<<<<<< HEAD
-            <FinhubNewsfeed />
-=======
             <FinHubNewsfeed />
->>>>>>> 4a43f024d61ce972da9b694afae5dbb515581d58
+
+            <FinHubNewsfeed />
 
             <TwitterWidget />
             <Orderbook />

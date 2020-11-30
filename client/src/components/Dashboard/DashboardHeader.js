@@ -3,7 +3,7 @@ import styled from "styled-components";
 import chartSample from "../../assets/img/chart-sample.svg";
 import averageSymbol from "../../assets/img/symbol-average.svg";
 
-function Dashboardheader(props) {
+const Dashboardheader = (props) => {
   return (
     <>
       <div className="container">
@@ -37,9 +37,7 @@ function Dashboardheader(props) {
       </div>
     </>
   );
-}
-
-Dashboardheader.propTypes = {};
+};
 
 export default Dashboardheader;
 
