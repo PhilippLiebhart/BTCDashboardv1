@@ -4,18 +4,18 @@ const Schema = mongoose.Schema;
 // Ninja Schema
 const tweetSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
+    data: {
+      public_metrics: { type: Object },
+      possibly_sensitive: { type: Boolean },
+      source: { type: String },
+      author_id: { type: String },
+      text: { type: String },
+      created_at: { type: String },
+      id: { type: String },
+      lang: { type: String },
     },
-    styles: {
-      type: String,
-      required: true,
-    },
-    clan: {
-      type: String,
-      required: true,
-    },
+    includes: { type: Object },
+    matching_rules: { type: Array },
   },
   { timestamps: true }
 );
