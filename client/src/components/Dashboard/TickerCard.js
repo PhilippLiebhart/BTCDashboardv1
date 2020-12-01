@@ -9,29 +9,30 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
     <>
       <TickerCardWrapper>
         <div className="row">
-          <div className="col-6">
-            <ExchangeName>
-              {name} <small>Status: {status}</small>
-            </ExchangeName>
+          <div className="col-7">
+            <ExchangeName>{name}</ExchangeName>
           </div>
-          <div className="col-6">
-            {" "}
-            <img
-              src={chartSample}
-              alt=""
-              height="25px"
-              width="100%"
-              style={{ padding: 0 }}
-            />
+          <div className="col-5">
+            <Status
+              style={{
+                color: status,
+                backgroundColor: status,
+                borderRadius: "50%",
+                width: "150px",
+                height: "150px",
+              }}
+            >
+              O
+            </Status>
           </div>
         </div>
         <hr />
         <div className="row">
-          <div className="col-7">
+          <div className="col-6 my-auto">
             <Price>{last}</Price>
-            <Percent className="text-warning">+000 % </Percent>
+            {/* <Percent className="text-warning">+000 % </Percent> */}
           </div>
-          <div className="col-5">
+          <div className="col-6 my-auto">
             <Volume>Vol {vol}</Volume>
             <Volume>High {high}</Volume>
             <Volume>Low {low}</Volume>
@@ -68,15 +69,21 @@ const TickerCardWrapper = styled.div`
 `;
 
 const ExchangeName = styled.h1`
+  color: var(--primary);
   display: inline;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 `;
 
-const Price = styled.h3``;
+const Price = styled.span`
+  font-size: 1.5rem;
+  font-weight: 500;
+`;
 const Percent = styled.h6`
   font-size: 0.5rem;
 `;
 
 const Volume = styled.h4`
-  font-size: 0.6rem;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
 `;
+const Status = styled.span``;

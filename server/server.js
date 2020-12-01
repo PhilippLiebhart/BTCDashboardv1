@@ -71,6 +71,7 @@ async function getAllRules() {
 
   if (response.statusCode !== 200) {
     throw new Error(response.body);
+    console.log(response);
   }
 
   return response.body;

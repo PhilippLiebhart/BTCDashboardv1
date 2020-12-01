@@ -3,7 +3,6 @@ import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import TwitterWidget from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
 import FinHubNewsfeed from "../components/Dashboard/FinHubNewsfeed";
-import Orderbook from "../components/Dashboard/Orderbook";
 import TickerWIdget from "../components/Dashboard/TickerWidget";
 function Dashboardpage(props) {
   console.log("### DASHBOARDPAGE RENDER ###");
@@ -16,7 +15,6 @@ function Dashboardpage(props) {
           </div>
           <div className="section d-flex flex-wrap justify-content-center mb-5">
             <div>
-              {" "}
               <TickerWIdget />
               <FearAndGreedIndex />
             </div>
@@ -24,7 +22,6 @@ function Dashboardpage(props) {
             <FinHubNewsfeed />
 
             <TwitterWidget />
-            <Orderbook />
           </div>
         </div>
       </DashboardWrapper>

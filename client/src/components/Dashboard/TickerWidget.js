@@ -1,18 +1,33 @@
-import { useEffect } from "react";
 import TickerCard from "./TickerCard";
-import usePhemexTicker from "../../hooks/usePhemexTicker";
+import usePhemexTicker from "../../hooks/Ticker/usePhemexTicker";
+import useBybitTicker from "../../hooks/Ticker/useBybitTicker";
+import useBinanceTicker from "../../hooks/Ticker/useBinanceTicker";
+import useBitmexTicker from "../../hooks/Ticker/useBitmexTicker";
 
 const TickerWIdget = () => {
-  const [tickerData, dayMarket, orderbook, connStatus] = usePhemexTicker();
-
-  //todo strange behaviour - not rerendering?
-
-  //console.log("-------IN WIDGET---------------------", tickerData);
-
-  //todo CLOCK, dailyChange, connectionStatus, tickerDirection
+  const [tickerData, dayMarket, connStatus] = usePhemexTicker();
+  const [bybitTickerData, bybitConnStatus] = useBybitTicker();
+  const [binanceTickerData, binanceConnStatus] = useBinanceTicker();
+  const [bitmexTickerData, bitmexConnStatus] = useBitmexTicker();
 
   return (
     <>
+      <TickerCard
+        name="BITMEX"
+        last={bitmexTickerData?.last}
+        vol={parseFloat(bitmexTickerData?.vol)}
+        high={parseFloat(bitmexTickerData?.high).toFixed(2)}
+        low={parseFloat(bitmexTickerData?.low).toFixed(2)}
+        status={binanceConnStatus}
+      />
+      <TickerCard
+        name="BINANCE"
+        last={parseFloat(binanceTickerData?.c)}
+        vol={parseFloat(binanceTickerData?.v).toFixed(2)}
+        high={parseFloat(binanceTickerData?.h).toFixed(2)}
+        low={parseFloat(binanceTickerData?.l).toFixed(2)}
+        status={binanceConnStatus}
+      />
       <TickerCard
         name="PHEMEX"
         last={(tickerData?.tick?.last / 10000).toFixed(2)}
@@ -20,6 +35,14 @@ const TickerWIdget = () => {
         high={dayMarket?.market24h?.high / 10000}
         low={dayMarket?.market24h?.low / 10000}
         status={connStatus}
+      />
+      <TickerCard
+        name="BYBIT"
+        last={(bybitTickerData?.last?.index_price_e4 / 10000).toFixed(2)}
+        vol={bybitTickerData?.snapshot?.data.volume_24h / 10000}
+        high={bybitTickerData?.snapshot?.data.high_price_24h_e4 / 10000}
+        low={bybitTickerData?.snapshot?.data.low_price_24h_e4 / 10000}
+        status={bybitConnStatus}
       />
     </>
   );
