@@ -1,23 +1,28 @@
-import TickerCard from "./Dashboard/TickerCard";
-
-import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
+import GridLayout from "react-grid-layout";
 
 const Playground = () => {
-  const [tickerData, dayMarket, orderbook, connStatus] = usePhemexTicker();
-
+  const layout = [
+    { i: "a", x: 0, y: 0, w: 1, h: 2, static: true },
+    { i: "b", x: 2, y: 1, w: 3, h: 5, minW: 2, maxW: 4 },
+    { i: "c", x: 4, y: 0, w: 3, h: 3 },
+  ];
   return (
     <>
-      <h1>{tickerData?.last}</h1>
-      <h1>{dayMarket?.market24h?.volume / 10000}</h1>
-      <h1>{connStatus}</h1>
-      <TickerCard
-        name="PHEMEX"
-        last={(tickerData?.tick?.last / 10000).toFixed(2)}
-        vol={dayMarket?.market24h?.volume / 10000}
-        high={dayMarket?.market24h?.high / 10000}
-        low={dayMarket?.market24h?.low / 10000}
-        status={connStatus}
-      />
+      <GridLayout
+        className="layout"
+        layout={layout}
+        cols={12}
+        rowHeight={30}
+        width={1200}
+      >
+        <div key="a" style={{ backgroundColor: "red" }}>
+          HULA AAAAAAAAAA
+        </div>
+        <div key="b">HULA BBBBBBBBBB</div>
+        <div key="c" style={{ border: "1px solid red" }}>
+          HULA CCCCCCCCCC
+        </div>
+      </GridLayout>
     </>
   );
 };
