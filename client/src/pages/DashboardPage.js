@@ -21,8 +21,6 @@ function Dashboardpage(props) {
 
             <FinHubNewsfeed />
 
-            <FinHubNewsfeed />
-
             <TwitterWidget />
           </div>
         </div>
