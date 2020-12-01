@@ -6,7 +6,10 @@ import useFearAndGreedIndex from "../../hooks/useFearAndGreedIndex";
 const FearAndGreedIndex = (props) => {
   const [fearAndGreedIndex] = useFearAndGreedIndex();
 
-  console.log("FEAR AND GREED:", fearAndGreedIndex);
+  console.log("FEAR AND GREED:", fearAndGreedIndex.timestamp);
+  const time = new Date(fearAndGreedIndex.timestamp * 1000).toLocaleDateString(
+    "en-US"
+  );
 
   const greedCard = (
     <div className="grid">
@@ -16,6 +19,7 @@ const FearAndGreedIndex = (props) => {
       <h6 className="text-primary m-0 p-0">
         {fearAndGreedIndex.value_classification}
       </h6>
+      <small>{time}</small>
     </div>
   );
 

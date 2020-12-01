@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: "./.env" });
 const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
@@ -71,7 +71,6 @@ async function getAllRules() {
 
   if (response.statusCode !== 200) {
     throw new Error(response.body);
-    return null;
   }
 
   return response.body;
