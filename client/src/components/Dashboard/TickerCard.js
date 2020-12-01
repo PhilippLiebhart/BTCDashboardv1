@@ -4,15 +4,7 @@ import styled from "styled-components";
 import chartSample from "../../assets/img/chart-sample.svg";
 //import Websockettest from "../../hooks/websockettest";
 
-<<<<<<< HEAD:src/components/Dashboard/TickerCard.js
-import usePhemexTicker from "../../hooks/usePhemexTicker";
-
-const TickerCard = () => {
-  const [tick, dayMarket] = usePhemexTicker();
-  console.log(tick);
-=======
 const TickerCard = ({ name, last, vol, high, low, status }) => {
->>>>>>> feat/mongodb:client/src/components/Dashboard/TickerCard.js
   return (
     <>
       <TickerCardWrapper>
