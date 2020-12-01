@@ -3,23 +3,11 @@ import TickerCard from "./TickerCard";
 import usePhemexTicker from "../../hooks/usePhemexTicker";
 
 const TickerWIdget = () => {
-  // const [mean, setMean] = useState();
   const [tickerData, dayMarket, orderbook, connStatus] = usePhemexTicker();
 
-  //todo strange behaviour - tick only avalable if console.log is there
-  //console.log("----------------------------", tickerData);
-  console.log("----------------------------", orderbook);
+  //todo strange behaviour - not rerendering?
 
-  // useEffect(() => {
-  //   setMean(
-  //     (
-  //       (parseFloat(tick.price) +
-  //         parseFloat(binanceTick.price) +
-  //         parseFloat(bybitTick.price)) /
-  //       3
-  //     ).toFixed(2)
-  //   );
-  // }, [tick, binanceTick, bybitTick]);
+  //console.log("-------IN WIDGET---------------------", tickerData);
 
   //todo CLOCK, dailyChange, connectionStatus, tickerDirection
 

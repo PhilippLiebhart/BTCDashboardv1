@@ -1,39 +1,39 @@
 import { useState, useEffect } from "react";
 
-const PHEMEX_TICK_CONFIG = {
-  id: 1234,
-  method: "tick.subscribe",
-  params: [".BTC"],
-};
+// const PHEMEX_TICK_CONFIG = {
+//   id: 1234,
+//   method: "tick.subscribe",
+//   params: [".BTC"],
+// };
 
-const PHEMEX_24HTICK_CONFIG = {
-  id: 12345,
-  method: "market24h.subscribe",
-  params: [],
-};
+// const PHEMEX_24HTICK_CONFIG = {
+//   id: 12345,
+//   method: "market24h.subscribe",
+//   params: [],
+// };
 
-const PHEMEX_HEARTBEAT = {
-  id: 123456,
-  method: "server.ping",
-  params: [],
-};
+// const PHEMEX_HEARTBEAT = {
+//   id: 123456,
+//   method: "server.ping",
+//   params: [],
+// };
 
-const WEBSOCKET_STATUS = {
-  Open: "green",
-  Closed: "red",
-  Connecting: "yellow",
-};
+// const WEBSOCKET_STATUS = {
+//   Open: "green",
+//   Closed: "red",
+//   Connecting: "yellow",
+// };
 
 let ws = new WebSocket("wss://phemex.com/ws");
 
-const usePhemexTicker = (props) => {
+const usePhemexTicker = () => {
   const { readyState } = ws;
 
   const [connStatus, setConnStatus] = useState();
-  const [tickerData, setTickerData] = useState({});
+  const [tickerData, setTickerData] = useState();
   const [dayMarket, setDayMarket] = useState({});
   const [orderbook, setOrderbook] = useState({ data: 0, fetched: false });
-  console.log("****************", tickerData);
+  console.log("*******IN usePHEMEX*********", tickerData);
 
   const sendHeartbeat = () => {
     let heartbeatMessage = {
@@ -87,9 +87,9 @@ const usePhemexTicker = (props) => {
 
   ws.onmessage = (message) => {
     let { tick, market24h, book } = JSON.parse(message.data);
-
+    //console.log(JSON.parse(message.data));
     if (tick) {
-      setTickerData({ tick });
+      setTickerData({ tick, last: tick.last });
     } else if (market24h?.symbol === "BTCUSD") {
       setDayMarket({ market24h });
     } else if (book) {
@@ -103,7 +103,7 @@ const usePhemexTicker = (props) => {
       };
       ws.send(JSON.stringify(unsubscribeOrderbook));
     } else {
-      console.log("!! tick is still undefined !!!!");
+      //console.log("tick undefined");
     }
   };
 
