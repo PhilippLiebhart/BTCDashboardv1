@@ -1,5 +1,4 @@
 import GridLayout from "react-grid-layout";
-
 const Playground = () => {
   const layout = [
     { i: "a", x: 0, y: 0, w: 1, h: 2, static: true },

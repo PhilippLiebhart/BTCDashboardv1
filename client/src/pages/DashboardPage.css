@@ -1,0 +1,15 @@
+.item,
+.MyDragHandleClassName {
+  border: 1px solid;
+  background-color: gray;
+}
+.item {
+  overflow: scroll;
+}
+
+.MyDragHandleClassName {
+  cursor: move;
+  height: 20px;
+  font-size: 10px;
+  background: #255563;
+}
