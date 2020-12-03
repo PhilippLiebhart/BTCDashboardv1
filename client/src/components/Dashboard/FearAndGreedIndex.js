@@ -33,20 +33,19 @@ const FearAndGreedIndex = (props) => {
 const FearAndGreedWrapper = styled.div`
   padding: 16px;
   margin: 10px;
-  height: 136px;
 
   border-radius: 10px;
   text-align: center;
 
-  background-color: var(--dark);
+  /* background-color: var(--dark); */
   color: var(--primary);
 
-  .grid {
+  /* .grid {
     display: grid;
     grid-gap: auto;
     align-items: center;
     height: 100%;
-  }
+  } */
 `;
 
 FearAndGreedIndex.propTypes = {};

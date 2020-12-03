@@ -35,31 +35,37 @@ const TwitterWidget = () => {
 
   return (
     <TimelineWrapper>
-      <h3 className="h6 text-left">Twitter Feed:</h3>
-
-      <InfiniteScroll
-        dataLength={currentCount}
-        next={loadMoreFunc}
-        hasMore={hasmore}
-        loader={<h4>Loading...</h4>}
-        height={400}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+      <div
+        id="scrollableDivTwitter"
+        style={{ height: "100%", overflowY: "scroll" }}
       >
-        {tweets ? mappedTweets : <Spinner />}
-      </InfiniteScroll>
+        <h3 className="h6 text-left">Twitter Feed:</h3>
+
+        <InfiniteScroll
+          dataLength={currentCount}
+          next={loadMoreFunc}
+          hasMore={hasmore}
+          loader={<h4>Loading...</h4>}
+          //height={520}
+          scrollableTarget="scrollableDivTwitter"
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {tweets ? mappedTweets : <Spinner />}
+        </InfiniteScroll>
+      </div>
     </TimelineWrapper>
   );
 };
 
 const TimelineWrapper = styled.div`
-  width: 268px;
-  padding: 16px;
-  margin: 10px;
-  height: fit-content;
+  width: 100%;
+  height: 400px;
+  padding: 16px 5px 0 16px;
+  /* margin: 10px; */
 
   border-radius: 10px;
   text-align: left;

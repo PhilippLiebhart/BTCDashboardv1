@@ -1,15 +1,29 @@
-.item,
+/* .item,
 .MyDragHandleClassName {
-  border: 1px solid;
-  background-color: gray;
-}
+  /* border: 1px solid; */
+/* background-color: gray;
+} */
 .item {
-  overflow: scroll;
+  /* overflow: scroll; */
+  width: auto;
+  /* height: 136px; */
+  /* padding: 16px; */
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+
+  background-color: var(--dark);
+  color: var(--primary);
 }
 
 .MyDragHandleClassName {
   cursor: move;
-  height: 20px;
+  height: auto;
   font-size: 10px;
-  background: #255563;
+  border-radius: 10px;
+  margin-top: 3px;
+  background: var(--dark);
+  color: white;
+  text-align: center;
 }

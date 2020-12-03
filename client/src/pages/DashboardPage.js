@@ -16,11 +16,11 @@ const ReactGridLayout = WidthProvider(RGL);
 class Dashboardpage extends Component {
   state = {
     layout: [
-      { i: "1", x: 0, y: 0, w: 12, h: 1, minH: 2, static: true }, // *** -- minH & maxH doesnt effect the grid items
+      { i: "1", x: 0, y: 0, w: 12, h: 1, minH: 1, static: true },
       { i: "2", x: 0, y: 0, w: 3, h: 4, minW: 3, minH: 1 },
-      { i: "3", x: 3, y: 0, w: 5, h: 3, minH: 3 },
-      { i: "4", x: 8, y: 0, w: 3, h: 2, minH: 2 },
-      { i: "5", x: 6, y: 0, w: 3, h: 1, minH: 1 },
+      { i: "3", x: 3, y: 0, w: 5, h: 3, minH: 1 },
+      { i: "4", x: 8, y: 0, w: 3, h: 3, minH: 1 },
+      { i: "5", x: 5, y: 1, w: 3, h: 1, minH: 1, minW: 2 },
     ],
     resizeplotly: false,
   };
@@ -39,26 +39,23 @@ class Dashboardpage extends Component {
     return (
       <>
         <ReactGridLayout
-          style={{ backgroundColor: "blue" }}
-          rowHeight={200}
+          //rowHeight={200}
           cols={12}
           onResize={this.onResize}
           //width={100}
           // breakpoints={{ lg: 1200, xxs: 1 }}
           // cols={{ lg: 12, xxs: 2 }}
-          autoSize={true}
+          //autoSize={true}
           layout={this.state.layout}
           onLayoutChange={this.onLayoutChange}
           draggableHandle=".MyDragHandleClassName"
           draggableCancel=".MyDragCancel"
           isDraggable={true}
           isResizable={true}
+
+          // useCSSTransforms={true}
         >
           <div className="item" key={1}>
-            <div className="MyDragHandleClassName">
-              Drag from Here - <span className="text">1</span>
-            </div>
-
             <DashboardHeader />
           </div>
 

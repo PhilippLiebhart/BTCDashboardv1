@@ -39,30 +39,38 @@ const FinhubNewsfeed = (props) => {
 
   return (
     <NewsFeedWrapper>
-      <h3 className="h6 text-left">Finhub Crypto News:</h3>
-      <InfiniteScroll
-        dataLength={currentCount}
-        next={loadMoreFunc}
-        hasMore={hasmore}
-        loader={<h4>Loading...</h4>}
-        height={400}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+      <div
+        id="scrollableDivFinhub"
+        style={{ height: "100%", overflowY: "scroll" }}
       >
-        {finhubNews.length < 1 ? <Spinner /> : headlineList}
-      </InfiniteScroll>
+        <h3 className="h6 text-left">Finhub Crypto News:</h3>
+        <InfiniteScroll
+          dataLength={currentCount}
+          next={loadMoreFunc}
+          hasMore={hasmore}
+          loader={<h4>Loading...</h4>}
+          //height={510}
+          scrollableTarget="scrollableDivFinhub"
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {finhubNews.length < 1 ? <Spinner /> : headlineList}
+        </InfiniteScroll>
+      </div>
     </NewsFeedWrapper>
   );
 };
 
 const NewsFeedWrapper = styled.div`
-  width: 500px;
-  height: fit-content;
-  padding: 16px;
-  margin: 10px;
+  width: 100%;
+  height: 400px;
+
+  /* margin: 10px; */
+  padding: 16px 5px 0 16px;
+
   border-radius: 10px;
   text-align: left;
 

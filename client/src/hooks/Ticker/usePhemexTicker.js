@@ -56,18 +56,18 @@ const usePhemexTicker = () => {
       );
     }, 5000);
 
-    ws.onopen = () => {
-      setConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-      ws.send(JSON.stringify(TICK_CONFIG));
-      ws.send(JSON.stringify(MARKET24HTICK_CONFIG));
-      // ws.send(JSON.stringify(ORDERBOOK_CONFIG));
-    };
-
     return () => {
       clearInterval(heartbeat);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  ws.onopen = () => {
+    setConnStatus(WEBSOCKET_STATUS[ws.readyState]);
+    ws.send(JSON.stringify(TICK_CONFIG));
+    ws.send(JSON.stringify(MARKET24HTICK_CONFIG));
+    // ws.send(JSON.stringify(ORDERBOOK_CONFIG));
+  };
 
   ws.onmessage = (message) => {
     let { tick, market24h } = JSON.parse(message.data);
