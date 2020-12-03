@@ -1,14 +1,11 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import chartSample from "../../assets/img/chart-sample.svg";
-//import Websockettest from "../../hooks/websockettest";
-
 const TickerCard = ({ name, last, vol, high, low, status }) => {
   return (
     <>
       <TickerCardWrapper>
-        <div className="row">
+        <div className="row align-items-center">
           <div className="col-7">
             <ExchangeName>{name}</ExchangeName>
           </div>
@@ -27,7 +24,7 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
           </div>
         </div>
         <hr />
-        <div className="row">
+        <div className="row align-items-center">
           <div className="col-6 my-auto">
             <Price>{last}</Price>
             {/* <Percent className="text-warning">+000 % </Percent> */}
@@ -48,15 +45,16 @@ TickerCard.propTypes = {};
 export default TickerCard;
 
 const TickerCardWrapper = styled.div`
-  width: 268px;
+  /* width: 268px; */
   height: 136px;
-  padding: 16px;
-  margin: 10px;
+  padding: 26px 16px 16px 16px;
+  /* margin: 10px; */
   border-radius: 10px;
   text-align: left;
+  align-items: center;
 
-  background-color: var(--dark);
-  color: var(--primary);
+  /* background-color: var(--dark);
+  color: var(--primary); */
 
   hr {
     height: 1px;

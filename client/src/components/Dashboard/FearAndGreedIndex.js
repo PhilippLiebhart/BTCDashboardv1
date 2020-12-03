@@ -15,8 +15,10 @@ const FearAndGreedIndex = (props) => {
     <div className="grid">
       {" "}
       <h6 className="text-primary m-0 p-0">Fear and Greed Index:</h6>
-      <h4 className="text-white m-0 p-0">{fearAndGreedIndex.value} / 100</h4>
-      <h6 className="text-primary m-0 p-0">
+      <h4 className="text-white m-0 p-0 text-secondary">
+        {fearAndGreedIndex.value} / 100
+      </h4>
+      <h6 className="text-primary m-0 p-0 ">
         {fearAndGreedIndex.value_classification}
       </h6>
       <small>{time}</small>

@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const axios = require("axios");
 
 const app = express();
 const port = 4000;
@@ -20,13 +21,12 @@ app.get("/", (req, res) => {
 const Tweet = require("./models/tweet");
 
 // connect to mongodb
-const dbURI =
-  "mongodb+srv://admin:hula2020@btcdashcluster.u1o6w.mongodb.net/twitterStream?retryWrites=true&w=majority";
+const dbURI = process.env.REACT_APP_MONGODB;
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Listening on port 4000");
-    app.listen(4000);
+    app.listen(port);
   })
   .catch((err) => console.log(err));
 
@@ -35,21 +35,17 @@ app.get("/all-tweets", (request, response) => {
     .then((result) => response.send(result))
     .catch((err) => response.send("ERROR"));
 });
+
 // ############## END MONGO DB ###################
 
 //  ############## START TWITTER API ##############
-
 const needle = require("needle");
 
-// The code below sets the bearer token from your environment variables
-// To set environment variables on Mac OS X, run the export command below from the terminal:
-// export BEARER_TOKEN='YOUR-TOKEN'
 const token = process.env.REACT_APP_BEARER_TOKEN;
 const rulesURL = "https://api.twitter.com/2/tweets/search/stream/rules";
 const streamURL =
   "https://api.twitter.com/2/tweets/search/stream?tweet.fields=attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld&expansions=referenced_tweets.id,author_id";
 
-// Edit rules as desired here below
 const rules = [
   { value: "from:IvanOnTech", tag: "Ivan on tech" },
   { value: "from:MMCrypto", tag: "mm crypto" },
@@ -217,3 +213,53 @@ function streamConnect() {
     streamConnect(token);
   });
 })();
+
+// ############## START COIN MARKET CAP ###################
+
+app.get("/coinMarketCap", (request, response) => {
+  axios({
+    method: "get",
+    url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+    responseType: "JSON",
+    headers: {
+      "X-CMC_PRO_API_KEY": process.env.REACT_APP_COINMARKETCAP_KEY,
+    },
+    qs: {
+      start: "1",
+      limit: "5000",
+      convert: "USD",
+    },
+  })
+    .then((res) => {
+      // response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
+      console.log("*******************************", res.data);
+      return response.send(res.data);
+    })
+    .catch((err) => {
+      console.log("API call error:", err.message);
+    });
+});
+
+// const fetchCoinmarketCap = () => {
+//   axios({
+//     method: "get",
+//     url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+//     responseType: "JSON",
+//     headers: {
+//       "X-CMC_PRO_API_KEY": process.env.REACT_APP_COINMARKETCAP_KEY,
+//     },
+//     qs: {
+//       start: "1",
+//       limit: "5000",
+//       convert: "USD",
+//     },
+//   })
+//     .then((response) => {
+//       // response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
+//       console.log("*******************************", response.data);
+//       return response.data;
+//     })
+//     .catch((err) => {
+//       console.log("API call error:", err.message);
+//     });
+// };

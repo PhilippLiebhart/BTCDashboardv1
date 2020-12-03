@@ -33,7 +33,7 @@ const usePhemexTicker = () => {
   const [tickerData, setTickerData] = useState();
   const [dayMarket, setDayMarket] = useState({});
   const [orderbook, setOrderbook] = useState({ data: 0, fetched: false });
-  console.log("*******IN usePHEMEX*********", tickerData);
+  // console.log("*******IN usePHEMEX*********", tickerData);
 
   const sendHeartbeat = () => {
     let heartbeatMessage = {

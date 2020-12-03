@@ -38,30 +38,12 @@ const useBinanceTicker = () => {
   const [binanceConnStatus, setBinanceConnStatus] = useState();
   const [binanceTickerData, setBinanceTickerData] = useState();
 
-  // const sendHeartbeat = () => {
-  //   if (ws.readyState === 0) {
-  //     ws.send(JSON.stringify(HEARTBEAT));
-  //   } else {
-  //     return;
-  //   }
-  // };
-
   useEffect(() => {
-    // const heartbeat = setInterval(() => {
-    //   sendHeartbeat();
-    //   console.log(
-    //     "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    //   );
-    // }, 6000);
-
     ws.onopen = () => {
       setBinanceConnStatus(WEBSOCKET_STATUS[ws.readyState]);
       ws.send(JSON.stringify(TICK_CONFIG));
     };
 
-    // return () => {
-    //   clearInterval(heartbeat);
-    // };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -69,11 +51,6 @@ const useBinanceTicker = () => {
     let data = JSON.parse(message.data);
 
     setBinanceTickerData(data);
-    // if (tick) {
-    //
-    // } else {
-    //   console.log("[[!! no matching criteria !!]]");
-    // }
   };
 
   return [binanceTickerData, binanceConnStatus];

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/img/logo.svg";
 
 function Navbar(props) {
@@ -28,22 +28,15 @@ function Navbar(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <NavLink to="/">
-              <a className="nav-item nav-link active" href="#">
-                Home <span className="sr-only">(current)</span>
-              </a>
+            <NavLink to="/" className="nav-item nav-link">
+              Home <span className="sr-only">(current)</span>
             </NavLink>
-            <NavLink to="/Dashboard">
-              <a className="nav-item nav-link" href="#">
-                Dashboard
-              </a>
+            <NavLink to="/Dashboard" className="nav-item nav-link">
+              Dashboard
             </NavLink>
-            <a className="nav-item nav-link" href="#">
-              News
-            </a>
-            <a className="nav-item nav-link disabled" href="#">
-              Trading
-            </a>
+            <NavLink to="/MarketCap" className="nav-item nav-link">
+              MarketCap
+            </NavLink>
           </div>
         </div>
       </nav>

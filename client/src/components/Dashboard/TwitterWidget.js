@@ -63,7 +63,7 @@ const TwitterWidget = () => {
 
 const TimelineWrapper = styled.div`
   width: 100%;
-  height: 400px;
+  height: 95%;
   padding: 16px 5px 0 16px;
   /* margin: 10px; */
 

@@ -5,11 +5,11 @@ import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
 import FinhubnewsItem from "./FinhubNewsItem";
 import { useEffect, useState } from "react";
 
-const FinhubNewsfeed = (props) => {
+const FinHubNewsWidget = (props) => {
   const [finhubNews] = useFinhubNewsfeed();
   const [currentNews, setCurrentNews] = useState();
   const [currentCount, setCurrentCount] = useState(10);
-  const [hasmore, sethasmore] = useState(true);
+  const [hasMore, sethasMore] = useState(true);
 
   useEffect(() => {
     setCurrentNews(finhubNews.slice(0, currentCount));
@@ -20,7 +20,7 @@ const FinhubNewsfeed = (props) => {
     let newCount = currentCount + 10;
     setCurrentCount(newCount);
     if (currentNews.length > 99) {
-      sethasmore(false);
+      sethasMore(false);
     }
   };
 
@@ -47,7 +47,7 @@ const FinhubNewsfeed = (props) => {
         <InfiniteScroll
           dataLength={currentCount}
           next={loadMoreFunc}
-          hasMore={hasmore}
+          hasMore={hasMore}
           loader={<h4>Loading...</h4>}
           //height={510}
           scrollableTarget="scrollableDivFinhub"
@@ -66,7 +66,7 @@ const FinhubNewsfeed = (props) => {
 
 const NewsFeedWrapper = styled.div`
   width: 100%;
-  height: 400px;
+  height: 95%;
 
   /* margin: 10px; */
   padding: 16px 5px 0 16px;
@@ -103,6 +103,4 @@ const NewsFeedWrapper = styled.div`
   }
 `;
 
-FinhubNewsfeed.propTypes = {};
-
-export default FinhubNewsfeed;
+export default FinHubNewsWidget;

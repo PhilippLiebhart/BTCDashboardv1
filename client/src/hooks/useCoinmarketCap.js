@@ -4,28 +4,18 @@ import Axios from "axios";
 const useCoinmarketCap = () => {
   const [coinmarketData, setCoinMarketData] = useState({});
 
-  const requestOptions = {
-    method: "GET",
-    url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
-    qs: {
-      start: "1",
-      limit: "5000",
-      convert: "USD",
-    },
-    headers: {
-      "X-CMC_PRO_API_KEY": `${process.env.REACT_APP_COINMARKETCAP_KEY}`,
-    },
-    json: true,
-    gzip: true,
+  const fetchCoinmarketData = () => {
+    Axios.get(`http://localhost:4000/coinMarketCap`)
+      .then((res) => {
+        console.log("useCoinmarketCap RESULT:", res);
+        setCoinMarketData(res.data);
+      })
+      .catch((err) => console.error("useCoinmarketCap AXIOS ERROR!", err));
   };
 
   useEffect(() => {
-    Axios.get(requestOptions.url, requestOptions)
-      .then((res) => {
-        console.log("COIN MARKET RES", res);
-        setCoinMarketData({ ...res.data });
-      })
-      .catch((err) => console.error("COIN MARKET AXIOS ERROR!", err));
+    fetchCoinmarketData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [coinmarketData];

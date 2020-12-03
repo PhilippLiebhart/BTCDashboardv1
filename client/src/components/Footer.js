@@ -10,67 +10,27 @@ function Footer(props) {
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <h6 className="text-uppercase font-weight-bold mb-4">About</h6>
               <ul className="list-unstyled mb-0">
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Contact Us
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    About US
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Stories
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Press
-                  </a>
-                </li>
+                <li className="mb-2">Contact Us</li>
+                <li className="mb-2">About US</li>
+                <li className="mb-2">Stories</li>
+                <li className="mb-2">Press</li>
               </ul>
             </div>
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <h6 className="text-uppercase font-weight-bold mb-4">Help</h6>
               <ul className="list-unstyled mb-0">
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    FAQ
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    How to use
-                  </a>
-                </li>
+                <li className="mb-2">FAQ</li>
+                <li className="mb-2">How to use</li>
               </ul>
             </div>
 
             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
               <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
               <ul className="list-unstyled mb-0">
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Login
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Register
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Sitemap
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="text-muted">
-                    Our Products
-                  </a>
-                </li>
+                <li className="mb-2">Login</li>
+                <li className="mb-2">Register</li>
+                <li className="mb-2">Sitemap</li>
+                <li className="mb-2">Our Products</li>
               </ul>
             </div>
           </div>

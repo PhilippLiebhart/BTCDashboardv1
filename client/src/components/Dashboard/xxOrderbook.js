@@ -1,6 +1,3 @@
-import PropTypes from "prop-types";
-import usePhemexTicker from "../../hooks/usePhemexTicker";
-
 const Orderbook = (props) => {
   //const [tick, dayMarket, orderbook] = usePhemexTicker();
   return (
