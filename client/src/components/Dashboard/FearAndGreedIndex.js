@@ -6,7 +6,6 @@ import useFearAndGreedIndex from "../../hooks/useFearAndGreedIndex";
 const FearAndGreedIndex = (props) => {
   const [fearAndGreedIndex] = useFearAndGreedIndex();
 
-  console.log("FEAR AND GREED:", fearAndGreedIndex.timestamp);
   const time = new Date(fearAndGreedIndex.timestamp * 1000).toLocaleDateString(
     "en-US"
   );

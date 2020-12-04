@@ -48,16 +48,16 @@ const useBybitTicker = () => {
       sendHeartbeat();
     }, 3000);
 
-    ws.onopen = () => {
-      setBybitConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-      ws.send(JSON.stringify(TICK_CONFIG));
-    };
-
     return () => {
       clearInterval(heartbeat);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  ws.onopen = () => {
+    setBybitConnStatus(WEBSOCKET_STATUS[ws.readyState]);
+    ws.send(JSON.stringify(TICK_CONFIG));
+  };
 
   ws.onmessage = (message) => {
     let tickData = JSON.parse(message.data);
@@ -72,7 +72,7 @@ const useBybitTicker = () => {
     } else if (tickData.type === "snapshot") {
       setBybitTickerData({ ...bybitTickerData, snapshot: tickData });
     } else {
-      //console.log("X");
+      console.log("X");
     }
   };
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./DashboardPage.css";
 import RGL, { WidthProvider } from "react-grid-layout";
@@ -17,6 +17,7 @@ import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
 import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
+import CoinMarketWidget from "../components/Dashboard/CoinMarketWidget";
 
 const ReactGridLayout = WidthProvider(RGL);
 const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
@@ -24,6 +25,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
   const [bybitTickerData, bybitConnStatus] = useBybitTicker();
   const [binanceTickerData, binanceConnStatus] = useBinanceTicker();
   const [bitmexTickerData, bitmexConnStatus] = useBitmexTicker();
+  const [averagePrice, setAveragePrice] = useState();
 
   const [state, setState] = useState({
     layout: [
@@ -35,6 +37,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
       { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
       { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
       { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 2 },
+      { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 6 },
     ],
     resizeplotly: false,
   });
@@ -47,10 +50,21 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
     setState({ ...state, layout: layouts });
   };
 
+  useEffect(() => {
+    setAveragePrice(
+      (
+        (bitmexTickerData?.last +
+          parseFloat(binanceTickerData?.c) +
+          tickerData?.tick?.last / 10000 +
+          bybitTickerData?.last?.index_price_e4 / 10000) /
+        4
+      ).toFixed(2)
+    );
+  }, [tickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
   return (
     <>
       <div className="item bg-transparent" key={"header"}>
-        <DashboardHeader />
+        <DashboardHeader averagePrice={averagePrice} />
       </div>
       <ReactGridLayout
         rowHeight={148}
@@ -66,7 +80,6 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
         draggableCancel=".MyDragCancel"
         isDraggable={true}
         isResizable={true}
-
         // useCSSTransforms={true}
       >
         {/* -- TICKER START ------------------------ */}
@@ -146,6 +159,12 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
             Drag from Here - <span className="text">5</span>
           </div>
           <FearAndGreedIndex />
+        </div>
+        <div className="item" key={"coinMarket"}>
+          <div className="MyDragHandleClassName">
+            Drag from Here - <span className="text">5</span>
+          </div>
+          <CoinMarketWidget />
         </div>
       </ReactGridLayout>
     </>

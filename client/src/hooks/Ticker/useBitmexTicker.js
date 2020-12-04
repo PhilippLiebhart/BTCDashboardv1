@@ -48,21 +48,21 @@ const useBitmexTicker = () => {
       sendHeartbeat();
     }, 3000);
 
-    ws.onopen = () => {
-      setBitmexConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-      ws.send(JSON.stringify(TICK_CONFIG));
-    };
-
     return () => {
       clearInterval(heartbeat);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  ws.onopen = () => {
+    setBitmexConnStatus(WEBSOCKET_STATUS[ws.readyState]);
+    ws.send(JSON.stringify(TICK_CONFIG));
+  };
+
   ws.onmessage = (message) => {
     let tickData = JSON.parse(message.data);
 
-    console.log("{{{{{{ BITMETX }}}", tickData);
+    //console.log("{{{{{{ BITMETX }}}", tickData);
     if (tickData.action === "partial") {
       setBitmexTickerData({
         ...bitmexTickerData,

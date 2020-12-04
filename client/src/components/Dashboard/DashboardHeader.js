@@ -13,7 +13,9 @@ const Dashboardheader = (props) => {
             width="25px"
             alt=""
           />
-          <h1 className="h1 d-inline ml-2 text-primary">21540$</h1>
+          <h1 className="h1 d-inline ml-2 text-primary">
+            {props.averagePrice}
+          </h1>
         </div>
         <div className="col-md-4 justify-content-center text-center">
           <p className="header--24h">Volume: 200.3 mio</p>

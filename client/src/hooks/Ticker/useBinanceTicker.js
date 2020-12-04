@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const WS_URL = "wss:/stream.binance.com/ws";
 
@@ -32,26 +32,29 @@ const WEBSOCKET_STATUS = {
   3: "yellow",
 };
 
-let ws = new WebSocket(WS_URL);
-
 const useBinanceTicker = () => {
   const [binanceConnStatus, setBinanceConnStatus] = useState();
   const [binanceTickerData, setBinanceTickerData] = useState();
+  //console.log("{{{BINANCE TICKER RUNS}}}", binanceConnStatus);
+
+  const socketRef = useRef();
 
   useEffect(() => {
+    let ws = new WebSocket(WS_URL);
+    socketRef.current = ws;
+
     ws.onopen = () => {
       setBinanceConnStatus(WEBSOCKET_STATUS[ws.readyState]);
       ws.send(JSON.stringify(TICK_CONFIG));
     };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    ws.onmessage = (message) => {
+      let data = JSON.parse(message.data);
+      console.log("************ binance open");
+
+      setBinanceTickerData(data);
+    };
   }, []);
-
-  ws.onmessage = (message) => {
-    let data = JSON.parse(message.data);
-
-    setBinanceTickerData(data);
-  };
 
   return [binanceTickerData, binanceConnStatus];
 };
