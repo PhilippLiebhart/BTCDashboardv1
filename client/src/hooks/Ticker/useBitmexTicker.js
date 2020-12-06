@@ -42,7 +42,7 @@ const useBitmexTicker = () => {
           low: tickData.data[0].lowPrice,
           high: tickData.data[0].highPrice,
         });
-      } else if (tickData.data && tickData.data[0]?.fairPrice) {
+      } else if (tickData?.data[0]?.fairPrice) {
         setBitmexTickerData({
           ...bitmexTickerData,
           last: tickData?.data[0]?.fairPrice,
