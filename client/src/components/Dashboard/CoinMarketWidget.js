@@ -16,13 +16,13 @@ const CoinMarketWidget = () => {
           </tr>
         </thead>
         <tbody>
-          {coinmarketData?.data?.slice(0, 6).map((coin, index) => {
+          {coinmarketData?.data?.slice(0, 5).map((coin, index) => {
             return (
               <tr key={index}>
                 <td className="p-1 m-0 text-center border-0">{coin.name}</td>
                 <td className="p-1 m-0 text-center border-0">{coin.symbol}</td>
                 <td className="p-1 m-0 text-center border-0">
-                  {coin.quote.USD.percent_change_24h}
+                  {coin.quote.USD.percent_change_24h.toFixed(2)} %
                 </td>
                 <td className="p-0 m-0 text-center border-0">
                   {coin.date_added.slice(0, 4)}

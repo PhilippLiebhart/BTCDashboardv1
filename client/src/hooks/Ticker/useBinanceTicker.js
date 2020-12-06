@@ -8,24 +8,6 @@ const TICK_CONFIG = {
   id: 1,
 };
 
-// const MARKET24HTICK_CONFIG = {
-//   method: "market24h.subscribe",
-//   params: [],
-//   id: 12345,
-// };
-
-// const ORDERBOOK_CONFIG = {
-//   id: 123456,
-//   method: "orderbook.subscribe",
-//   params: ["BTCUSD"],
-// };
-
-// const HEARTBEAT = {
-//   id: 123456,
-//   method: "server.ping",
-//   params: [],
-// };
-
 const WEBSOCKET_STATUS = {
   1: "green",
   2: "red",
@@ -39,21 +21,24 @@ const useBinanceTicker = () => {
 
   const socketRef = useRef();
 
-  useEffect(() => {
+  const wsInit = () => {
     let ws = new WebSocket(WS_URL);
     socketRef.current = ws;
 
-    ws.onopen = () => {
+    socketRef.current.onopen = () => {
       setBinanceConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-      ws.send(JSON.stringify(TICK_CONFIG));
+      socketRef.current.send(JSON.stringify(TICK_CONFIG));
     };
 
-    ws.onmessage = (message) => {
+    socketRef.current.onmessage = (message) => {
       let data = JSON.parse(message.data);
-      console.log("************ binance open");
 
       setBinanceTickerData(data);
     };
+  };
+
+  useEffect(() => {
+    wsInit();
   }, []);
 
   return [binanceTickerData, binanceConnStatus];

@@ -2,7 +2,6 @@ import useCoinmarketCap from "../hooks/useCoinmarketCap";
 
 const MarketCapPage = () => {
   const [coinmarketData] = useCoinmarketCap();
-  console.log("coinmarketData", coinmarketData);
 
   return (
     <div className="d-flex flex-nowrap p-3">

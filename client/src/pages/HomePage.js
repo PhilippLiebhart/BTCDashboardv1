@@ -14,8 +14,8 @@ function Homepage(props) {
               <h1 className="display-3 font-weight-bold text-primary">
                 BTCDASH
               </h1>
-              <p clasName="lead">create your own custom BTCDASH.</p>
-              <hr clasName="my-4" />
+              <p className="lead">create your own custom BTCDASH.</p>
+              <hr className="my-4" />
             </div>
             <div className="col">
               {" "}

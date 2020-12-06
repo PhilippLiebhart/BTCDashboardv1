@@ -231,8 +231,6 @@ app.get("/coinMarketCap", (request, response) => {
     },
   })
     .then((res) => {
-      // response.data.pipe(fs.createWriteStream("ada_lovelace.jpg"));
-      console.log("*******************************", res.data);
       return response.send(res.data);
     })
     .catch((err) => {

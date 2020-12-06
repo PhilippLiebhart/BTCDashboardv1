@@ -14,11 +14,11 @@ const MARKET24HTICK_CONFIG = {
   id: 12345,
 };
 
-const ORDERBOOK_CONFIG = {
-  id: 123456,
-  method: "orderbook.subscribe",
-  params: ["BTCUSD"],
-};
+// const ORDERBOOK_CONFIG = {
+//   id: 123456,
+//   method: "orderbook.subscribe",
+//   params: ["BTCUSD"],
+// };
 
 const HEARTBEAT = {
   id: 123456,
@@ -39,17 +39,17 @@ const usePhemexTicker = () => {
 
   const socketRef = useRef();
 
-  useEffect(() => {
+  const wsInit = () => {
     const ws = new WebSocket(WS_URL);
     socketRef.current = ws;
 
-    ws.onopen = () => {
-      setConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-      ws.send(JSON.stringify(TICK_CONFIG));
-      ws.send(JSON.stringify(MARKET24HTICK_CONFIG));
+    socketRef.current.onopen = () => {
+      setConnStatus(WEBSOCKET_STATUS[socketRef.current.readyState]);
+      socketRef.current.send(JSON.stringify(TICK_CONFIG));
+      socketRef.current.send(JSON.stringify(MARKET24HTICK_CONFIG));
     };
 
-    ws.onmessage = (message) => {
+    socketRef.current.onmessage = (message) => {
       let { tick, market24h } = JSON.parse(message.data);
 
       if (tick) {
@@ -57,19 +57,16 @@ const usePhemexTicker = () => {
       } else if (market24h?.symbol === "BTCUSD") {
         setDayMarket({ market24h });
       } else {
-        console.log("[[!! no matching criteria !!]]");
+        console.log("[[!! phemex no matching criteria !!]]");
       }
     };
-    const heartbeat = setInterval(() => {
-      if (ws.readyState === 0) {
-        ws.send(JSON.stringify(HEARTBEAT));
-      } else {
-        return;
-      }
+  };
 
-      console.log(
-        "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-      );
+  useEffect(() => {
+    wsInit();
+
+    const heartbeat = setInterval(() => {
+      socketRef.current.send(JSON.stringify(HEARTBEAT));
     }, 5000);
 
     return () => {

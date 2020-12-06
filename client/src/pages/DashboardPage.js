@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./DashboardPage.css";
-import RGL, { WidthProvider } from "react-grid-layout";
+import RGL, { WidthProvider, Responsive } from "react-grid-layout";
 //  import css -- IMP!!!
 import "./Grid-styles/grid-layout-styles.css";
 import "./Grid-styles/resizable-styles.css";
@@ -19,36 +19,66 @@ import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
 import CoinMarketWidget from "../components/Dashboard/CoinMarketWidget";
 
-const ReactGridLayout = WidthProvider(RGL);
+// const ReactGridLayout = WidthProvider(RGL);
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const layoutLG = [
+  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
+  { i: "21", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "22", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "23", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "24", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
+  { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
+  { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 3 },
+  { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 6 },
+];
+
+const layoutMD = [
+  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
+  { i: "21", x: 0, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "22", x: 2, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "23", x: 4, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "24", x: 6, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "NewsFeed", x: 0, y: 0, w: 4, h: 3, minH: 1 },
+  { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
+  { i: "feargreed", x: 4, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
+  { i: "coinMarket", x: 7, y: 1, w: 4, h: 2, minH: 2, minW: 6 },
+];
+
+const layoutXS = [
+  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
+  { i: "21", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "22", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "23", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "24", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "NewsFeed", x: 0, y: 0, w: 2, h: 3, minH: 1 },
+  { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
+  { i: "feargreed", x: 0, y: 0, w: 1, h: 1, minH: 1, minW: 2 },
+  { i: "coinMarket", x: 0, y: 0, w: 2, h: 2, minH: 6, minW: 6 },
+];
+
 const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
   const [tickerData, dayMarket, connStatus] = usePhemexTicker();
-  const [bybitTickerData, bybitConnStatus] = useBybitTicker();
+  const [
+    bybitTickerData,
+    bybitTickerSnapshot,
+    bybitConnStatus,
+  ] = useBybitTicker();
   const [binanceTickerData, binanceConnStatus] = useBinanceTicker();
-  const [bitmexTickerData, bitmexConnStatus] = useBitmexTicker();
+  const [
+    bitmexTickerData,
+    bitmexTickerPartial,
+    bitmexConnStatus,
+  ] = useBitmexTicker();
   const [averagePrice, setAveragePrice] = useState();
 
-  const [state, setState] = useState({
-    layout: [
-      { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
-      { i: "21", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 3, maxH: 1 },
-      { i: "22", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 3, maxH: 1 },
-      { i: "23", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 3, maxH: 1 },
-      { i: "24", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 3, maxH: 1 },
-      { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
-      { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
-      { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 2 },
-      { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 6 },
-    ],
-    resizeplotly: false,
+  // console.log("ooooooooooooo", bitmexTickerPartial);
+
+  const [layoutState, setLayoutState] = useState({
+    layouts: { lg: layoutLG, md: layoutMD, xs: layoutXS },
   });
-
-  const onLayoutChange = (layout) => {
-    setState({ layout });
-  };
-
-  const onResize = (layouts) => {
-    setState({ ...state, layout: layouts });
-  };
 
   useEffect(() => {
     setAveragePrice(
@@ -61,25 +91,41 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
       ).toFixed(2)
     );
   }, [tickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
+
+  const onLayoutChange = (layout) => {
+    setLayoutState({ ...layoutState, layout: layout });
+  };
+
+  const onResize = (layouts) => {
+    setLayoutState({ ...layoutState, layouts: layouts });
+  };
+
+  const onBreakpointChange = (breakpoint) => {
+    console.log("BREAKPOINT", breakpoint);
+    setLayoutState({ ...layoutState, currentBreakpoint: breakpoint });
+  };
+
   return (
     <>
       <div className="item bg-transparent" key={"header"}>
         <DashboardHeader averagePrice={averagePrice} />
       </div>
-      <ReactGridLayout
+
+      <ResponsiveGridLayout
         rowHeight={148}
-        cols={16}
+        //cols={16}
         onResize={onResize}
-        //width={100}
-        // breakpoints={{ lg: 1200, xxs: 1 }}
-        // cols={{ lg: 12, xxs: 2 }}
+        breakpoints={{ lg: 1000, md: 700, xs: 699 }}
+        cols={{ lg: 16, md: 6, xs: 2 }}
         //autoSize={true}
-        layout={state.layout}
+        layouts={layoutState.layouts}
         onLayoutChange={onLayoutChange}
+        onBreakpointChange={onBreakpointChange}
         draggableHandle=".MyDragHandleClassName"
         draggableCancel=".MyDragCancel"
         isDraggable={true}
         isResizable={true}
+        //width={1200}
         // useCSSTransforms={true}
       >
         {/* -- TICKER START ------------------------ */}
@@ -88,9 +134,9 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
             <TickerCard
               name="BITMEX"
               last={bitmexTickerData?.last}
-              vol={parseFloat(bitmexTickerData?.vol)}
-              high={parseFloat(bitmexTickerData?.high).toFixed(2)}
-              low={parseFloat(bitmexTickerData?.low).toFixed(2)}
+              vol={parseFloat(bitmexTickerPartial?.vol)}
+              high={parseFloat(bitmexTickerPartial?.high).toFixed(2)}
+              low={parseFloat(bitmexTickerPartial?.low).toFixed(2)}
               status={bitmexConnStatus}
             />
           </div>
@@ -127,9 +173,9 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
             <TickerCard
               name="BYBIT"
               last={(bybitTickerData?.last?.index_price_e4 / 10000).toFixed(2)}
-              vol={bybitTickerData?.snapshot?.data.volume_24h / 10000}
-              high={bybitTickerData?.snapshot?.data.high_price_24h_e4 / 10000}
-              low={bybitTickerData?.snapshot?.data.low_price_24h_e4 / 10000}
+              vol={bybitTickerSnapshot?.data?.volume_24h / 10000}
+              high={bybitTickerSnapshot?.data?.high_price_24h_e4 / 10000}
+              low={bybitTickerSnapshot?.data?.low_price_24h_e4 / 10000}
               status={bybitConnStatus}
             />
           </div>
@@ -166,7 +212,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
           </div>
           <CoinMarketWidget />
         </div>
-      </ReactGridLayout>
+      </ResponsiveGridLayout>
     </>
   );
 };

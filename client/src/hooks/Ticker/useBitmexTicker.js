@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const WS_URL = "wss://www.bitmex.com/realtime";
 
@@ -6,18 +6,6 @@ const TICK_CONFIG = {
   op: "subscribe",
   args: ["instrument:XBTUSD"],
 };
-
-// const MARKET24HTICK_CONFIG = {
-//   method: "market24h.subscribe",
-//   params: [],
-//   id: 12345,
-// };
-
-// const ORDERBOOK_CONFIG = {
-//   id: 123456,
-//   method: "orderbook.subscribe",
-//   params: ["BTCUSD"],
-// };
 
 const HEARTBEAT = {
   op: "ping",
@@ -29,23 +17,51 @@ const WEBSOCKET_STATUS = {
   3: "yellow",
 };
 
-let ws = new WebSocket(WS_URL);
-
 const useBitmexTicker = () => {
   const [bitmexConnStatus, setBitmexConnStatus] = useState();
   const [bitmexTickerData, setBitmexTickerData] = useState();
-  console.log("bitmexTickerData", bitmexTickerData);
-  const sendHeartbeat = () => {
-    if (ws.readyState === 0) {
-      ws.send(JSON.stringify(HEARTBEAT));
-    } else {
-      return;
-    }
+  const [bitmexTickerPartial, setBitmexTickerPartial] = useState();
+
+  const socketRef = useRef();
+
+  const wsInit = () => {
+    const ws = new WebSocket(WS_URL);
+    socketRef.current = ws;
+
+    socketRef.current.onopen = () => {
+      setBitmexConnStatus(WEBSOCKET_STATUS[socketRef.current.readyState]);
+      socketRef.current.send(JSON.stringify(TICK_CONFIG));
+    };
+
+    socketRef.current.onmessage = (message) => {
+      let tickData = JSON.parse(message.data);
+
+      if (tickData.action === "partial") {
+        setBitmexTickerPartial({
+          vol: tickData.data[0].turnover24h,
+          low: tickData.data[0].lowPrice,
+          high: tickData.data[0].highPrice,
+        });
+      } else if (tickData?.data[0]?.fairPrice) {
+        setBitmexTickerData({
+          ...bitmexTickerData,
+          last: tickData?.data[0]?.fairPrice,
+        });
+      } else {
+        console.log("{{{{{ BITMEX message not matching! }}}}}}");
+      }
+    };
   };
 
   useEffect(() => {
+    wsInit();
+
     const heartbeat = setInterval(() => {
-      sendHeartbeat();
+      if (socketRef.current.readyState === 0) {
+        socketRef.current.send(JSON.stringify(HEARTBEAT));
+      } else {
+        return;
+      }
     }, 3000);
 
     return () => {
@@ -54,44 +70,7 @@ const useBitmexTicker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  ws.onopen = () => {
-    setBitmexConnStatus(WEBSOCKET_STATUS[ws.readyState]);
-    ws.send(JSON.stringify(TICK_CONFIG));
-  };
-
-  ws.onmessage = (message) => {
-    let tickData = JSON.parse(message.data);
-
-    //console.log("{{{{{{ BITMETX }}}", tickData);
-    if (tickData.action === "partial") {
-      setBitmexTickerData({
-        ...bitmexTickerData,
-        vol: tickData.data[0].turnover24h,
-        low: tickData.data[0].lowPrice,
-        high: tickData.data[0].highPrice,
-      });
-    } else {
-      try {
-        if (tickData.data[0].lastPriceProtected) {
-          setBitmexTickerData({
-            ...bitmexTickerData,
-            last: tickData?.data[0]?.lastPriceProtected,
-          });
-        } else if (tickData.action === "partial") {
-          setBitmexTickerData({
-            ...bitmexTickerData,
-            vol: tickData.data[0].turnover24h,
-            low: tickData.data[0].lowPrice,
-            high: tickData.data[0].highPrice,
-          });
-        }
-      } catch (e) {
-        console.log("66666666666666", e);
-      }
-    }
-  };
-
-  return [bitmexTickerData, bitmexConnStatus];
+  return [bitmexTickerData, bitmexTickerPartial, bitmexConnStatus];
 };
 
 export default useBitmexTicker;
