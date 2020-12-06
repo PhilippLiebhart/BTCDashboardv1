@@ -101,7 +101,6 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
   };
 
   const onBreakpointChange = (breakpoint) => {
-    console.log("BREAKPOINT", breakpoint);
     setLayoutState({ ...layoutState, currentBreakpoint: breakpoint });
   };
 
@@ -125,8 +124,6 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
         draggableCancel=".MyDragCancel"
         isDraggable={true}
         isResizable={true}
-        //width={1200}
-        // useCSSTransforms={true}
       >
         {/* -- TICKER START ------------------------ */}
         <div className="item" key={21}>
@@ -223,5 +220,3 @@ export default Dashboardpage;
 //   rowHeight: 150,
 //   cols: 2, // to make grid item 50% or 100%
 // };
-
-//const TwitterWidgetWrapper = styled.div``;
