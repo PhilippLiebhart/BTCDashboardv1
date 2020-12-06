@@ -68,7 +68,6 @@ const NewsFeedWrapper = styled.div`
   width: 100%;
   height: 95%;
 
-  /* margin: 10px; */
   padding: 16px 5px 0 16px;
 
   border-radius: 10px;
@@ -76,22 +75,6 @@ const NewsFeedWrapper = styled.div`
 
   background-color: var(--dark);
   color: var(--primary);
-
-  /* div::-webkit-scrollbar {
-    width: 11px;
-  }
-  div {
-    scrollbar-width: thin;
-    scrollbar-color: var(--thumbBG) var(--body-bg);
-  }
-  div::-webkit-scrollbar-track {
-    background: var(--body-bg);
-  }
-  div::-webkit-scrollbar-thumb {
-    background-color: var(--thumbBG);
-    border-radius: 6px;
-    border: 3px solid var(--body-bg);
-  } */
 
   hr {
     height: 1px;

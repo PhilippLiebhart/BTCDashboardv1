@@ -45,16 +45,11 @@ TickerCard.propTypes = {};
 export default TickerCard;
 
 const TickerCardWrapper = styled.div`
-  /* width: 268px; */
   height: 136px;
   padding: 26px 16px 16px 16px;
-  /* margin: 10px; */
   border-radius: 10px;
   text-align: left;
   align-items: center;
-
-  /* background-color: var(--dark);
-  color: var(--primary); */
 
   hr {
     height: 1px;

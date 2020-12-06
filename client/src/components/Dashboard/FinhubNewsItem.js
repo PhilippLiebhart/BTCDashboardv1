@@ -45,26 +45,6 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
           </div>
         </details>
       </main>
-
-      {/* <div className="card bg-dark mb-1">
-        <div className="card-header" id="hula">
-          <p className="h5 text-primary text-left mb-0">
-            <NewsItemDate className="text-secondary">
-              {formattedTime}
-            </NewsItemDate>{" "}
-            {headline}
-          </p>
-        </div>
-
-        <div className="card-body">
-          {summary}
-          <h6 className="text-primary text-right mt-3">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              read more...
-            </a>
-          </h6>
-        </div>
-      </div> */}
     </>
   );
 };

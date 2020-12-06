@@ -38,15 +38,7 @@ const FearAndGreedWrapper = styled.div`
   border-radius: 10px;
   text-align: center;
 
-  /* background-color: var(--dark); */
   color: var(--primary);
-
-  /* .grid {
-    display: grid;
-    grid-gap: auto;
-    align-items: center;
-    height: 100%;
-  } */
 `;
 
 FearAndGreedIndex.propTypes = {};

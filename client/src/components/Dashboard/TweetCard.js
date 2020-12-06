@@ -15,7 +15,6 @@ export default TweetCard;
 const TweetCardWrapper = styled.div`
   padding: 8px 0 8px 0;
 
-  //  border-bottom: 0.1rem solid var(--secondary);
   hr {
     border-color: var(--light);
     padding: 0;

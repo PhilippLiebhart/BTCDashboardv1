@@ -65,7 +65,6 @@ const TimelineWrapper = styled.div`
   width: 100%;
   height: 95%;
   padding: 16px 5px 0 16px;
-  /* margin: 10px; */
 
   border-radius: 10px;
   text-align: left;
