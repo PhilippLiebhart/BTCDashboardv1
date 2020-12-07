@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./DashboardPage.css";
-import RGL, { WidthProvider, Responsive } from "react-grid-layout";
-//  import css -- IMP!!!
+import { WidthProvider, Responsive } from "react-grid-layout";
 import "./Grid-styles/grid-layout-styles.css";
 import "./Grid-styles/resizable-styles.css";
 
@@ -10,15 +8,15 @@ import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import TwitterWidget from "../components/Dashboard/TwitterWidget";
 import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
 import FinHubNewsWidget from "../components/Dashboard/FinHubNewsWidget";
-//import TickerWIdget from "../components/Dashboard/TickerWidget";
 import TickerCard from "../components/Dashboard/TickerCard";
+import CoinMarketWidget from "../components/Dashboard/CoinMarketWidget";
 
 import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
 import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
-import CoinMarketWidget from "../components/Dashboard/CoinMarketWidget";
 
+import "./DashboardPage.css";
 // const ReactGridLayout = WidthProvider(RGL);
 
 const ResponsiveGridLayout = WidthProvider(Responsive);

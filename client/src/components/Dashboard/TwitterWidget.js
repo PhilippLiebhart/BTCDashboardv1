@@ -10,7 +10,7 @@ const TwitterWidget = () => {
   const [tweets] = useTwitterDB();
   const [currentTweets, setCurrentTweets] = useState();
   const [currentCount, setCurrentCount] = useState(10);
-  const [hasmore, sethasmore] = useState(true);
+  const [hasMore, sethasMore] = useState(true);
 
   useEffect(() => {
     setCurrentTweets(tweets?.slice(0, currentCount));
@@ -21,7 +21,7 @@ const TwitterWidget = () => {
     let newCount = currentCount + 10;
     setCurrentCount(newCount);
     if (currentTweets.length > 99) {
-      sethasmore(false);
+      sethasMore(false);
     }
   };
 
@@ -44,7 +44,7 @@ const TwitterWidget = () => {
         <InfiniteScroll
           dataLength={currentCount}
           next={loadMoreFunc}
-          hasMore={hasmore}
+          hasMore={hasMore}
           loader={<h4>Loading...</h4>}
           //height={520}
           scrollableTarget="scrollableDivTwitter"
