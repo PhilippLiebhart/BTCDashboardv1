@@ -13,7 +13,7 @@
   text-align: center;
   align-items: center;
 
-  background-color: var(--dark);
+  background-color: var(--dashWidgetBgDark);
   color: var(--primary);
 }
 

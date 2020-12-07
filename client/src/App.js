@@ -1,4 +1,5 @@
-import "./App.scss";
+//import "./App.scss";
+import GlobalStyle from "./styles/GlobalStyles";
 import { Switch, Route } from "react-router-dom";
 
 import Dashboardpage from "./pages/DashboardPage";
@@ -10,6 +11,7 @@ import Playground from "./components/playground";
 function App() {
   return (
     <Layout>
+      <GlobalStyle />
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/Dashboard" exact component={Dashboardpage} />

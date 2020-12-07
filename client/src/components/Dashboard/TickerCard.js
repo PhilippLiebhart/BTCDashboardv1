@@ -50,7 +50,6 @@ const TickerCardWrapper = styled.div`
   border-radius: 10px;
   text-align: left;
   align-items: center;
-
   hr {
     height: 1px;
     border-color: var(--secondary);

@@ -104,9 +104,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
 
   return (
     <>
-      <div className="item bg-transparent" key={"header"}>
-        <DashboardHeader averagePrice={averagePrice} />
-      </div>
+      <DashboardHeader averagePrice={averagePrice} />
 
       <ResponsiveGridLayout
         rowHeight={148}

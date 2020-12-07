@@ -69,7 +69,6 @@ const TimelineWrapper = styled.div`
   border-radius: 10px;
   text-align: left;
 
-  background-color: var(--dark);
   color: var(--primary);
 `;
 
