@@ -183,25 +183,27 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
         {/* -- TICKER END ------------------------ */}
         <div className="item widget--base" key={"NewsFeed"}>
           <div className="MyDragHandleClassName">
-            Drag from Here - <span className="text">3</span>
+            <h6 className="text-center p-1 m-0 secondary">
+              Finhub Crypto News
+            </h6>
           </div>
           <FinHubNewsWidget />
         </div>
         <div className="item widget--base" key={"twitter"}>
           <div className="MyDragHandleClassName">
-            Drag from Here - <span className="text">4</span>
+            <h6 className="text-center p-1 m-0 secondary">Twitter</h6>{" "}
           </div>
           <TwitterWidget />
         </div>
         <div className="item widget--base" key={"feargreed"}>
           <div className="MyDragHandleClassName">
-            Drag from Here - <span className="text">5</span>
+            <h6 className="text-center p-1 m-0 secondary">Fear and Greed</h6>
           </div>
           <FearAndGreedIndex />
         </div>
         <div className="item widget--base" key={"coinMarket"}>
           <div className="MyDragHandleClassName">
-            Drag from Here - <span className="text">5</span>
+            <h6 className="text-center p-1 m-0 secondary">Coin Market Cap</h6>
           </div>
           <CoinMarketWidget />
         </div>

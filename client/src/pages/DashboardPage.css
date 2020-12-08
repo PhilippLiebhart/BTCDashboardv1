@@ -1,6 +1,6 @@
 .item {
-  overflow: scroll;
-  /* width: auto; */
+  overflow: hidden;
+  width: auto;
   /* height: 136px; */
   /* padding: 16px; */
   margin: 10px;
@@ -18,25 +18,4 @@
   border-radius: 10px;
   background: var(--dark);
   text-align: center;
-}
-
-/* SCROLLBAR */
-html {
-  --scrollbarBG: #cfd8dc;
-  --thumbBG: #90a4ae;
-}
-*::-webkit-scrollbar {
-  width: 11px;
-}
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBG) var(--body-bg);
-}
-*::-webkit-scrollbar-track {
-  background: var(--body-bg);
-}
-*::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBG);
-  border-radius: 6px;
-  border: 3px solid var(--dashBgDark);
 }

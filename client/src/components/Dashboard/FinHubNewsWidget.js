@@ -26,14 +26,17 @@ const FinHubNewsWidget = (props) => {
 
   let headlineList = currentNews?.map((newsItem, index) => {
     return (
-      <FinhubnewsItem
-        key={newsItem.id}
-        id={newsItem.id}
-        headline={newsItem.headline}
-        summary={newsItem.summary}
-        url={newsItem.url}
-        time={newsItem.datetime}
-      />
+      <>
+        <FinhubnewsItem
+          key={newsItem.id}
+          id={newsItem.id}
+          headline={newsItem.headline}
+          summary={newsItem.summary}
+          url={newsItem.url}
+          time={newsItem.datetime}
+        />
+        <hr />
+      </>
     );
   });
 
@@ -43,7 +46,6 @@ const FinHubNewsWidget = (props) => {
         id="scrollableDivFinhub"
         style={{ height: "100%", overflowY: "scroll" }}
       >
-        <h3 className="h6 text-left">Finhub Crypto News:</h3>
         <InfiniteScroll
           dataLength={currentCount}
           next={loadMoreFunc}
@@ -68,7 +70,7 @@ const NewsFeedWrapper = styled.div`
   width: 100%;
   height: 95%;
 
-  padding: 16px 5px 0 16px;
+  /* padding: 16px 5px 0 16px; */
 
   border-radius: 10px;
   text-align: left;
@@ -78,10 +80,14 @@ const NewsFeedWrapper = styled.div`
   hr {
     height: 1px;
     border-color: var(--secondary);
-    width: 100%;
+    width: 95% !important;
     padding: 0;
     margin-top: 12px;
     margin-bottom: 12px;
+    border-bottom: none;
+    color: var(--secondary);
+    border-left: none;
+    border-right: none;
   }
 `;
 

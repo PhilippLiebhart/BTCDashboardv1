@@ -25,7 +25,7 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
         </div>
         <hr />
         <div className="row">
-          <div className="">
+          <div className="col-price">
             <Price className="font-weight-bolder">{last}</Price>
           </div>
           <div className="">
@@ -49,18 +49,32 @@ const TickerCardWrapper = styled.div`
 
   .row {
     display: grid;
-    grid-template-columns: auto auto auto;
-
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    justify-content: auto;
     justify-items: left;
     align-items: center;
+    align-content: center;
     text-align: left !important;
   }
-  .col-left {
+  .col-price {
+    text-align: center;
+    width: 100%;
   }
 
   .col-right {
     text-align: left !important;
+  }
+
+  hr {
+    height: 1px;
+    border-color: var(--secondary);
+    width: 100% !important;
+    padding: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
   }
 `;
 
@@ -76,7 +90,7 @@ const Price = styled.span`
 `;
 
 const Volume = styled.p`
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   line-height: 0;
 `;
 const Status = styled.span``;

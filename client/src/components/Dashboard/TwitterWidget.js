@@ -26,11 +26,14 @@ const TwitterWidget = () => {
   };
 
   const mappedTweets = currentTweets?.map((tweet) => (
-    <Tweet
-      key={tweet._id}
-      user={tweet.includes.users[0].name}
-      text={tweet.data.text}
-    />
+    <>
+      <Tweet
+        key={tweet._id}
+        user={tweet.includes.users[0].name}
+        text={tweet.data.text}
+      />
+      <hr />
+    </>
   ));
 
   return (
@@ -39,8 +42,6 @@ const TwitterWidget = () => {
         id="scrollableDivTwitter"
         style={{ height: "100%", overflowY: "scroll" }}
       >
-        <h3 className="h6 text-left">Twitter Feed:</h3>
-
         <InfiniteScroll
           dataLength={currentCount}
           next={loadMoreFunc}
@@ -62,14 +63,23 @@ const TwitterWidget = () => {
 };
 
 const TimelineWrapper = styled.div`
-  width: 100%;
   height: 95%;
-  padding: 16px 5px 0 16px;
 
   border-radius: 10px;
   text-align: left;
 
   color: var(--primary);
+
+  hr {
+    height: 1px;
+    border-color: var(--secondary);
+    width: 95% !important;
+    padding: 0;
+    border-bottom: none;
+    color: var(--secondary);
+    border-left: none;
+    border-right: none;
+  }
 `;
 
 export default TwitterWidget;
