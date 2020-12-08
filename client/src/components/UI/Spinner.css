@@ -1,6 +1,3 @@
-h1 {
-  color: rgba(0, 250, 255, 299);
-}
 .PULSE {
   /* Chrome, Safari, Opera */
   -webkit-animation: PULSE 1s infinite ease;

@@ -8,9 +8,9 @@ function Homepage(props) {
       <HomePageWrapper>
         <div className="introCard">
           <div className="card--left">
-            <h1 clasName="">Welcome to</h1>
-            <h1 className="">BTCDASH</h1>
-            <p className="">create your own custom BTCDASH.</p>
+            <h1 className="headline">Welcome to</h1>
+            <h1 className="App--name">BTCDASH</h1>
+            <p className="subline">create your own custom BTCDASH.</p>
             <hr />
           </div>
           <IntroLogo>
@@ -29,28 +29,48 @@ export default Homepage;
 const HomePageWrapper = styled.div`
   height: 80vh;
   width: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+
   background-color: var(--bgDashDark);
+  color: var(--primary);
 
   .introCard {
     display: flex;
     flex-direction: row;
-    padding: 100px;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto;
+
     background-color: var(--dashWidgetBgDark);
+    padding: 26px 16px 16px 16px;
+    border-radius: 10px;
   }
 
-  .introText {
-    border: 1px solid red;
-    margin-right: 50px;
+  .card--left {
+    font-weight: 800;
+    line-height: 0.5rem;
+
+    .App--name {
+      font-weight: 800px;
+      font-size: 3rem;
+    }
+    .headline {
+      font-weight: 800px;
+      font-size: 1.5rem;
+      color: var(--secondary);
+    }
+    .subline {
+      color: var(--secondary);
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
   }
 `;
 
 const IntroLogo = styled.div`
   background-color: var(--dashWidgetBgDark);
+  padding: 20px;
 
   .App-logo {
     pointer-events: none;
