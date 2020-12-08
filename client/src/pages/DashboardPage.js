@@ -122,7 +122,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
         isResizable={true}
       >
         {/* -- TICKER START ------------------------ */}
-        <div className="item" key={21}>
+        <div className="item widget--base" key={21}>
           <div className="MyDragHandleClassName">
             <TickerCard
               name="BITMEX"
@@ -135,7 +135,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
           </div>
         </div>
 
-        <div className="item" key={22}>
+        <div className="item widget--base" key={22}>
           <div className="MyDragHandleClassName">
             <TickerCard
               name="BINANCE"
@@ -148,7 +148,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
           </div>
         </div>
 
-        <div className="item" key={23}>
+        <div className="item widget--base" key={23}>
           <div className="MyDragHandleClassName">
             <TickerCard
               name="PHEMEX"
@@ -161,7 +161,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
           </div>
         </div>
 
-        <div className="item" key={24}>
+        <div className="item widget--base" key={24}>
           <div className="MyDragHandleClassName">
             <TickerCard
               name="BYBIT"
@@ -181,25 +181,25 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
           <TickerWIdget />
         </div> */}
         {/* -- TICKER END ------------------------ */}
-        <div className="item" key={"NewsFeed"}>
+        <div className="item widget--base" key={"NewsFeed"}>
           <div className="MyDragHandleClassName">
             Drag from Here - <span className="text">3</span>
           </div>
           <FinHubNewsWidget />
         </div>
-        <div className="item" key={"twitter"}>
+        <div className="item widget--base" key={"twitter"}>
           <div className="MyDragHandleClassName">
             Drag from Here - <span className="text">4</span>
           </div>
           <TwitterWidget />
         </div>
-        <div className="item" key={"feargreed"}>
+        <div className="item widget--base" key={"feargreed"}>
           <div className="MyDragHandleClassName">
             Drag from Here - <span className="text">5</span>
           </div>
           <FearAndGreedIndex />
         </div>
-        <div className="item" key={"coinMarket"}>
+        <div className="item widget--base" key={"coinMarket"}>
           <div className="MyDragHandleClassName">
             Drag from Here - <span className="text">5</span>
           </div>

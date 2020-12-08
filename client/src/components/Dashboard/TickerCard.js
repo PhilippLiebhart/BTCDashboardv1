@@ -5,11 +5,11 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
   return (
     <>
       <TickerCardWrapper>
-        <div className="row align-items-center">
-          <div className="col-7">
-            <ExchangeName>{name}</ExchangeName>
+        <div className="row">
+          <div className="">
+            <ExchangeName className="font-weight-bold">{name}</ExchangeName>
           </div>
-          <div className="col-5">
+          <div className="">
             <Status
               style={{
                 color: status,
@@ -19,17 +19,16 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
                 height: "150px",
               }}
             >
-              O
+              o
             </Status>
           </div>
         </div>
         <hr />
-        <div className="row align-items-center">
-          <div className="col-6 my-auto">
-            <Price>{last}</Price>
-            {/* <Percent className="text-warning">+000 % </Percent> */}
+        <div className="row">
+          <div className="">
+            <Price className="font-weight-bolder">{last}</Price>
           </div>
-          <div className="col-6 my-auto">
+          <div className="">
             <Volume>Vol {vol}</Volume>
             <Volume>High {high}</Volume>
             <Volume>Low {low}</Volume>
@@ -46,17 +45,22 @@ export default TickerCard;
 
 const TickerCardWrapper = styled.div`
   height: 136px;
-  padding: 26px 16px 16px 16px;
-  border-radius: 10px;
-  text-align: left;
-  align-items: center;
-  hr {
-    height: 1px;
-    border-color: var(--secondary);
-    width: 100%;
-    padding: 0;
-    margin-top: 12px;
-    margin-bottom: 12px;
+  padding: 32px 16px 16px 16px;
+
+  .row {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    justify-content: space-between;
+    justify-items: left;
+    align-items: center;
+    text-align: left !important;
+  }
+  .col-left {
+  }
+
+  .col-right {
+    text-align: left !important;
   }
 `;
 
@@ -70,12 +74,9 @@ const Price = styled.span`
   font-size: 1.5rem;
   font-weight: 500;
 `;
-const Percent = styled.h6`
-  font-size: 0.5rem;
-`;
 
-const Volume = styled.h4`
-  font-size: 0.7rem;
-  line-height: 0.8rem;
+const Volume = styled.p`
+  font-size: 0.6rem;
+  line-height: 0;
 `;
 const Status = styled.span``;

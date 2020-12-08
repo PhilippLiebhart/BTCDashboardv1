@@ -1,29 +1,42 @@
-/* .item,
-.MyDragHandleClassName {
-  /* border: 1px solid; */
-/* background-color: gray;
-} */
 .item {
-  /* overflow: scroll; */
-  width: auto;
+  overflow: scroll;
+  /* width: auto; */
   /* height: 136px; */
   /* padding: 16px; */
   margin: 10px;
-  border-radius: 10px;
-  text-align: center;
-  align-items: center;
-
+  /* border-radius: 10px; */
+  text-align: left;
+  align-items: left;
+  /* 
   background-color: var(--dashWidgetBgDark);
-  color: var(--primary);
+  color: var(--primary); */
 }
 
 .MyDragHandleClassName {
   cursor: move;
   height: auto;
-  font-size: 10px;
   border-radius: 10px;
-  margin-top: 3px;
   background: var(--dark);
-  /* color: white; */
   text-align: center;
+}
+
+/* SCROLLBAR */
+html {
+  --scrollbarBG: #cfd8dc;
+  --thumbBG: #90a4ae;
+}
+*::-webkit-scrollbar {
+  width: 11px;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--body-bg);
+}
+*::-webkit-scrollbar-track {
+  background: var(--body-bg);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--dashBgDark);
 }

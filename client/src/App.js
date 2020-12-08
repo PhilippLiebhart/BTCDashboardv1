@@ -8,6 +8,8 @@ import Homepage from "./pages/HomePage";
 import Layout from "./components/Layout";
 import Playground from "./components/playground";
 
+import "./App.css";
+
 function App() {
   return (
     <Layout>
