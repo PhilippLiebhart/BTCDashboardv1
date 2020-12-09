@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const TickerCard = ({ name, last, vol, high, low, status }) => {
@@ -39,8 +38,6 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
     </>
   );
 };
-
-TickerCard.propTypes = {};
 
 export default TickerCard;
 

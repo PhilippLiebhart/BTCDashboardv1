@@ -49,6 +49,4 @@ const Orderbook = (props) => {
   );
 };
 
-Orderbook.propTypes = {};
-
 export default Orderbook;

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
@@ -85,7 +84,5 @@ const FinhubNewsItemWrapper = styled.div`
     display: none;
   }
 `;
-
-FinhubnewsItem.propTypes = {};
 
 export default FinhubnewsItem;

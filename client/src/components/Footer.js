@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 function Footer(props) {
@@ -45,8 +44,6 @@ function Footer(props) {
     </FooterWrapper>
   );
 }
-
-Footer.propTypes = {};
 
 export default Footer;
 

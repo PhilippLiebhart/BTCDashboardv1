@@ -41,6 +41,4 @@ const FearAndGreedWrapper = styled.div`
   color: var(--primary);
 `;
 
-FearAndGreedIndex.propTypes = {};
-
 export default FearAndGreedIndex;
