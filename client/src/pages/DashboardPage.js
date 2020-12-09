@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import "./Grid-styles/grid-layout-styles.css";
 import "./Grid-styles/resizable-styles.css";
+import "./Grid-styles/draggable-item-styles.css";
 
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import TwitterWidget from "../components/Dashboard/TwitterWidget";
@@ -16,7 +17,6 @@ import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
 
-import "./DashboardPage.css";
 // const ReactGridLayout = WidthProvider(RGL);
 
 const ResponsiveGridLayout = WidthProvider(Responsive);

@@ -44,8 +44,6 @@ const NavWrapper = styled.div`
   color: var(--primary);
   font-size: 1rem;
 
-  border: 1px solid red;
-
   .navbar--left {
     display: flex;
     flex-direction: row;

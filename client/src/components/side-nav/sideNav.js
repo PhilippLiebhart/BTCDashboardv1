@@ -1,5 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./sideNav.css";
+import logo from "../../assets/img/logo.svg";
 
 class SideNav extends React.Component {
   state = {
@@ -45,7 +47,7 @@ class SideNav extends React.Component {
     let sideNavStyle = { width: showNav ? "250px" : "0" };
 
     return (
-      <React.Fragment>
+      <>
         <span onClick={this.openNavClick} class="open-nav">
           &#9776; open
         </span>
@@ -54,16 +56,33 @@ class SideNav extends React.Component {
           class="nav-cover"
           style={navCoverStyle}
         />
+        <div className="navbar--left">
+          <img
+            src={logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top mr-2"
+            alt=""
+          />
+          <h3>BTCDASH</h3>
+        </div>
         <div name="side-nav" class="side-nav" style={sideNavStyle}>
           <a href="#" onClick={this.closeNavClick} class="close-nav">
             &times;
           </a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
+
+          <img src={logo} width="40" height="40" alt="" />
+          <NavLink to="/" className="nav-item nav-link">
+            Home <span className="sr-only">(current)</span>
+          </NavLink>
+          <NavLink to="/Dashboard" className="nav-item nav-link">
+            Dashboard
+          </NavLink>
+          <NavLink to="/MarketCap" className="nav-item nav-link">
+            MarketCap
+          </NavLink>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

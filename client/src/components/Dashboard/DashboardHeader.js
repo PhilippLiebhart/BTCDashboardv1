@@ -49,11 +49,10 @@ const DashboardheaderWrapper = styled.div`
   justify-content: center;
   justify-items: center;
   align-items: center;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   color: var(--secondary);
 
-  border: 1px solid red;
   .header__item {
     margin: 15px;
   }
