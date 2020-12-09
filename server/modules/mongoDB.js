@@ -1,13 +1,13 @@
 require("dotenv").config({ path: "./.env" });
 import mongoose from "mongoose";
 
-const dbURI = process.env.REACT_APP_MONGODB;
+const dbURI = process.env.DATABASE_URI;
 
-const connect = () => {
+const connectDatabase = () => {
   return mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 };
 
-module.exports = { connect };
+module.exports = { connectDatabase };

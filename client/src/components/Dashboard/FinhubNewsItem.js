@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
-  let unix_timestamp = time;
+  let unixTimestamp = time;
 
-  let date = new Date(unix_timestamp * 1000);
+  let date = new Date(unixTimestamp * 1000);
   let hours = date.getHours();
   let minutes = "0" + date.getMinutes();
   let seconds = "0" + date.getSeconds();
