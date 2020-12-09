@@ -10,7 +10,7 @@ const TwitterWidget = () => {
   const [tweets] = useTwitterDB();
   const [currentTweets, setCurrentTweets] = useState();
   const [currentCount, setCurrentCount] = useState(10);
-  const [hasMore, sethasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     setCurrentTweets(tweets?.slice(0, currentCount));
@@ -21,7 +21,7 @@ const TwitterWidget = () => {
     let newCount = currentCount + 10;
     setCurrentCount(newCount);
     if (currentTweets.length > 99) {
-      sethasMore(false);
+      setHasMore(false);
     }
   };
 

@@ -3,13 +3,13 @@ import cors from "cors";
 
 require("dotenv").config({ path: "./.env" });
 
-const fetch = () => {
+const fetchCoinmarketcapListings = () => {
   return axios({
     method: "get",
     url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
     responseType: "JSON",
     headers: {
-      "X-CMC_PRO_API_KEY": process.env.REACT_APP_COINMARKETCAP_KEY,
+      "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_KEY,
     },
     qs: {
       start: "1",
@@ -19,4 +19,4 @@ const fetch = () => {
   });
 };
 
-module.exports = { fetch };
+module.exports = { fetchCoinmarketcapListings };

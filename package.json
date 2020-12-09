@@ -6,7 +6,6 @@
   "author": "Philos <philipp@philipp-liebhart.de>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "cd client && npm install",
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
