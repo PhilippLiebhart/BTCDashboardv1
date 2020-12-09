@@ -71,9 +71,6 @@ const Price = styled.span`
   font-size: 1.5rem;
   font-weight: 500;
 `;
-const Percent = styled.h6`
-  font-size: 0.5rem;
-`;
 
 const Volume = styled.h4`
   font-size: 0.7rem;
