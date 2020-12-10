@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   --secondary: rgb(196, 196, 196);
   --dashBgDark:#393f48;
   --dashWidgetBgDark:  #222831;
+  --dashWidgetBgDarker:  #1c2128;
   --dashHrLight: #2c3139;
 
   // --blue: #007bff;
@@ -45,8 +46,15 @@ body {
   padding:0;
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
-  background-color: var(--dashBgDark);
+  background-color: var(--dashWidgetBgDark);
 }
+
+/* SIDE NAV */
+.sidenav---sidenav---_2tBP {
+  background-color: rgba(57, 63, 72, 0.9);
+  /* background: repeat url("/Users/philos/Documents/_REACT_PROJECT/_APPs/_ My Apps/BTC-Dashboard-v1/client/src/assets/img/logo.svg"); */
+}
+
 
 
 /* SCROLLBAR */
@@ -143,7 +151,8 @@ a {
   border-radius: 10px;
   text-align: left;
   
-  background-color: var(--dashWidgetBgDark);
+  background-color: var(--dashWidgetBgDarker);
+  
   color: var(--primary);
 
   hr {

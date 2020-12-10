@@ -57,7 +57,7 @@ const layoutXS = [
   { i: "coinMarket", x: 0, y: 0, w: 2, h: 2, minH: 6, minW: 6 },
 ];
 
-const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
+const Dashboardpage = () => {
   const [tickerData, dayMarket, connStatus] = usePhemexTicker();
   const [
     bybitTickerData,
@@ -111,7 +111,7 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
         //cols={16}
         onResize={onResize}
         breakpoints={{ lg: 1000, md: 700, xs: 699 }}
-        cols={{ lg: 16, md: 6, xs: 2 }}
+        cols={{ lg: 14, md: 6, xs: 2 }}
         //autoSize={true}
         layouts={layoutState.layouts}
         onLayoutChange={onLayoutChange}
@@ -213,8 +213,3 @@ const Dashboardpage = ({ rowHeight = "200", cols = "2" }) => {
 };
 
 export default Dashboardpage;
-
-// Dashboardpage.defaultProps = {
-//   rowHeight: 150,
-//   cols: 2, // to make grid item 50% or 100%
-// };
