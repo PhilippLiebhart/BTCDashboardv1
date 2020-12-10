@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
+import DashboardContextProvider from "./context/DashboardContext";
 
 import "normalize.css";
 import "./index.css";
@@ -10,7 +11,9 @@ import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <DashboardContextProvider>
+        <App />
+      </DashboardContextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

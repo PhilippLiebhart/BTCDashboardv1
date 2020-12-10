@@ -57,7 +57,7 @@ const usePhemexTicker = () => {
       } else if (market24h?.symbol === "BTCUSD") {
         setDayMarket({ market24h });
       } else {
-        console.log("[[!! phemex no matching criteria !!]]");
+        // console.log("[[!! phemex no matching criteria !!]]");
       }
     };
   };

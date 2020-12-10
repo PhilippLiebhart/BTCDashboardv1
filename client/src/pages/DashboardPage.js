@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import styled from "styled-components";
 
 import { WidthProvider, Responsive } from "react-grid-layout";
 import "./Grid-styles/grid-layout-styles.css";
 import "./Grid-styles/resizable-styles.css";
 import "./Grid-styles/draggable-item-styles.css";
+
+import { DashboardContext } from "../context/DashboardContext";
 
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import TwitterWidget from "../components/Dashboard/TwitterWidget";
@@ -58,6 +61,8 @@ const layoutXS = [
 ];
 
 const Dashboardpage = () => {
+  const { direction } = useContext(DashboardContext);
+
   const [tickerData, dayMarket, connStatus] = usePhemexTicker();
   const [
     bybitTickerData,
@@ -104,112 +109,121 @@ const Dashboardpage = () => {
 
   return (
     <>
-      <DashboardHeader averagePrice={averagePrice} />
+      <DashboardWrapper direction={direction}>
+        <DashboardHeader averagePrice={averagePrice} />
 
-      <ResponsiveGridLayout
-        rowHeight={148}
-        //cols={16}
-        onResize={onResize}
-        breakpoints={{ lg: 1000, md: 700, xs: 699 }}
-        cols={{ lg: 14, md: 6, xs: 2 }}
-        //autoSize={true}
-        layouts={layoutState.layouts}
-        onLayoutChange={onLayoutChange}
-        onBreakpointChange={onBreakpointChange}
-        draggableHandle=".MyDragHandleClassName"
-        draggableCancel=".MyDragCancel"
-        isDraggable={true}
-        isResizable={true}
-      >
-        {/* -- TICKER START ------------------------ */}
-        <div className="item widget--base" key={21}>
-          <div className="MyDragHandleClassName">
-            <TickerCard
-              name="BITMEX"
-              last={bitmexTickerData?.last}
-              vol={parseFloat(bitmexTickerPartial?.vol)}
-              high={parseFloat(bitmexTickerPartial?.high).toFixed(2)}
-              low={parseFloat(bitmexTickerPartial?.low).toFixed(2)}
-              status={bitmexConnStatus}
-            />
+        <ResponsiveGridLayout
+          rowHeight={148}
+          //cols={16}
+          onResize={onResize}
+          breakpoints={{ lg: 1000, md: 700, xs: 699 }}
+          cols={{ lg: 14, md: 6, xs: 2 }}
+          //autoSize={true}
+          layouts={layoutState.layouts}
+          onLayoutChange={onLayoutChange}
+          onBreakpointChange={onBreakpointChange}
+          draggableHandle=".MyDragHandleClassName"
+          draggableCancel=".MyDragCancel"
+          isDraggable={true}
+          isResizable={true}
+        >
+          {/* -- TICKER START ------------------------ */}
+          <div className="item widget--base" key={21}>
+            <div className="MyDragHandleClassName">
+              <TickerCard
+                name="BITMEX"
+                last={bitmexTickerData?.last}
+                vol={parseFloat(bitmexTickerPartial?.vol)}
+                high={parseFloat(bitmexTickerPartial?.high).toFixed(2)}
+                low={parseFloat(bitmexTickerPartial?.low).toFixed(2)}
+                status={bitmexConnStatus}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="item widget--base" key={22}>
-          <div className="MyDragHandleClassName">
-            <TickerCard
-              name="BINANCE"
-              last={parseFloat(binanceTickerData?.c)}
-              vol={parseFloat(binanceTickerData?.v).toFixed(2)}
-              high={parseFloat(binanceTickerData?.h).toFixed(2)}
-              low={parseFloat(binanceTickerData?.l).toFixed(2)}
-              status={binanceConnStatus}
-            />
+          <div className="item widget--base" key={22}>
+            <div className="MyDragHandleClassName">
+              <TickerCard
+                name="BINANCE"
+                last={parseFloat(binanceTickerData?.c)}
+                vol={parseFloat(binanceTickerData?.v).toFixed(2)}
+                high={parseFloat(binanceTickerData?.h).toFixed(2)}
+                low={parseFloat(binanceTickerData?.l).toFixed(2)}
+                status={binanceConnStatus}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="item widget--base" key={23}>
-          <div className="MyDragHandleClassName">
-            <TickerCard
-              name="PHEMEX"
-              last={(tickerData?.tick?.last / 10000).toFixed(2)}
-              vol={dayMarket?.market24h?.volume / 10000}
-              high={dayMarket?.market24h?.high / 10000}
-              low={dayMarket?.market24h?.low / 10000}
-              status={connStatus}
-            />
+          <div className="item widget--base" key={23}>
+            <div className="MyDragHandleClassName">
+              <TickerCard
+                name="PHEMEX"
+                last={(tickerData?.tick?.last / 10000).toFixed(2)}
+                vol={dayMarket?.market24h?.volume / 10000}
+                high={dayMarket?.market24h?.high / 10000}
+                low={dayMarket?.market24h?.low / 10000}
+                status={connStatus}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="item widget--base" key={24}>
-          <div className="MyDragHandleClassName">
-            <TickerCard
-              name="BYBIT"
-              last={(bybitTickerData?.last?.index_price_e4 / 10000).toFixed(2)}
-              vol={bybitTickerSnapshot?.data?.volume_24h / 10000}
-              high={bybitTickerSnapshot?.data?.high_price_24h_e4 / 10000}
-              low={bybitTickerSnapshot?.data?.low_price_24h_e4 / 10000}
-              status={bybitConnStatus}
-            />
+          <div className="item widget--base" key={24}>
+            <div className="MyDragHandleClassName">
+              <TickerCard
+                name="BYBIT"
+                last={(bybitTickerData?.last?.index_price_e4 / 10000).toFixed(
+                  2
+                )}
+                vol={bybitTickerSnapshot?.data?.volume_24h / 10000}
+                high={bybitTickerSnapshot?.data?.high_price_24h_e4 / 10000}
+                low={bybitTickerSnapshot?.data?.low_price_24h_e4 / 10000}
+                status={bybitConnStatus}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* <div className="item" key={2}>
-          <div className="MyDragHandleClassName">
-            Drag from Here - <span className="text">2</span>
+          {/* -- TICKER END ------------------------ */}
+          <div className="item widget--base" key={"NewsFeed"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">
+                Finhub Crypto News
+              </h6>
+            </div>
+            <FinHubNewsWidget />
           </div>
-          <TickerWIdget />
-        </div> */}
-        {/* -- TICKER END ------------------------ */}
-        <div className="item widget--base" key={"NewsFeed"}>
-          <div className="MyDragHandleClassName">
-            <h6 className="text-center p-1 m-0 secondary">
-              Finhub Crypto News
-            </h6>
+          <div className="item widget--base" key={"twitter"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">Twitter</h6>{" "}
+            </div>
+            <TwitterWidget />
           </div>
-          <FinHubNewsWidget />
-        </div>
-        <div className="item widget--base" key={"twitter"}>
-          <div className="MyDragHandleClassName">
-            <h6 className="text-center p-1 m-0 secondary">Twitter</h6>{" "}
+          <div className="item widget--base" key={"feargreed"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">Fear and Greed</h6>
+            </div>
+            <FearAndGreedIndex />
           </div>
-          <TwitterWidget />
-        </div>
-        <div className="item widget--base" key={"feargreed"}>
-          <div className="MyDragHandleClassName">
-            <h6 className="text-center p-1 m-0 secondary">Fear and Greed</h6>
+          <div className="item widget--base" key={"coinMarket"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">Coin Market Cap</h6>
+            </div>
+            <CoinMarketWidget />
           </div>
-          <FearAndGreedIndex />
-        </div>
-        <div className="item widget--base" key={"coinMarket"}>
-          <div className="MyDragHandleClassName">
-            <h6 className="text-center p-1 m-0 secondary">Coin Market Cap</h6>
-          </div>
-          <CoinMarketWidget />
-        </div>
-      </ResponsiveGridLayout>
+        </ResponsiveGridLayout>
+      </DashboardWrapper>
     </>
   );
 };
+
+const DashboardWrapper = styled.div`
+  background-image: linear-gradient(
+    to bottom,
+    ${(props) =>
+      props.direction === "up"
+        ? "rgba(93, 211, 158, 0.2)"
+        : "rgba(205, 9, 11, 0.4)"},
+    transparent
+  );
+`;
 
 export default Dashboardpage;

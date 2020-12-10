@@ -9,7 +9,9 @@ function Layout(props) {
     <LayoutWrapper>
       {/* <Navbar /> */}
       <SliderNav />
-      <main>{props.children}</main>
+
+      <main className="main">{props.children}</main>
+
       <Footer />
     </LayoutWrapper>
   );
@@ -18,6 +20,8 @@ function Layout(props) {
 export default Layout;
 
 const LayoutWrapper = styled.div`
-  height: 100vh;
-  padding-left: 57px;
+  .main {
+    padding-left: 57px;
+    padding-right: 20px;
+  }
 `;

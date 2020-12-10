@@ -1,39 +1,38 @@
 import styled from "styled-components";
 
-function Footer(props) {
+function Footer() {
   return (
     <FooterWrapper>
-      <footer className="footer body-bg">
-        <div className="container py-5">
-          <div className="row py-3">
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <h6 className="text-uppercase font-weight-bold mb-4">About</h6>
-              <ul className="list-unstyled mb-0">
-                <li className="mb-2">Contact Us</li>
-                <li className="mb-2">About US</li>
-                <li className="mb-2">Stories</li>
-                <li className="mb-2">Press</li>
-              </ul>
-            </div>
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <h6 className="text-uppercase font-weight-bold mb-4">Help</h6>
-              <ul className="list-unstyled mb-0">
-                <li className="mb-2">FAQ</li>
-                <li className="mb-2">How to use</li>
-              </ul>
-            </div>
+      <footer className="footer">
+        <div className="footer-grid">
+          <div className="footer-item">
+            <h6 className="footer-headline">About</h6>
+            <ul className="footer-list">
+              <li className="footer-list-item">Contact Us</li>
+              <li className="footer-list-item">About US</li>
+              <li className="footer-list-item">Stories</li>
+              <li className="footer-list-item">Press</li>
+            </ul>
+          </div>
+          <div className="footer-item">
+            <h6 className="footer-headline">Help</h6>
+            <ul className="footer-list">
+              <li className="footer-list-item">FAQ</li>
+              <li className="footer-list-item">How to use</li>
+            </ul>
+          </div>
 
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
-              <ul className="list-unstyled mb-0">
-                <li className="mb-2">Login</li>
-                <li className="mb-2">Register</li>
-                <li className="mb-2">Sitemap</li>
-                <li className="mb-2">Our Products</li>
-              </ul>
-            </div>
+          <div className="footer-item">
+            <h6 className="footer-headline">Company</h6>
+            <ul className="footer-list">
+              <li className="footer-list-item">Login</li>
+              <li className="footer-list-item">Register</li>
+              <li className="footer-list-item">Sitemap</li>
+              <li className="footer-list-item">Our Products</li>
+            </ul>
           </div>
         </div>
+
         <hr className="p-0 m-0 b-0" />
         <div className="body-bg  py-2">
           <div className="container text-center">
@@ -50,4 +49,25 @@ export default Footer;
 const FooterWrapper = styled.div`
   width: 100%;
   color: var(--secondary);
+
+  padding-top: 80px;
+
+  .footer-grid {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    justify-content: space-evenly;
+  }
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-list-item {
+    margin: 5px 0;
+  }
+  .footer-headline {
+    padding: 0;
+    margin: 0 0 12px 0;
+  }
 `;

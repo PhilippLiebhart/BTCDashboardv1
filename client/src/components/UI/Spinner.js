@@ -4,7 +4,6 @@ import "./Spinner.css";
 export default function Spinner(props) {
   return (
     <>
-      {/* <h1 className="PULSE h6 text-center">Finhub News loading</h1> */}
       <SpinnerWrap>
         <div className="lds-ripple">
           <div></div>

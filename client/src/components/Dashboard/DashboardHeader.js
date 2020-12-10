@@ -1,33 +1,48 @@
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import chartSample from "../../assets/img/chart-sample.svg";
+// import chartSample from "../../assets/img/chart-sample.svg";
 import averageSymbol from "../../assets/img/symbol-average.svg";
+import Spinner from "../UI/Spinner";
 
 const Dashboardheader = (props) => {
+  const tickDirectionRef = useRef();
+  tickDirectionRef.current = props.averagePrice;
+
+  const [lastPrice, setLastPrice] = useState();
+  const [averagePriceDirection, setAveragePriceDirection] = useState();
+
+  useEffect(() => {
+    setLastPrice(props.averagePrice);
+
+    if (lastPrice < tickDirectionRef.current) {
+      setAveragePriceDirection("up");
+    } else if (lastPrice > tickDirectionRef.current) {
+      setAveragePriceDirection("down");
+    }
+  }, [props.averagePrice]);
+
   return (
     <DashboardheaderWrapper>
-      <AveragePrice className="header__item">
+      <AveragePrice className="header__item" direction={averagePriceDirection}>
         <img
           src={averageSymbol}
-          style={{ display: "inline" }}
+          style={{
+            display: "inline",
+            marginRight: "12px",
+            verticalAlign: "bottom",
+            paddingTop: "2px",
+          }}
           width="25px"
           alt=""
         />
-        <h1 className="primary">{props.averagePrice}</h1>
+        <h1 className="">
+          {props.averagePrice !== "NaN" ? props.averagePrice : <Spinner />}
+        </h1>
       </AveragePrice>
 
-      <div className="header__item">
-        <p className="header--24h">Volume: 200.3 mio</p>
-        <p className="header--24h">Biggest Order: 2.3 mio</p>
-        <p className="header--24h">Low/High: 18900/22500 $</p>
-      </div>
-      <div className="header__item">
-        <img
-          src={chartSample}
-          alt=""
-          height="60px"
-          width="100%"
-          style={{ padding: 0 }}
-        />
+      <div className="primary header__item">
+        <h3>24h Change:</h3>
+        <h3>+0.41%</h3>
       </div>
     </DashboardheaderWrapper>
   );
@@ -37,6 +52,8 @@ export default Dashboardheader;
 
 const AveragePrice = styled.div`
   display: flex;
+  color: ${(props) =>
+    props.direction === "up" ? "var(--success)" : "var(--danger)"} !important;
 `;
 
 const DashboardheaderWrapper = styled.div`
@@ -46,12 +63,17 @@ const DashboardheaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  justify-items: center;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: var(--secondary);
+
+  h3 {
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
 
   .header__item {
     margin: 15px;

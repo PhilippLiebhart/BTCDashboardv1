@@ -1,8 +1,31 @@
+import { useEffect, useRef } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
+import { DashboardContext } from "../../context/DashboardContext";
 import useCoinmarketCap from "../../hooks/useCoinmarketCap";
 
 const CoinMarketWidget = () => {
+  const context = useContext(DashboardContext);
+  const { handleDirection } = context;
+
   const [coinmarketData] = useCoinmarketCap();
+
+  useEffect(() => {
+    if (
+      coinmarketData.data &&
+      coinmarketData.data[0]?.quote.USD.percent_change_24h < 0
+    ) {
+      console.log("DOWN");
+      handleDirection("down");
+    } else if (
+      coinmarketData.data &&
+      coinmarketData.data[0]?.quote.USD.percent_change_24h > 0
+    ) {
+      console.log("UP");
+
+      handleDirection("up");
+    }
+  }, [coinmarketData]);
 
   return (
     <CoinMarketWrapper>

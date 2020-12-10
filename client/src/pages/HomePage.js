@@ -17,20 +17,20 @@ function Homepage(props) {
           </IntroLogo>
         </div>
         <div className="homePageGrid">
-          <div className="homePageGrid--item">
+          <div className="homePageGrid-item">
             <h1 className="headline">Dashboard</h1>
             <h2 className="subline">link</h2>
           </div>
-          <div className="homePageGrid--item">
+          <div className="homePageGrid-item">
             <h1 className="headline">Coin Market</h1>
             <h2 className="subline">link</h2>
           </div>
-          <div className="homePageGrid--item">
-            <h1 className="headline">Dashboard</h1>
+          <div className="homePageGrid-item">
+            <h1 className="headline">Settings</h1>
             <h2 className="subline">link</h2>
           </div>
-          <div className="homePageGrid--item">
-            <h1 className="headline">Settings</h1>
+          <div className="homePageGrid-item">
+            <h1 className="headline">FAQ</h1>
             <h2 className="subline">link</h2>
           </div>
         </div>
@@ -43,9 +43,10 @@ export default Homepage;
 
 const HomePageWrapper = styled.div`
   height: 80vh;
-  width: 100%;
+  width: fit-content;
+  margin: 5% auto;
 
-  background-color: var(--dashWidgetBgDark);
+  /* background-color: var(--dashWidgetBgDark); */
   color: var(--primary);
 
   .introCard {
@@ -65,18 +66,18 @@ const HomePageWrapper = styled.div`
     line-height: 0.5rem;
 
     .App--name {
-      font-weight: 800px;
+      font-weight: 900;
       font-size: 6rem;
     }
   }
   .headline {
-    font-weight: 800px;
+    font-weight: 600;
     font-size: 1.5rem;
     color: var(--secondary);
   }
   .subline {
     color: var(--secondary);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.2rem;
   }
 
@@ -85,12 +86,12 @@ const HomePageWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     line-height: 0.5rem;
     text-align: center;
 
-    .homePageGrid--item {
+    .homePageGrid-item {
       padding: 16px 16px 16px 16px;
       border-radius: 10px;
       background-color: var(--dashBgDark);

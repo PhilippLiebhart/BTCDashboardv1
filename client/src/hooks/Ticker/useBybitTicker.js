@@ -46,7 +46,7 @@ const useBybitTicker = () => {
       } else if (tickData.type === "snapshot") {
         setBybitTickerSnapshot({ ...tickData });
       } else {
-        console.log("[[[[bybit no matching message]]]]");
+        // console.log("[[[[bybit no matching message]]]]");
       }
     };
   };

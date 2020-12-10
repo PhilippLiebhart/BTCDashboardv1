@@ -48,7 +48,7 @@ const useBitmexTicker = () => {
           last: tickData?.data[0]?.fairPrice,
         });
       } else {
-        console.log("{{{{{ BITMEX message not matching! }}}}}}");
+        // console.log("{{{{{ BITMEX message not matching! }}}}}}");
       }
     };
   };

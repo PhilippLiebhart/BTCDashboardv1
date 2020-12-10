@@ -6,7 +6,7 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
       <TickerCardWrapper>
         <div className="row">
           <div className="">
-            <ExchangeName className="font-weight-bold">{name}</ExchangeName>
+            <ExchangeName className="">{name}</ExchangeName>
           </div>
           <div className="">
             <Status
@@ -25,7 +25,7 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
         <hr />
         <div className="row">
           <div className="col-price">
-            <Price className="font-weight-bolder">{last}</Price>
+            <Price className="">{last}</Price>
           </div>
           <div className="">
             <Volume>Vol {vol}</Volume>
@@ -78,16 +78,18 @@ const TickerCardWrapper = styled.div`
 const ExchangeName = styled.h1`
   color: var(--primary);
   display: inline;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
 `;
 
 const Price = styled.span`
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const Volume = styled.p`
   font-size: 0.7rem;
   line-height: 0;
+  font-weight: 500;
 `;
 const Status = styled.span``;

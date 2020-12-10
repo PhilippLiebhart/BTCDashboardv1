@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,900;1,100;1,200;1,300;1,400;1,500;1,900&display=swap");
 
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 
 :root {
   --primary: #00adb5;
@@ -19,16 +19,16 @@ const GlobalStyle = createGlobalStyle`
   // --red: #dc3545;
   // --orange: #fd7e14;
   // --yellow: #ffc107;
-  // --green: #28a745;
+  --green: #28a745;
   // --teal: #20c997;
   // --cyan: #17a2b8;
   // --white: #fff;
   // --gray: #6c757d;
   // --gray-dark: #343a40;
-  // --success: #28a745;
+  --success: #28a745;
   // --info: #17a2b8;
   // --warning: #ffc107;
-  // --danger: #dc3545;
+  --danger: #dc3545;
   // --light: #f8f9fa;
   // --dark: #343a40;
   --breakpoint-xs: 0;
@@ -38,16 +38,7 @@ const GlobalStyle = createGlobalStyle`
   --breakpoint-xl: 1200px;
 }
 
-/* BASE */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  padding:0;
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--dashWidgetBgDark);
-}
+
 
 /* SIDE NAV */
 .sidenav---sidenav---_2tBP {
