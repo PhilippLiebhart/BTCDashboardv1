@@ -25,10 +25,10 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layoutLG = [
   { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
-  { i: "21", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "22", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "23", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "24", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
+  { i: "21", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "22", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "23", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "24", x: 0, y: 0, w: 4, h: 1, minW: 3, maxW: 4, maxH: 1 },
   { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
   { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
   { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 3 },
@@ -62,6 +62,10 @@ const layoutXS = [
   { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
 ];
 
+const LOCAL_STORAGE_LAYOUT_KEY = "layouts";
+const defaultLayout = {lg: layoutLG, md: layoutMD, xs: layoutXS };
+const gridLayout = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LAYOUT_KEY)) || defaultLayout;
+
 const Dashboardpage = () => {
   const { direction } = useContext(DashboardContext);
 
@@ -83,9 +87,7 @@ const Dashboardpage = () => {
   ] = useBitmexTicker();
   const [averagePrice, setAveragePrice] = useState();
 
-  const [layoutState, setLayoutState] = useState({
-    layouts: { lg: layoutLG, md: layoutMD, xs: layoutXS },
-  });
+  const [layoutState, setLayoutState] = useState(gridLayout);
 
   useEffect(() => {
     setAveragePrice(
@@ -99,32 +101,34 @@ const Dashboardpage = () => {
     );
   }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
 
-  const onLayoutChange = (layout) => {
-    setLayoutState({ ...layoutState, layout: layout });
+  const onLayoutChange = (currentLayout, allLayouts) => {
+    localStorage.setItem(LOCAL_STORAGE_LAYOUT_KEY, JSON.stringify(allLayouts));
+    setLayoutState(allLayouts);
   };
 
-  const onResize = (layouts) => {
-    setLayoutState({ ...layoutState, layouts: layouts });
-  };
+  const deleteLayoutFromLocalStorage = () => {
+    localStorage.setItem(LOCAL_STORAGE_LAYOUT_KEY, JSON.stringify(defaultLayout));
+    window.location.reload();
+  }
 
   const onBreakpointChange = (breakpoint) => {
-    setLayoutState({ ...layoutState, currentBreakpoint: breakpoint });
+    layoutState.currentBreakpoint = breakpoint;
+    setLayoutState(layoutState);
   };
 
   return (
     <>
       <DashboardWrapper direction={direction}>
+      <button onClick={() => deleteLayoutFromLocalStorage()}>Reset Layout</button>
         <DashboardHeader averagePrice={averagePrice} />
 
         <ResponsiveGridLayout
           rowHeight={148}
-          //cols={16}
-          onResize={onResize}
           breakpoints={{ lg: 1000, md: 700, xs: 699 }}
           cols={{ lg: 14, md: 6, xs: 2 }}
           //autoSize={true}
-          layouts={layoutState.layouts}
-          onLayoutChange={onLayoutChange}
+          layouts={layoutState}
+          onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
           onBreakpointChange={onBreakpointChange}
           draggableHandle=".MyDragHandleClassName"
           draggableCancel=".MyDragCancel"
