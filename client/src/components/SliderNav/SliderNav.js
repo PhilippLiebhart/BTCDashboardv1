@@ -17,13 +17,13 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/img/logo.svg";
-import homeIcon from "/Users/philos/Documents/_REACT_PROJECT/_APPs/_ My Apps/BTC-Dashboard-v1/client/src/assets/navItems/homeIcon.png";
-import settingsIcon from "/Users/philos/Documents/_REACT_PROJECT/_APPs/_ My Apps/BTC-Dashboard-v1/client/src/assets/navItems/settingsIcon.png";
-import coinmarketIcon from "/Users/philos/Documents/_REACT_PROJECT/_APPs/_ My Apps/BTC-Dashboard-v1/client/src/assets/navItems/coinmarketIcon.png";
-import chartIcon from "/Users/philos/Documents/_REACT_PROJECT/_APPs/_ My Apps/BTC-Dashboard-v1/client/src/assets/navItems/chartIcon.png";
+import homeIcon from "../../../src/assets/navItems/homeIcon.png";
+import settingsIcon from "../../../src/assets/navItems/settingsIcon.png";
+import coinmarketIcon from "../../../src/assets/navItems/coinmarketIcon.png";
+import chartIcon from "../../../src/assets/navItems/chartIcon.png";
 
 const SliderNav = ({ location, history }) => {
-  const [navState, setNavState] = useState({ expanded: true });
+  const [navState, setNavState] = useState({ expanded: false });
 
   return (
     <SliderNavWrapper>
