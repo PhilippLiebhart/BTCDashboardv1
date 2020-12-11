@@ -8,33 +8,23 @@ const Dashboardheader = (props) => {
   const tickDirectionRef = useRef();
   tickDirectionRef.current = props.averagePrice;
 
-  const [lastPrice, setLastPrice] = useState();
+  const [lastAveragePrice, setLastAveragePrice] = useState();
   const [averagePriceDirection, setAveragePriceDirection] = useState();
 
   useEffect(() => {
-    setLastPrice(props.averagePrice);
+    setLastAveragePrice(props.averagePrice);
 
-    if (lastPrice < tickDirectionRef.current) {
+    if (lastAveragePrice < tickDirectionRef.current) {
       setAveragePriceDirection("up");
-    } else if (lastPrice > tickDirectionRef.current) {
+    } else if (lastAveragePrice > tickDirectionRef.current) {
       setAveragePriceDirection("down");
     }
-  }, [props.averagePrice]);
+  }, [tickDirectionRef]);
 
   return (
     <DashboardheaderWrapper>
       <AveragePrice className="header__item" direction={averagePriceDirection}>
-        <img
-          src={averageSymbol}
-          style={{
-            display: "inline",
-            marginRight: "12px",
-            verticalAlign: "bottom",
-            paddingTop: "2px",
-          }}
-          width="25px"
-          alt=""
-        />
+        <img src={averageSymbol} alt="" />
         <h1 className="">
           {props.averagePrice !== "NaN" ? props.averagePrice : <Spinner />}
         </h1>
@@ -67,21 +57,43 @@ const DashboardheaderWrapper = styled.div`
   align-items: center;
   margin-bottom: 0px;
   margin-top: 0px;
+  height: 100px;
+
+  @media (max-width: 576px) {
+    height: auto;
+  }
+
+  h1 {
+    @media (max-width: 576px) {
+      font-size: 1.2rem;
+    }
+  }
 
   h3 {
     font-size: 1.3rem;
     margin: 0;
     padding: 0;
     text-align: center;
+    @media (max-width: 576px) {
+      font-size: 0.8rem;
+    }
   }
 
   .header__item {
     margin: 15px;
-  }
-  .header--24h {
-    margin: 0;
-    padding: 0;
-    font-size: 0.8rem;
-    line-height: 1rem;
+
+    img {
+      display: inline;
+      margin-right: 12px;
+      vertical-align: bottom;
+      padding-top: 2px;
+      width: 25px;
+    }
+    @media (max-width: 576px) {
+      margin: 15px 0 0 0;
+      img {
+        width: 15px;
+      }
+    }
   }
 `;

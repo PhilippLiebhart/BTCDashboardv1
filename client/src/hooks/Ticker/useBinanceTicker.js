@@ -16,7 +16,7 @@ const WEBSOCKET_STATUS = {
 
 const useBinanceTicker = () => {
   const [binanceConnStatus, setBinanceConnStatus] = useState();
-  const [binanceTickerData, setBinanceTickerData] = useState();
+  const [binanceTickerData, setBinanceTickerData] = useState({});
   //console.log("{{{BINANCE TICKER RUNS}}}", binanceConnStatus);
 
   const socketRef = useRef();
@@ -31,9 +31,15 @@ const useBinanceTicker = () => {
     };
 
     socketRef.current.onmessage = (message) => {
-      let data = JSON.parse(message.data);
+      let tickData = JSON.parse(message.data);
 
-      setBinanceTickerData(data);
+      setBinanceTickerData({
+        ...binanceTickerData,
+        last: tickData.c,
+        vol: tickData.v,
+        high: tickData.h,
+        low: tickData.l,
+      });
     };
   };
 

@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import logo from "../assets/img/logo.svg";
+import logoText from "../assets/img/logo_text.svg";
+
+import HomePageCard from "../components/HomePageCard";
 
 function Homepage(props) {
   return (
@@ -8,31 +11,31 @@ function Homepage(props) {
         <div className="introCard">
           <div className="card--left">
             <h1 className="headline">Welcome to</h1>
-            <h1 className="App--name">BTCDASH</h1>
+            <img src={logoText} className="logo-Text" alt="btc dash" />
             <p className="subline">Your BTC Dashboard...</p>
             <hr />
           </div>
           <IntroLogo>
-            <img src={logo} className="App-logo" alt="logo" width="200px" />
+            <img src={logo} className="App-logo" alt="logo" />
           </IntroLogo>
         </div>
         <div className="homePageGrid">
-          <div className="homePageGrid-item">
-            <h1 className="headline">Dashboard</h1>
-            <h2 className="subline">link</h2>
-          </div>
-          <div className="homePageGrid-item">
-            <h1 className="headline">Coin Market</h1>
-            <h2 className="subline">link</h2>
-          </div>
-          <div className="homePageGrid-item">
-            <h1 className="headline">Settings</h1>
-            <h2 className="subline">link</h2>
-          </div>
-          <div className="homePageGrid-item">
-            <h1 className="headline">FAQ</h1>
-            <h2 className="subline">link</h2>
-          </div>
+          <HomePageCard
+            headline={"Dashboard"}
+            linkText="link to Dashboard"
+            linkURL={"/Dashboard"}
+          />
+          <HomePageCard
+            headline={"Coin Market"}
+            linkText="link to Coin Market"
+            linkURL={"/coinMarketCap"}
+          />
+
+          <HomePageCard
+            headline={"FAQ"}
+            linkText="link to FAQ"
+            linkURL={"/faq"}
+          />
         </div>
       </HomePageWrapper>
     </>
@@ -42,8 +45,7 @@ function Homepage(props) {
 export default Homepage;
 
 const HomePageWrapper = styled.div`
-  height: 80vh;
-  width: fit-content;
+  width: 100%;
   margin: 5% auto;
 
   /* background-color: var(--dashWidgetBgDark); */
@@ -57,17 +59,17 @@ const HomePageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: var(--dashWidgetBgDark);
+    /* background-color: var(--dashWidgetBgDark); */
     padding: 26px 16px 16px 16px;
     border-radius: 10px;
   }
 
   .card--left {
     line-height: 0.5rem;
+    width: 370px;
 
-    .App--name {
-      font-weight: 900;
-      font-size: 6rem;
+    .logo-Text {
+      width: 100%;
     }
   }
   .headline {
@@ -82,11 +84,6 @@ const HomePageWrapper = styled.div`
   }
 
   .homePageGrid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-items: center;
-    justify-content: space-evenly;
     align-items: center;
     line-height: 0.5rem;
     text-align: center;
@@ -96,16 +93,27 @@ const HomePageWrapper = styled.div`
       border-radius: 10px;
       background-color: var(--dashBgDark);
       margin: 10px;
+      height: 50px;
+    }
+    .homePageGrid-item:hover {
+      border: 1px solid var(--primary);
+      padding: 18px 18px 18px 18px;
+      height: 70px;
+      transition: 0.3s ease;
     }
   }
 `;
 
 const IntroLogo = styled.div`
-  background-color: var(--dashWidgetBgDark);
+  /* background-color: var(--dashWidgetBgDark); */
   padding: 20px;
-  margin-left: 50px;
-
+  width: 370px;
   pointer-events: none;
+  
+  img {
+   width: 100%;
+  }
+
   }
 
   @media (prefers-reduced-motion: no-preference) {

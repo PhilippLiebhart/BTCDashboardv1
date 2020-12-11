@@ -1,41 +1,29 @@
 import styled from "styled-components";
+import Spinner from "../UI/Spinner";
 
 const TickerCard = ({ name, last, vol, high, low, status }) => {
-  return (
-    <>
-      <TickerCardWrapper>
-        <div className="row">
-          <div className="">
-            <ExchangeName className="">{name}</ExchangeName>
-          </div>
-          <div className="">
-            <Status
-              style={{
-                color: status,
-                backgroundColor: status,
-                borderRadius: "50%",
-                width: "150px",
-                height: "150px",
-              }}
-            >
-              o
-            </Status>
-          </div>
+  const tickerCard = (
+    <TickerCardWrapper>
+      <div className="row">
+        <div className="col-exchangeName">
+          <ExchangeName className="">{name} +15%</ExchangeName>
         </div>
-        <hr />
-        <div className="row">
-          <div className="col-price">
-            <Price className="">{last}</Price>
-          </div>
-          <div className="">
-            <Volume>Vol {vol}</Volume>
-            <Volume>High {high}</Volume>
-            <Volume>Low {low}</Volume>
-          </div>
+      </div>
+      <hr />
+      <div className="row">
+        <div className="col-price">
+          <Price className="price">{last ? last : <Spinner />}</Price>
         </div>
-      </TickerCardWrapper>
-    </>
+        <div className="col-data">
+          <Volume>Vol {vol}</Volume>
+          <Volume>High {high}</Volume>
+          <Volume>Low {low}</Volume>
+        </div>
+      </div>
+    </TickerCardWrapper>
   );
+
+  return <>{last && vol && high && low ? tickerCard : <Spinner />}</>;
 };
 
 export default TickerCard;
@@ -43,16 +31,27 @@ export default TickerCard;
 const TickerCardWrapper = styled.div`
   height: 136px;
   padding: 32px 16px 16px 16px;
+  @media (max-width: 576px) {
+    padding: 10px;
+  }
 
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-content: auto;
+    justify-content: space-evenly;
     justify-items: left;
     align-items: center;
     align-content: center;
-    text-align: left !important;
+
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
   }
+
+  .col-exchangeName {
+    width: 100%;
+  }
+
   .col-price {
     text-align: center;
     width: 100%;
@@ -60,6 +59,13 @@ const TickerCardWrapper = styled.div`
 
   .col-right {
     text-align: left !important;
+    @media (max-width: 576px) {
+      text-align: center !important;
+    }
+  }
+
+  .col-data {
+    width: 100%;
   }
 
   hr {
@@ -72,6 +78,9 @@ const TickerCardWrapper = styled.div`
     border-bottom: none;
     border-left: none;
     border-right: none;
+    @media (max-width: 576px) {
+      margin: 5px auto;
+    }
   }
 `;
 
@@ -80,16 +89,27 @@ const ExchangeName = styled.h1`
   display: inline;
   font-size: 1rem;
   font-weight: 600;
+
+  @media (max-width: 576px) {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 `;
 
 const Price = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
+  @media (max-width: 576px) {
+    font-size: 1.2rem !important;
+  }
 `;
 
 const Volume = styled.p`
   font-size: 0.7rem;
   line-height: 0;
   font-weight: 500;
+  @media (max-width: 576px) {
+    line-height: 7px;
+  }
 `;
-const Status = styled.span``;
+// const Status = styled.span``;

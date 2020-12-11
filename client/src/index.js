@@ -9,12 +9,10 @@ import "normalize.css";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <DashboardContextProvider>
-        <App />
-      </DashboardContextProvider>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <DashboardContextProvider>
+      <App />
+    </DashboardContextProvider>
+  </Router>,
   document.getElementById("root")
 );

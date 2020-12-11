@@ -20,7 +20,7 @@ const WEBSOCKET_STATUS = {
 const useBybitTicker = () => {
   const [bybitConnStatus, setBybitConnStatus] = useState();
   const [bybitTickerData, setBybitTickerData] = useState();
-  const [bybitTickerSnapshot, setBybitTickerSnapshot] = useState();
+  const [bybitTickerLastPrice, setBybitTickerLastPrice] = useState();
 
   const socketRef = useRef();
 
@@ -36,15 +36,26 @@ const useBybitTicker = () => {
     socketRef.current.onmessage = (message) => {
       let tickData = JSON.parse(message.data);
       if (
-        tickData.type === "delta" &&
-        tickData.data.update[0]?.hasOwnProperty("index_price_e4")
+        tickData?.type === "delta" &&
+        tickData?.data?.update &&
+        tickData.data.update[0]?.index_price_e4
+      ) {
+        setBybitTickerLastPrice({
+          ...bybitTickerLastPrice,
+          last: tickData.data.update[0]?.index_price_e4,
+        });
+      } else if (
+        tickData.type === "snapshot" &&
+        tickData.data?.volume_24h &&
+        tickData.data.high_price_24h_e4 &&
+        tickData.data.low_price_24h_e4
       ) {
         setBybitTickerData({
           ...bybitTickerData,
-          last: tickData?.data?.update[0],
+          vol: tickData.data.volume_24h,
+          high: tickData.data.high_price_24h_e4,
+          low: tickData.data.low_price_24h_e4,
         });
-      } else if (tickData.type === "snapshot") {
-        setBybitTickerSnapshot({ ...tickData });
       } else {
         // console.log("[[[[bybit no matching message]]]]");
       }
@@ -63,7 +74,7 @@ const useBybitTicker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [bybitTickerData, bybitTickerSnapshot, bybitConnStatus];
+  return [bybitTickerData, bybitTickerLastPrice, bybitConnStatus];
 };
 
 export default useBybitTicker;

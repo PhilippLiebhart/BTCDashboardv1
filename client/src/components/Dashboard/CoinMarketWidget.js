@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 import { DashboardContext } from "../../context/DashboardContext";
@@ -15,14 +15,11 @@ const CoinMarketWidget = () => {
       coinmarketData.data &&
       coinmarketData.data[0]?.quote.USD.percent_change_24h < 0
     ) {
-      console.log("DOWN");
       handleDirection("down");
     } else if (
       coinmarketData.data &&
       coinmarketData.data[0]?.quote.USD.percent_change_24h > 0
     ) {
-      console.log("UP");
-
       handleDirection("up");
     }
   }, [coinmarketData]);
@@ -60,6 +57,7 @@ const CoinMarketWidget = () => {
 const CoinMarketWrapper = styled.div`
   padding: 16px;
   text-align: center;
+  font-size: 0.8rem;
   table {
     margin: 0 auto;
     width: 100%;

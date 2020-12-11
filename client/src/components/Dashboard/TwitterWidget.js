@@ -26,14 +26,10 @@ const TwitterWidget = () => {
   };
 
   const mappedTweets = currentTweets?.map((tweet) => (
-    <>
-      <Tweet
-        key={tweet._id}
-        user={tweet.includes.users[0].name}
-        text={tweet.data.text}
-      />
+    <div key={tweet._id}>
+      <Tweet user={tweet.includes.users[0].name} text={tweet.data.text} />
       <hr />
-    </>
+    </div>
   ));
 
   return (

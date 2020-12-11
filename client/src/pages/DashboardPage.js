@@ -19,8 +19,7 @@ import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
 import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
-
-// const ReactGridLayout = WidthProvider(RGL);
+import TradingViewChart from "../components/Dashboard/TradingViewChart";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -33,7 +32,8 @@ const layoutLG = [
   { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
   { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
   { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 3 },
-  { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 6 },
+  { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 4 },
+  { i: "tradingView", x: 0, y: 10, w: 7, h: 4, minH: 4, minW: 4 },
 ];
 
 const layoutMD = [
@@ -46,6 +46,7 @@ const layoutMD = [
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
   { i: "feargreed", x: 4, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
   { i: "coinMarket", x: 7, y: 1, w: 4, h: 2, minH: 2, minW: 6 },
+  { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
 ];
 
 const layoutXS = [
@@ -58,26 +59,29 @@ const layoutXS = [
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
   { i: "feargreed", x: 0, y: 0, w: 1, h: 1, minH: 1, minW: 2 },
   { i: "coinMarket", x: 0, y: 0, w: 2, h: 2, minH: 6, minW: 6 },
+  { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
 ];
 
 const Dashboardpage = () => {
   const { direction } = useContext(DashboardContext);
 
-  const [tickerData, dayMarket, connStatus] = usePhemexTicker();
+  const [
+    phemexTickerLastPrice,
+    phemexTickerData,
+    connStatus,
+  ] = usePhemexTicker();
   const [
     bybitTickerData,
-    bybitTickerSnapshot,
+    bybitTickerLastPrice,
     bybitConnStatus,
   ] = useBybitTicker();
   const [binanceTickerData, binanceConnStatus] = useBinanceTicker();
   const [
+    bitmexTickerLastPrice,
     bitmexTickerData,
-    bitmexTickerPartial,
     bitmexConnStatus,
   ] = useBitmexTicker();
   const [averagePrice, setAveragePrice] = useState();
-
-  // console.log("ooooooooooooo", bitmexTickerPartial);
 
   const [layoutState, setLayoutState] = useState({
     layouts: { lg: layoutLG, md: layoutMD, xs: layoutXS },
@@ -86,14 +90,14 @@ const Dashboardpage = () => {
   useEffect(() => {
     setAveragePrice(
       (
-        (bitmexTickerData?.last +
-          parseFloat(binanceTickerData?.c) +
-          tickerData?.tick?.last / 10000 +
-          bybitTickerData?.last?.index_price_e4 / 10000) /
+        (bitmexTickerLastPrice?.last +
+          parseFloat(binanceTickerData?.last) +
+          phemexTickerLastPrice?.last / 10000 +
+          bybitTickerLastPrice?.last / 10000) /
         4
       ).toFixed(2)
     );
-  }, [tickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
+  }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
 
   const onLayoutChange = (layout) => {
     setLayoutState({ ...layoutState, layout: layout });
@@ -132,10 +136,10 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BITMEX"
-                last={bitmexTickerData?.last}
-                vol={parseFloat(bitmexTickerPartial?.vol)}
-                high={parseFloat(bitmexTickerPartial?.high).toFixed(2)}
-                low={parseFloat(bitmexTickerPartial?.low).toFixed(2)}
+                last={bitmexTickerLastPrice?.last}
+                vol={parseFloat(bitmexTickerData?.vol)}
+                high={parseFloat(bitmexTickerData?.high).toFixed(2)}
+                low={parseFloat(bitmexTickerData?.low).toFixed(2)}
                 status={bitmexConnStatus}
               />
             </div>
@@ -145,10 +149,10 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BINANCE"
-                last={parseFloat(binanceTickerData?.c)}
-                vol={parseFloat(binanceTickerData?.v).toFixed(2)}
-                high={parseFloat(binanceTickerData?.h).toFixed(2)}
-                low={parseFloat(binanceTickerData?.l).toFixed(2)}
+                last={parseFloat(binanceTickerData?.last)}
+                vol={parseFloat(binanceTickerData?.vol).toFixed(2)}
+                high={parseFloat(binanceTickerData?.high).toFixed(2)}
+                low={parseFloat(binanceTickerData?.low).toFixed(2)}
                 status={binanceConnStatus}
               />
             </div>
@@ -158,10 +162,10 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="PHEMEX"
-                last={(tickerData?.tick?.last / 10000).toFixed(2)}
-                vol={dayMarket?.market24h?.volume / 10000}
-                high={dayMarket?.market24h?.high / 10000}
-                low={dayMarket?.market24h?.low / 10000}
+                last={(phemexTickerLastPrice?.last / 10000).toFixed(2)}
+                vol={phemexTickerData?.vol / 10000}
+                high={phemexTickerData?.high / 10000}
+                low={phemexTickerData?.low / 10000}
                 status={connStatus}
               />
             </div>
@@ -171,12 +175,10 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BYBIT"
-                last={(bybitTickerData?.last?.index_price_e4 / 10000).toFixed(
-                  2
-                )}
-                vol={bybitTickerSnapshot?.data?.volume_24h / 10000}
-                high={bybitTickerSnapshot?.data?.high_price_24h_e4 / 10000}
-                low={bybitTickerSnapshot?.data?.low_price_24h_e4 / 10000}
+                last={(bybitTickerLastPrice?.last / 10000).toFixed(2)}
+                vol={bybitTickerData?.vol / 10000}
+                high={bybitTickerData?.high / 10000}
+                low={bybitTickerData?.low / 10000}
                 status={bybitConnStatus}
               />
             </div>
@@ -209,6 +211,15 @@ const Dashboardpage = () => {
             </div>
             <CoinMarketWidget />
           </div>
+
+          <div className="item widget--base" key={"tradingView"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">
+                TradingView Chart
+              </h6>
+            </div>
+            <TradingViewChart dashboard={true} />
+          </div>
         </ResponsiveGridLayout>
       </DashboardWrapper>
     </>
@@ -216,6 +227,7 @@ const Dashboardpage = () => {
 };
 
 const DashboardWrapper = styled.div`
+  padding-right: 20px;
   background-image: linear-gradient(
     to bottom,
     ${(props) =>

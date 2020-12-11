@@ -33,9 +33,9 @@ const WEBSOCKET_STATUS = {
 };
 
 const usePhemexTicker = () => {
-  const [connStatus, setConnStatus] = useState();
-  const [tickerData, setTickerData] = useState();
-  const [dayMarket, setDayMarket] = useState({});
+  const [phemexConnStatus, setPhemexConnStatus] = useState();
+  const [phemexTickerLastPrice, setPhemexTickerLastPrice] = useState();
+  const [phemexTickerData, setPhemexTickerData] = useState({});
 
   const socketRef = useRef();
 
@@ -44,18 +44,23 @@ const usePhemexTicker = () => {
     socketRef.current = ws;
 
     socketRef.current.onopen = () => {
-      setConnStatus(WEBSOCKET_STATUS[socketRef.current.readyState]);
+      setPhemexConnStatus(WEBSOCKET_STATUS[socketRef.current.readyState]);
       socketRef.current.send(JSON.stringify(TICK_CONFIG));
       socketRef.current.send(JSON.stringify(MARKET24HTICK_CONFIG));
     };
 
     socketRef.current.onmessage = (message) => {
-      let { tick, market24h } = JSON.parse(message.data);
+      let tickData = JSON.parse(message.data);
 
-      if (tick) {
-        setTickerData({ tick, last: tick.last });
-      } else if (market24h?.symbol === "BTCUSD") {
-        setDayMarket({ market24h });
+      if (tickData?.tick) {
+        setPhemexTickerLastPrice({ ...tickData, last: tickData.tick.last });
+      } else if (tickData?.market24h?.symbol === "BTCUSD") {
+        setPhemexTickerData({
+          ...tickData,
+          vol: tickData.market24h?.volume,
+          low: tickData.market24h?.low,
+          high: tickData.market24h?.high,
+        });
       } else {
         // console.log("[[!! phemex no matching criteria !!]]");
       }
@@ -75,7 +80,7 @@ const usePhemexTicker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [tickerData, dayMarket, connStatus];
+  return [phemexTickerLastPrice, phemexTickerData, phemexConnStatus];
 };
 
 export default usePhemexTicker;

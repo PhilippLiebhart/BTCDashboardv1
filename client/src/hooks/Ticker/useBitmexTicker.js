@@ -19,8 +19,8 @@ const WEBSOCKET_STATUS = {
 
 const useBitmexTicker = () => {
   const [bitmexConnStatus, setBitmexConnStatus] = useState();
+  const [bitmexTickerLastPrice, setBitmexTickerLastPrice] = useState();
   const [bitmexTickerData, setBitmexTickerData] = useState();
-  const [bitmexTickerPartial, setBitmexTickerPartial] = useState();
 
   const socketRef = useRef();
 
@@ -37,14 +37,14 @@ const useBitmexTicker = () => {
       let tickData = JSON.parse(message.data);
 
       if (tickData.action === "partial") {
-        setBitmexTickerPartial({
+        setBitmexTickerData({
           vol: tickData.data[0].turnover24h,
           low: tickData.data[0].lowPrice,
           high: tickData.data[0].highPrice,
         });
       } else if (tickData?.data && tickData.data[0]?.fairPrice) {
-        setBitmexTickerData({
-          ...bitmexTickerData,
+        setBitmexTickerLastPrice({
+          ...bitmexTickerLastPrice,
           last: tickData?.data[0]?.fairPrice,
         });
       } else {
@@ -70,7 +70,7 @@ const useBitmexTicker = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [bitmexTickerData, bitmexTickerPartial, bitmexConnStatus];
+  return [bitmexTickerLastPrice, bitmexTickerData, bitmexConnStatus];
 };
 
 export default useBitmexTicker;

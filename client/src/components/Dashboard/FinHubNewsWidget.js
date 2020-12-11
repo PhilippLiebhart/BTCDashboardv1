@@ -26,9 +26,8 @@ const FinHubNewsWidget = (props) => {
 
   let headlineList = currentNews?.map((newsItem, index) => {
     return (
-      <>
+      <div key={newsItem.id}>
         <FinhubnewsItem
-          key={newsItem.id}
           id={newsItem.id}
           headline={newsItem.headline}
           summary={newsItem.summary}
@@ -36,7 +35,7 @@ const FinHubNewsWidget = (props) => {
           time={newsItem.datetime}
         />
         <hr />
-      </>
+      </div>
     );
   });
 
