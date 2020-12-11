@@ -14,7 +14,6 @@ import styled from "styled-components";
 // Be sure to include styles at some point, probably during your bootstraping
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/img/logo.svg";
 import homeIcon from "../../../src/assets/navItems/homeIcon.png";
