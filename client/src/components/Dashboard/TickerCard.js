@@ -4,7 +4,7 @@ import Spinner from "../UI/Spinner";
 const TickerCard = ({ name, last, vol, high, low, status }) => {
   const tickerCard = (
     <TickerCardWrapper>
-      <div className="row">
+      <div className="row row-exchangeName">
         <div className="col-exchangeName">
           <ExchangeName className="">{name} +15%</ExchangeName>
         </div>
@@ -46,6 +46,10 @@ const TickerCardWrapper = styled.div`
     @media (max-width: 576px) {
       grid-template-columns: 1fr;
     }
+  }
+
+  .row-exchangeName {
+    grid-template-columns: 2fr;
   }
 
   .col-exchangeName {
