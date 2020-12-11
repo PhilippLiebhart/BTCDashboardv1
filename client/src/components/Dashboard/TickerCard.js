@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const TickerCard = ({ name, last, vol, high, low, status }) => {
@@ -40,8 +39,6 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
   );
 };
 
-TickerCard.propTypes = {};
-
 export default TickerCard;
 
 const TickerCardWrapper = styled.div`
@@ -70,9 +67,6 @@ const ExchangeName = styled.h1`
 const Price = styled.span`
   font-size: 1.5rem;
   font-weight: 500;
-`;
-const Percent = styled.h6`
-  font-size: 0.5rem;
 `;
 
 const Volume = styled.h4`

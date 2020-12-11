@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import logo from "../assets/img/logo.svg";
 
@@ -36,8 +35,6 @@ function Homepage(props) {
     </>
   );
 }
-
-Homepage.propTypes = {};
 
 export default Homepage;
 

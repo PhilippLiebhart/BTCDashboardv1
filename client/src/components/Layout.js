@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -12,8 +11,6 @@ function Layout(props) {
     </LayoutWrapper>
   );
 }
-
-Layout.propTypes = {};
 
 export default Layout;
 
