@@ -8,17 +8,6 @@ function Homepage(props) {
   return (
     <>
       <HomePageWrapper>
-        <div className="introCard">
-          <div className="card--left">
-            <h1 className="headline">Welcome to</h1>
-            <img src={logoText} className="logo-Text" alt="btc dash" />
-            <p className="subline">Your BTC Dashboard...</p>
-            <hr />
-          </div>
-          <IntroLogo>
-            <img src={logo} className="App-logo" alt="logo" />
-          </IntroLogo>
-        </div>
         <div className="homePageGrid">
           <HomePageCard
             headline={"Dashboard"}
@@ -30,12 +19,29 @@ function Homepage(props) {
             linkText="link to Coin Market"
             linkURL={"/coinMarketCap"}
           />
+          <HomePageCard
+            headline={"Chart"}
+            linkText="link tradingView Chart"
+            linkURL={"/tradingView"}
+          />
 
           <HomePageCard
             headline={"FAQ"}
             linkText="link to FAQ"
             linkURL={"/faq"}
           />
+        </div>
+
+        <div className="introCard">
+          <div className="card--left">
+            <h1 className="headline">Welcome to</h1>
+            <img src={logoText} className="logo-Text" alt="btc dash" />
+            <p className="subline">Your BTC Dashboard...</p>
+            <hr />
+          </div>
+          <IntroLogo>
+            <img src={logo} className="App-logo" alt="logo" />
+          </IntroLogo>
         </div>
       </HomePageWrapper>
     </>
@@ -59,7 +65,6 @@ const HomePageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
-    /* background-color: var(--dashWidgetBgDark); */
     padding: 26px 16px 16px 16px;
     border-radius: 10px;
   }
@@ -75,31 +80,43 @@ const HomePageWrapper = styled.div`
   .headline {
     font-weight: 600;
     font-size: 1.5rem;
-    color: var(--secondary);
   }
   .subline {
-    color: var(--secondary);
     font-weight: 400;
     font-size: 1.2rem;
   }
 
   .homePageGrid {
-    align-items: center;
-    line-height: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin: 0 auto;
+    justify-content: space-evenly;
     text-align: center;
 
     .homePageGrid-item {
-      padding: 16px 16px 16px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
       border-radius: 10px;
       background-color: var(--dashBgDark);
-      margin: 10px;
       height: 50px;
+      margin: 5px;
+
+      h1,
+      h3 {
+        font-size: 0.9rem;
+        padding: 0;
+        margin: 0;
+      }
     }
     .homePageGrid-item:hover {
-      border: 1px solid var(--primary);
-      padding: 18px 18px 18px 18px;
-      height: 70px;
-      transition: 0.3s ease;
+      border: 1px solid var(--secondary);
+      background-color: var(--primary);
+      color: var(--dashWidgetBgDarker);
+      transform: scale(0.95);
+      transition: all ease 900ms;
     }
   }
 `;

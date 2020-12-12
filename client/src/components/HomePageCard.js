@@ -5,7 +5,7 @@ const HomePageCard = ({ linkURL, linkText, headline }) => {
     <NavLink to={linkURL}>
       <div className="homePageGrid-item">
         <h1 className="headline">{headline}</h1>
-        <h2 className="subline">{linkText}</h2>
+        {/* <h2 className="subline">{linkText}</h2> */}
       </div>
     </NavLink>
   );
