@@ -6,13 +6,14 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
     <TickerCardWrapper>
       <div className="row">
         <div className="col-exchangeName">
-          <ExchangeName className="">{name} +15%</ExchangeName>
+          <ExchangeName>{name}</ExchangeName>
         </div>
+        <div>+15%</div>
       </div>
       <hr />
       <div className="row">
         <div className="col-price">
-          <Price className="price">{last ? last : <Spinner />}</Price>
+          <Price className="price">{last} $</Price>
         </div>
         <div className="col-data">
           <Volume>Vol {vol}</Volume>
@@ -29,8 +30,7 @@ const TickerCard = ({ name, last, vol, high, low, status }) => {
 export default TickerCard;
 
 const TickerCardWrapper = styled.div`
-  height: 136px;
-  padding: 32px 16px 16px 16px;
+  padding: 16px 16px 16px 16px;
   @media (max-width: 576px) {
     padding: 10px;
   }
@@ -38,8 +38,6 @@ const TickerCardWrapper = styled.div`
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-content: space-evenly;
-    justify-items: left;
     align-items: center;
     align-content: center;
 
@@ -49,12 +47,10 @@ const TickerCardWrapper = styled.div`
   }
 
   .col-exchangeName {
-    width: 100%;
+    text-align: left;
   }
 
   .col-price {
-    text-align: center;
-    width: 100%;
   }
 
   .col-right {
@@ -85,9 +81,7 @@ const TickerCardWrapper = styled.div`
 `;
 
 const ExchangeName = styled.h1`
-  color: var(--primary);
-  display: inline;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
 
   @media (max-width: 576px) {
@@ -97,7 +91,7 @@ const ExchangeName = styled.h1`
 `;
 
 const Price = styled.span`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   @media (max-width: 576px) {
     font-size: 1.2rem !important;
@@ -105,11 +99,11 @@ const Price = styled.span`
 `;
 
 const Volume = styled.p`
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   line-height: 0;
   font-weight: 500;
   @media (max-width: 576px) {
-    line-height: 7px;
+    line-height: 2px;
   }
 `;
 // const Status = styled.span``;

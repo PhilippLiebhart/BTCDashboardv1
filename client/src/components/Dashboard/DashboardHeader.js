@@ -1,10 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import styled from "styled-components";
 // import chartSample from "../../assets/img/chart-sample.svg";
 import averageSymbol from "../../assets/img/symbol-average.svg";
+import { DashboardContext } from "../../context/DashboardContext";
 import Spinner from "../UI/Spinner";
 
 const Dashboardheader = (props) => {
+  const coinMarketData = useContext(DashboardContext);
+  console.log("coinMarketData", useContext(DashboardContext));
+
   const tickDirectionRef = useRef();
   tickDirectionRef.current = props.averagePrice;
 
@@ -21,6 +25,8 @@ const Dashboardheader = (props) => {
     }
   }, [tickDirectionRef]);
 
+  console.log("HULAHULAHULA", coinMarketData?.winner24h);
+
   return (
     <DashboardheaderWrapper>
       <AveragePrice className="header__item" direction={averagePriceDirection}>
@@ -29,10 +35,38 @@ const Dashboardheader = (props) => {
           {props.averagePrice !== "NaN" ? props.averagePrice : <Spinner />}
         </h1>
       </AveragePrice>
-
-      <div className="primary header__item">
-        <h3>24h Change:</h3>
-        <h3>+xxx</h3>
+      <div className="header__item">
+        <Percent24h direction={coinMarketData?.direction}>
+          <h3>24h Change:</h3>
+          {coinMarketData?.percent24h > 0 ? "+ " : "- "}
+          {coinMarketData?.percent24h}
+        </Percent24h>
+      </div>
+      <div className="header__item">
+        <Percent24h
+          direction={
+            coinMarketData?.winner24h?.quote?.USD?.percent_change_24h > 0
+              ? "up"
+              : "down"
+          }
+        >
+          <h3>24h Winner:</h3>
+          {coinMarketData?.winner24h?.name} |{" "}
+          {coinMarketData?.winner24h?.quote?.USD?.percent_change_24h.toFixed(2)}
+        </Percent24h>
+      </div>{" "}
+      <div className="header__item">
+        <Percent24h
+          direction={
+            coinMarketData?.loser24h?.quote?.USD?.percent_change_24h > 0
+              ? "up"
+              : "down"
+          }
+        >
+          <h3>24h Loser:</h3>
+          {coinMarketData?.loser24h?.name} |{" "}
+          {coinMarketData?.loser24h?.quote?.USD?.percent_change_24h.toFixed(2)}
+        </Percent24h>
       </div>
     </DashboardheaderWrapper>
   );
@@ -80,12 +114,14 @@ const DashboardheaderWrapper = styled.div`
   }
 
   .header__item {
-    margin: 15px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
 
     img {
       display: inline;
       margin-right: 12px;
-      vertical-align: bottom;
       padding-top: 2px;
       width: 25px;
     }
@@ -95,5 +131,18 @@ const DashboardheaderWrapper = styled.div`
         width: 15px;
       }
     }
+
+    ul {
+      list-style: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0;
+      margin: 0;
+    }
   }
+`;
+
+const Percent24h = styled.h3`
+  color: ${(props) =>
+    props.direction === "up" ? "var(--success)" : "var(--danger)"};
 `;

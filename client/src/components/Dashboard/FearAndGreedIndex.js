@@ -12,11 +12,10 @@ const FearAndGreedIndex = (props) => {
 
   const greedCard = (
     <div className="grid">
+      <h4 className="primary pm-0">{fearAndGreedIndex.value} / 100</h4>
       <h6 className="secondary pm-0">
         {fearAndGreedIndex.value_classification}
       </h6>
-      <h4 className="primary pm-0">{fearAndGreedIndex.value} / 100</h4>
-      <small className="secondary">{time}</small>
     </div>
   );
 
@@ -29,10 +28,13 @@ const FearAndGreedIndex = (props) => {
 
 const FearAndGreedWrapper = styled.div`
   height: 60%;
-  margin: 10px;
   border-radius: 10px;
   text-align: center;
   color: var(--primary);
+
+  h6 {
+    font-size: 0.8rem;
+  }
 
   .grid {
     height: 100%;

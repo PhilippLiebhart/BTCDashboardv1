@@ -24,20 +24,18 @@ import TradingViewChart from "../components/Dashboard/TradingViewChart";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layoutLG = [
-  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
-  { i: "21", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "22", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "23", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "24", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "NewsFeed", x: 4, y: 0, w: 6, h: 3, minH: 1 },
-  { i: "twitter", x: 10, y: 0, w: 4, h: 3, minH: 1 },
-  { i: "feargreed", x: 4, y: 1, w: 3, h: 1, minH: 1, minW: 3 },
-  { i: "coinMarket", x: 7, y: 1, w: 6, h: 2, minH: 2, minW: 4 },
-  { i: "tradingView", x: 0, y: 10, w: 7, h: 4, minH: 4, minW: 4 },
+  { i: "21", x: 0, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "22", x: 3, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "23", x: 6, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "24", x: 9, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
+  { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1 },
+  { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1 },
+  { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
+  { i: "tradingView", x: 0, y: 10, w: 14, h: 4, minH: 4, minW: 4 },
 ];
 
 const layoutMD = [
-  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
   { i: "21", x: 0, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
   { i: "22", x: 2, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
   { i: "23", x: 4, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
@@ -50,7 +48,6 @@ const layoutMD = [
 ];
 
 const layoutXS = [
-  { i: "header", x: 0, y: 0, w: 16, h: 1, minH: 1, static: true },
   { i: "21", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
   { i: "22", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
   { i: "23", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
@@ -69,7 +66,7 @@ const originalLayouts = getFromLS("layouts") || {
 };
 
 const Dashboardpage = () => {
-  const { direction } = useContext(DashboardContext);
+  const coinMarketData = useContext(DashboardContext);
 
   const [
     phemexTickerLastPrice,
@@ -90,7 +87,7 @@ const Dashboardpage = () => {
   const [averagePrice, setAveragePrice] = useState();
 
   const [layoutState, setLayoutState] = useState({
-    layouts: JSON.parse(JSON.stringify(originalLayouts)),
+    layouts: originalLayouts,
   });
 
   useEffect(() => {
@@ -116,7 +113,9 @@ const Dashboardpage = () => {
   };
 
   const onBreakpointChange = (breakpoint) => {
-    setLayoutState({ ...layoutState, currentBreakpoint: breakpoint });
+    layoutState.currentBreakpoint = breakpoint;
+
+    setLayoutState(layoutState);
   };
 
   const resetLayout = () => {
@@ -131,13 +130,13 @@ const Dashboardpage = () => {
 
   return (
     <>
-      <DashboardWrapper direction={direction}>
+      <DashboardWrapper direction={coinMarketData.direction}>
         <button onClick={() => resetLayout()}>Reset Layout</button>
-        <button onClick={() => onLayoutChange()}>onchangelayour</button>
+
         <DashboardHeader averagePrice={averagePrice} />
 
         <ResponsiveGridLayout
-          rowHeight={148}
+          rowHeight={135}
           //cols={16}
           className="layout"
           onResize={onResize}
@@ -222,7 +221,7 @@ const Dashboardpage = () => {
           </div>
           <div className="item widget--base" key={"feargreed"}>
             <div className="MyDragHandleClassName">
-              <h6 className="text-center p-1 m-0 secondary">Fear and Greed</h6>
+              <h6 className="text-center p-1 m-0 secondary">Fear & Greed</h6>
             </div>
             <FearAndGreedIndex />
           </div>

@@ -6,21 +6,42 @@ import useCoinmarketCap from "../../hooks/useCoinmarketCap";
 
 const CoinMarketWidget = () => {
   const context = useContext(DashboardContext);
-  const { handleDirection } = context;
+  const { handleCoinMarketData } = context;
 
   const [coinmarketData] = useCoinmarketCap();
 
   useEffect(() => {
+    const winner24h = coinmarketData?.data?.reduce((p, c) =>
+      p.quote?.USD.percent_change_24h > c.quote?.USD.percent_change_24h ? p : c
+    );
+    const loser24h = coinmarketData?.data?.reduce((p, c) =>
+      p.quote?.USD.percent_change_24h > c.quote?.USD.percent_change_24h ? c : p
+    );
+
     if (
       coinmarketData.data &&
       coinmarketData.data[0]?.quote.USD.percent_change_24h < 0
     ) {
-      handleDirection("down");
+      handleCoinMarketData({
+        direction: "down",
+        percent24h: coinmarketData.data[0].quote.USD.percent_change_24h.toFixed(
+          2
+        ),
+        winner24h: winner24h,
+        loser24h: loser24h,
+      });
     } else if (
       coinmarketData.data &&
       coinmarketData.data[0]?.quote.USD.percent_change_24h > 0
     ) {
-      handleDirection("up");
+      handleCoinMarketData({
+        direction: "up",
+        percent24h: coinmarketData.data[0].quote.USD.percent_change_24h.toFixed(
+          2
+        ),
+        winner24h: winner24h,
+        loser24h: loser24h,
+      });
     }
   }, [coinmarketData]);
 
@@ -36,7 +57,7 @@ const CoinMarketWidget = () => {
           </tr>
         </thead>
         <tbody>
-          {coinmarketData?.data?.slice(0, 5).map((coin, index) => {
+          {coinmarketData?.data?.slice(0, 7).map((coin, index) => {
             return (
               <tr key={index}>
                 <td className="">{coin.name}</td>
@@ -44,7 +65,7 @@ const CoinMarketWidget = () => {
                 <td className="">
                   {coin.quote.USD.percent_change_24h.toFixed(2)} %
                 </td>
-                <td className="">{coin.date_added.slice(0, 4)}</td>
+                <td className="">{coin.date_added.slice(0, 7)}</td>
               </tr>
             );
           })}
