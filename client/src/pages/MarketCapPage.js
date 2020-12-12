@@ -1,11 +1,29 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Dashboardheader from "../components/Dashboard/DashboardHeader";
 import Spinner from "../components/UI/Spinner";
 
 import useCoinmarketCap from "../hooks/useCoinmarketCap";
 
 const MarketCapPage = () => {
   const [coinmarketData] = useCoinmarketCap();
+
+  const [coinsList, setCoinsList] = useState();
+
+  useEffect(() => {
+    setCoinsList(coinmarketData.data);
+  }, [coinmarketData]);
+
+  const sortByPercent = () => {
+    const list = [...coinsList];
+
+    list.sort(
+      (a, b) => a.quote.USD.percent_change_24h - b.quote.USD.percent_change_24h
+    );
+
+    setCoinsList([...list]);
+  };
+
+  console.log("äää", coinsList);
 
   return (
     <MarketCapPageWrapper>
@@ -15,13 +33,13 @@ const MarketCapPage = () => {
             <th>Place</th>
             <th>Name</th>
             <th>symbol</th>
-            <th>% change</th>
+            <th onClick={sortByPercent}>% change</th>
             <th>Date added</th>
           </tr>
         </thead>
         <tbody className="tbody">
-          {coinmarketData.data ? (
-            coinmarketData?.data?.map((coin, index) => {
+          {coinsList ? (
+            coinsList.map((coin, index) => {
               return (
                 <TableTr
                   up={coin.quote.USD.percent_change_24h > 0}
@@ -51,7 +69,7 @@ const MarketCapPageWrapper = styled.div`
     text-align: left;
     margin: 100px auto;
     /* border-collapse: collapse; */
-    border-spacing: 1px;
+    border-spacing: 0px;
     background-color: var(--dashWidgetBgDarker);
     cursor: crosshair;
     font-size: 0.9rem;
@@ -81,7 +99,12 @@ const MarketCapPageWrapper = styled.div`
   }
 `;
 
+const tableColorRed =
+  "linear-gradient(180deg, rgba(253,29,29,0.04665616246498594) 0%, rgba(253,29,29,0.02984943977591037) 49%, rgba(253,29,29,0.04945728291316531) 100%)";
+const tableColorGreen =
+  "linear-gradient(180deg, rgba(29,253,98,0.052258403361344574) 0%, rgba(29,253,98,0.03265056022408963) 49%, rgba(29,253,98,0.052258403361344574) 100%)";
+
 const TableTr = styled.tr`
-  background-color: ${(props) =>
-    props.up ? "rgba(40, 167, 69, 0.3)" : "rgba(220, 53, 69, 0.2)"} !important;
+  background: ${(props) =>
+    props.up ? tableColorGreen : tableColorRed} !important;
 `;
