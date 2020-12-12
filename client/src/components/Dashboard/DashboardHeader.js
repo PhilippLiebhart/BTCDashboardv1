@@ -32,7 +32,7 @@ const Dashboardheader = (props) => {
 
       <div className="primary header__item">
         <h3>24h Change:</h3>
-        <h3>+0.41%</h3>
+        <h3>+xxx</h3>
       </div>
     </DashboardheaderWrapper>
   );

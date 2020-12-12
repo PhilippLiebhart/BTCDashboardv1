@@ -62,6 +62,12 @@ const layoutXS = [
   { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
 ];
 
+const originalLayouts = getFromLS("layouts") || {
+  lg: layoutLG,
+  md: layoutMD,
+  xs: layoutXS,
+};
+
 const Dashboardpage = () => {
   const { direction } = useContext(DashboardContext);
 
@@ -84,7 +90,7 @@ const Dashboardpage = () => {
   const [averagePrice, setAveragePrice] = useState();
 
   const [layoutState, setLayoutState] = useState({
-    layouts: { lg: layoutLG, md: layoutMD, xs: layoutXS },
+    layouts: JSON.parse(JSON.stringify(originalLayouts)),
   });
 
   useEffect(() => {
@@ -99,8 +105,10 @@ const Dashboardpage = () => {
     );
   }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
 
-  const onLayoutChange = (layout) => {
+  const onLayoutChange = (layout, layouts) => {
+    console.log("onLayoutChange", layout);
     setLayoutState({ ...layoutState, layout: layout });
+    saveToLS("layouts", layouts);
   };
 
   const onResize = (layouts) => {
@@ -111,21 +119,34 @@ const Dashboardpage = () => {
     setLayoutState({ ...layoutState, currentBreakpoint: breakpoint });
   };
 
+  const resetLayout = () => {
+    setLayoutState({
+      layouts: {
+        lg: layoutLG,
+        md: layoutMD,
+        xs: layoutXS,
+      },
+    });
+  };
+
   return (
     <>
       <DashboardWrapper direction={direction}>
+        <button onClick={() => resetLayout()}>Reset Layout</button>
+        <button onClick={() => onLayoutChange()}>onchangelayour</button>
         <DashboardHeader averagePrice={averagePrice} />
 
         <ResponsiveGridLayout
           rowHeight={148}
           //cols={16}
+          className="layout"
           onResize={onResize}
           breakpoints={{ lg: 1000, md: 700, xs: 699 }}
           cols={{ lg: 14, md: 6, xs: 2 }}
           //autoSize={true}
           layouts={layoutState.layouts}
-          onLayoutChange={onLayoutChange}
           onBreakpointChange={onBreakpointChange}
+          onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
           draggableHandle=".MyDragHandleClassName"
           draggableCancel=".MyDragCancel"
           isDraggable={true}
@@ -237,5 +258,31 @@ const DashboardWrapper = styled.div`
     transparent
   );
 `;
+
+function getFromLS(key) {
+  let ls = {};
+  if (global.localStorage) {
+    try {
+      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+    } catch (e) {
+      /*Ignore*/
+    }
+  }
+  return ls[key];
+}
+
+function saveToLS(key, value) {
+  console.log("saveToLS", value);
+  if (global.localStorage) {
+    global.localStorage.setItem(
+      "rgl-8",
+      JSON.stringify({
+        [key]: value,
+      })
+    );
+
+    // localStorage.setItem("gridLayout", JSON.stringify(layout));
+  }
+}
 
 export default Dashboardpage;
