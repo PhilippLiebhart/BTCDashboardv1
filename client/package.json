@@ -19,6 +19,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-tradingview-widget": "^1.3.2",
     "react-twitter-widgets": "^1.9.5",
     "web-vitals": "^0.2.4"
   },
