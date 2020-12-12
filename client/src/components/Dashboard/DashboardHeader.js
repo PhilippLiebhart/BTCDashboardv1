@@ -7,7 +7,6 @@ import Spinner from "../UI/Spinner";
 
 const Dashboardheader = (props) => {
   const coinMarketData = useContext(DashboardContext);
-  console.log("coinMarketData", useContext(DashboardContext));
 
   const tickDirectionRef = useRef();
   tickDirectionRef.current = props.averagePrice;
@@ -24,8 +23,6 @@ const Dashboardheader = (props) => {
       setAveragePriceDirection("down");
     }
   }, [tickDirectionRef]);
-
-  console.log("HULAHULAHULA", coinMarketData?.winner24h);
 
   return (
     <DashboardheaderWrapper>
@@ -75,9 +72,15 @@ const Dashboardheader = (props) => {
 export default Dashboardheader;
 
 const AveragePrice = styled.div`
-  display: flex;
   color: ${(props) =>
     props.direction === "up" ? "var(--success)" : "var(--danger)"} !important;
+  width: 240px;
+  @media (max-width: 576px) {
+    width: 130px;
+    h1 {
+      text-align: center;
+    }
+  }
 `;
 
 const DashboardheaderWrapper = styled.div`
@@ -87,7 +90,8 @@ const DashboardheaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-content: stretch;
   align-items: center;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -98,6 +102,8 @@ const DashboardheaderWrapper = styled.div`
   }
 
   h1 {
+    text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
+
     @media (max-width: 576px) {
       font-size: 1.2rem;
     }
@@ -108,6 +114,7 @@ const DashboardheaderWrapper = styled.div`
     margin: 0;
     padding: 0;
     text-align: center;
+    text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
     @media (max-width: 576px) {
       font-size: 0.8rem;
     }
@@ -115,7 +122,6 @@ const DashboardheaderWrapper = styled.div`
 
   .header__item {
     height: 100%;
-
     display: flex;
     align-items: center;
 

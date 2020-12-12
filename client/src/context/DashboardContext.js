@@ -11,11 +11,8 @@ const DashboardContextProvider = (props) => {
     loser24h: "no data",
   });
 
-  console.log("coinMarketData22", coinMarketData);
-
   const handleCoinMarketData = (props) => {
     setCoinMarketData({ ...coinMarketData, ...props });
-    console.log("HULA HIULA HULA", props);
   };
 
   return (

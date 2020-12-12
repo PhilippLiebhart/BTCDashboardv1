@@ -20,6 +20,7 @@ import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
 import TradingViewChart from "../components/Dashboard/TradingViewChart";
+import TradingViewSpeedometer from "../components/Dashboard/TradingViewSpeedometer";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -32,7 +33,18 @@ const layoutLG = [
   { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1 },
   { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1 },
   { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
-  { i: "tradingView", x: 0, y: 10, w: 14, h: 4, minH: 4, minW: 4 },
+  { i: "tradingView", x: 0, y: 10, w: 11, h: 4, minH: 4, minW: 4 },
+  {
+    i: "tradingViewSpeedometer",
+    x: 11,
+    y: 2,
+    w: 3,
+    h: 3,
+    minH: 2,
+    maxH: 3,
+    maxW: 3,
+    minW: 3,
+  },
 ];
 
 const layoutMD = [
@@ -45,6 +57,16 @@ const layoutMD = [
   { i: "feargreed", x: 4, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
   { i: "coinMarket", x: 7, y: 1, w: 4, h: 2, minH: 2, minW: 6 },
   { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
+  {
+    i: "tradingViewSpeedometer",
+    x: 9,
+    y: 0,
+    w: 1,
+    h: 1,
+    minH: 2,
+    minW: 3,
+    maxH: 3,
+  },
 ];
 
 const layoutXS = [
@@ -57,6 +79,16 @@ const layoutXS = [
   { i: "feargreed", x: 0, y: 0, w: 1, h: 1, minH: 1, minW: 2 },
   { i: "coinMarket", x: 0, y: 0, w: 2, h: 2, minH: 6, minW: 6 },
   { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
+  {
+    i: "tradingViewSpeedometer",
+    x: 10,
+    y: 0,
+    w: 4,
+    h: 3,
+    minH: 2,
+    minW: 4,
+    maxH: 3,
+  },
 ];
 
 const originalLayouts = getFromLS("layouts") || {
@@ -103,7 +135,6 @@ const Dashboardpage = () => {
   }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
 
   const onLayoutChange = (layout, layouts) => {
-    console.log("onLayoutChange", layout);
     setLayoutState({ ...layoutState, layout: layout });
     saveToLS("layouts", layouts);
   };
@@ -240,6 +271,13 @@ const Dashboardpage = () => {
             </div>
             <TradingViewChart dashboard={true} />
           </div>
+
+          <div className="item widget--base" key={"tradingViewSpeedometer"}>
+            <div className="MyDragHandleClassName">
+              <h6 className="text-center p-1 m-0 secondary">Buy/Sell</h6>
+            </div>
+            <TradingViewSpeedometer />
+          </div>
         </ResponsiveGridLayout>
       </DashboardWrapper>
     </>
@@ -271,7 +309,6 @@ function getFromLS(key) {
 }
 
 function saveToLS(key, value) {
-  console.log("saveToLS", value);
   if (global.localStorage) {
     global.localStorage.setItem(
       "rgl-8",

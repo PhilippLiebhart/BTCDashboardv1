@@ -7,7 +7,7 @@ const useFearAndGreedIndex = () => {
   const fetchFearAndGreed = () => {
     Axios.get(`https://api.alternative.me/fng/`)
       .then((res) => {
-        console.log("RESULT", res);
+        console.log("FEAR AND GREEDRESULT", res);
         setFearAndGreedIndex({ ...res.data.data[0] });
       })
       .catch((err) => console.error("Greed Index API AXIOS ERROR!", err));

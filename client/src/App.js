@@ -7,6 +7,7 @@ import MarketCapPage from "./pages/MarketCapPage";
 import Homepage from "./pages/HomePage";
 import Layout from "./components/Layout";
 import TradingViewChart from "./components/Dashboard/TradingViewChart";
+import TradingViewSpeedometer from "./components/Dashboard/TradingViewSpeedometer";
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
         <Route path="/Dashboard" exact component={Dashboardpage} />
         <Route path="/coinMarketCap" exact component={MarketCapPage} />
         <Route path="/tradingView" exact component={TradingViewChart} />
+        <Route
+          path="/tradingViewSpeed"
+          exact
+          component={TradingViewSpeedometer}
+        />
       </Switch>
     </Layout>
   );

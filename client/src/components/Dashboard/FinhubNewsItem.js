@@ -23,7 +23,12 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
           <div className="news-card__content">
             <p>
               {summary}{" "}
-              <a href={url} target="_blank" rel="noopener noreferrer">
+              <a
+                href={url}
+                className="primary font-weight-bold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 read more...
               </a>
             </p>
@@ -50,6 +55,11 @@ const FinhubNewsItemWrapper = styled.div`
   .news-card__header {
     display: inline;
   }
+
+  .news-card__content {
+    color: var(--secondary);
+    padding: 0px 0px 2px 0px;
+  }
   h6 {
     display: inline;
     margin: 2px 0;
@@ -60,7 +70,7 @@ const FinhubNewsItemWrapper = styled.div`
   a {
     right: 16px;
     font-size: 0.7rem;
-    position: absolute;
+    /* position: absolute; */
     float: right;
     margin: 5px;
   }
