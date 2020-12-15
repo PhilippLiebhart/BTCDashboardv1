@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 // import chartSample from "../../assets/img/chart-sample.svg";
 import averageSymbol from "../../assets/img/symbol-average.svg";
 import { DashboardContext } from "../../context/DashboardContext";
@@ -22,7 +22,7 @@ const Dashboardheader = (props) => {
     } else if (lastAveragePrice > tickDirectionRef.current) {
       setAveragePriceDirection("down");
     }
-  }, [tickDirectionRef]);
+  }, [props.averagePrice]);
 
   return (
     <DashboardheaderWrapper>
@@ -72,6 +72,17 @@ const Dashboardheader = (props) => {
 export default Dashboardheader;
 
 const AveragePrice = styled.div`
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-in-out;
+  ${(props) =>
+    props.direction === "up"
+      ? css`
+          transform: rotate(-1deg);
+        `
+      : css`
+          transform: rotate(1deg);
+        `};
+
   color: ${(props) =>
     props.direction === "up" ? "var(--success)" : "var(--danger)"} !important;
   width: 240px;
@@ -104,7 +115,7 @@ const DashboardheaderWrapper = styled.div`
   h1 {
     text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
 
-    @media (max-width: 576px) {
+    @media (max-width: 700px) {
       font-size: 1.2rem;
     }
   }
@@ -115,7 +126,7 @@ const DashboardheaderWrapper = styled.div`
     padding: 0;
     text-align: center;
     text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
-    @media (max-width: 576px) {
+    @media (max-width: 830px) {
       font-size: 0.8rem;
     }
   }
@@ -131,7 +142,7 @@ const DashboardheaderWrapper = styled.div`
       padding-top: 2px;
       width: 25px;
     }
-    @media (max-width: 576px) {
+    @media (max-width: 700px) {
       margin: 15px 0 0 0;
       img {
         width: 15px;

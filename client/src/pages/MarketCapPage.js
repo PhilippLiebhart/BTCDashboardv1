@@ -8,19 +8,99 @@ const MarketCapPage = () => {
   const [coinmarketData] = useCoinmarketCap();
 
   const [coinsList, setCoinsList] = useState();
+  const [sortInfo, setSortInfo] = useState({
+    key: "PERCENT",
+    direction: "ASC",
+  });
 
   useEffect(() => {
-    setCoinsList(coinmarketData.data);
+    const transformedArray = coinmarketData?.data?.map((coin) => {
+      return {
+        ...coin,
+        percent_change_24h: coin.quote.USD.percent_change_24h,
+        percent_change_1h: coin.quote.USD.percent_change_1h,
+        percent_change_7d: coin.quote.USD.percent_change_7d,
+      };
+    });
+
+    setCoinsList(transformedArray);
   }, [coinmarketData]);
 
-  const sortByPercent = () => {
+  const sortByKey = (key) => {
+    console.log("SORT BY KEY", key);
     const list = [...coinsList];
 
-    list.sort(
-      (a, b) => a.quote.USD.percent_change_24h - b.quote.USD.percent_change_24h
-    );
+    if (sortInfo.direction === "ASC") {
+      console.log("ASC", key);
+      list.sort((a, b) => b[key] - a[key]);
+      setCoinsList([...list]);
+      setSortInfo({ direction: "DESC", key: key });
+    } else if (sortInfo.direction === "DESC") {
+      console.log("DESC", key);
+      list.sort((a, b) => b[key] - a[key]).reverse();
+      setCoinsList([...list]);
+      setSortInfo({ direction: "ASC", key: key });
+    } else {
+      return;
+    }
+  };
+
+  const sortByDate = (key) => {
+    const list = [...coinsList];
+
+    if (sortInfo.direction === "ASC") {
+      list.sort((a, b) => new Date(b[key]) - new Date(a[key]));
+      setCoinsList([...list]);
+      setSortInfo({ direction: "DESC", key: key });
+    } else if (sortInfo.direction === "DESC") {
+      list.sort((a, b) => new Date(b[key]) - new Date(a[key])).reverse();
+      setCoinsList([...list]);
+      setSortInfo({ direction: "ASC", key: key });
+    } else {
+      console.log("NOTHING");
+    }
 
     setCoinsList([...list]);
+  };
+
+  const sortHandler = (action) => {
+    switch (action) {
+      case "NAME":
+        const nameKey = "name";
+        sortByKey(nameKey);
+        // list.sort((a, b) => a.name.localeCompare(b.name));
+        // setCoinsList([...list]);
+
+        break;
+      case "SYMBOL":
+        const symbolKey = "symbol";
+        sortByKey(symbolKey);
+
+        break;
+
+      case "PERCENT1h":
+        const percent1hKey = "percent_change_1h";
+        sortByKey(percent1hKey);
+
+        break;
+      case "PERCENT24h":
+        const percent24Key = "percent_change_24h";
+        sortByKey(percent24Key);
+        break;
+
+      case "PERCENT7d":
+        const percent7dKey = "percent_change_7d";
+        sortByKey(percent7dKey);
+
+        break;
+      case "DATE_ADDED":
+        const dateKey = "date_added";
+        sortByDate(dateKey);
+        break;
+
+      default:
+        break;
+    }
   };
 
   console.log("äää", coinsList);
@@ -31,10 +111,12 @@ const MarketCapPage = () => {
         <thead>
           <tr>
             <th>Place</th>
-            <th>Name</th>
-            <th>symbol</th>
-            <th onClick={sortByPercent}>% change</th>
-            <th>Date added</th>
+            <th onClick={() => sortHandler("NAME")}>Name</th>
+            <th onClick={() => sortHandler("SYMBOL")}>symbol</th>
+            <th onClick={() => sortHandler("PERCENT1h")}>1h change</th>
+            <th onClick={() => sortHandler("PERCENT24h")}>24h change</th>
+            <th onClick={() => sortHandler("PERCENT7d")}>7d change</th>
+            <th onClick={() => sortHandler("DATE_ADDED")}>Date added</th>
           </tr>
         </thead>
         <tbody className="tbody">
@@ -48,7 +130,9 @@ const MarketCapPage = () => {
                   <td>{index + 1}</td>
                   <td>{coin.name}</td>
                   <td>{coin.symbol}</td>
+                  <td>{coin.quote.USD.percent_change_1h.toFixed(2)} %</td>
                   <td>{coin.quote.USD.percent_change_24h.toFixed(2)} %</td>
+                  <td>{coin.quote.USD.percent_change_7d.toFixed(2)} %</td>
                   <td>{coin.date_added.slice(0, 4)}</td>
                 </TableTr>
               );

@@ -48,24 +48,25 @@ const layoutLG = [
 ];
 
 const layoutMD = [
-  { i: "21", x: 0, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "22", x: 2, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "23", x: 4, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "24", x: 6, y: 0, w: 2, h: 1, minW: 4, maxW: 4, maxH: 1 },
-  { i: "NewsFeed", x: 0, y: 0, w: 4, h: 3, minH: 1 },
+  { i: "21", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "22", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "23", x: 6, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "24", x: 9, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
+  { i: "NewsFeed", x: 0, y: 6, w: 4, h: 3, minH: 1 },
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
-  { i: "feargreed", x: 4, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
-  { i: "coinMarket", x: 7, y: 1, w: 4, h: 2, minH: 2, minW: 6 },
-  { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
+  { i: "coinMarket", x: 10, y: 0, w: 2, h: 3, minH: 2, minW: 4, maxH: 3 },
+  { i: "tradingView", x: 0, y: 7, w: 4, h: 4, minH: 4, minW: 4 },
   {
     i: "tradingViewSpeedometer",
-    x: 9,
-    y: 0,
-    w: 1,
-    h: 1,
+    x: 2,
+    y: 2,
+    w: 2,
+    h: 3,
     minH: 2,
-    minW: 3,
     maxH: 3,
+    maxW: 3,
+    minW: 3,
   },
 ];
 
@@ -290,8 +291,8 @@ const DashboardWrapper = styled.div`
     to bottom,
     ${(props) =>
       props.direction === "up"
-        ? "rgba(93, 211, 158, 0.2)"
-        : "rgba(205, 9, 11, 0.4)"},
+        ? "rgba(93, 211, 158, 0.1)"
+        : "rgba(205, 9, 11, 0.1)"},
     transparent
   );
 `;
