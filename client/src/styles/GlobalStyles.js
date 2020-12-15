@@ -72,6 +72,10 @@ html {
 }
 
 /* UTILITY */
+
+.hideItem {
+  display: none !important;
+}
 .pm-0 {
   padding:0 !important;
   margin:0 !important;

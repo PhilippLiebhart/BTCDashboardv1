@@ -98,7 +98,24 @@ const baseLayout = {
   xs: layoutXS,
 };
 
-const originalLayouts = getFromLS("layouts") || baseLayout;
+const baseDisplaySettings = {
+  bitmexTicker: false,
+  binanceTicker: false,
+  phemexTicker: false,
+  bybitTicker: false,
+  newsfeed: false,
+  twitter: false,
+  feargreed: false,
+  coinMarket: false,
+  tradingView: false,
+  tradingViewSpeedometer: false,
+};
+
+const originalLayouts = getFromLS("layouts", "rgl-8") || baseLayout;
+const originalDisplaySettings =
+  getFromLS("displaySettings", "settings") || baseDisplaySettings;
+
+console.log("originalDisplaySettings", originalDisplaySettings);
 
 const Dashboardpage = () => {
   const coinMarketData = useContext(DashboardContext);
@@ -125,6 +142,10 @@ const Dashboardpage = () => {
     layouts: originalLayouts,
   });
 
+  const [displaySettings, setDisplaySettings] = useState(
+    originalDisplaySettings
+  );
+
   useEffect(() => {
     setAveragePrice(
       (
@@ -139,7 +160,7 @@ const Dashboardpage = () => {
 
   const onLayoutChange = (currentLayout, allLayouts) => {
     setLayoutState({ ...layoutState, layouts: allLayouts });
-    saveToLS("layouts", allLayouts);
+    saveToLS("layouts", allLayouts, "rgl-8");
   };
 
   const onResize = (layouts) => {
@@ -153,8 +174,17 @@ const Dashboardpage = () => {
   };
 
   const resetLayout = () => {
-    saveToLS("layouts", baseLayout);
+    saveToLS("layouts", baseLayout, "rgl-8");
+    saveToLS("displaySettings", baseDisplaySettings, "settings");
     window.location.reload();
+  };
+
+  const handleDisplaySettings = (itemKey) => {
+    console.log("KEY", itemKey);
+    setDisplaySettings({
+      ...displaySettings,
+      [itemKey]: !displaySettings[itemKey],
+    });
   };
 
   return (
@@ -163,6 +193,28 @@ const Dashboardpage = () => {
         <button onClick={() => resetLayout()}>Reset Layout</button>
 
         <DashboardHeader averagePrice={averagePrice} />
+
+        <DashboardFilter>
+          <button
+            onClick={() =>
+              saveToLS("displaySettings", displaySettings, "settings")
+            }
+          >
+            SAVE settings
+          </button>
+          {Object.entries(displaySettings).map(([key, val]) => {
+            return (
+              <DisplayButton
+                key={key}
+                display={!val}
+                onClick={() => handleDisplaySettings(key)}
+                className="widget--base"
+              >
+                {key}
+              </DisplayButton>
+            );
+          })}
+        </DashboardFilter>
 
         <ResponsiveGridLayout
           rowHeight={135}
@@ -181,7 +233,13 @@ const Dashboardpage = () => {
           isResizable={true}
         >
           {/* -- TICKER START ------------------------ */}
-          <div className="item widget--base" key={"bitmexTicker"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.bitmexTicker ? "hideItem" : "")
+            }
+            key={"bitmexTicker"}
+          >
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BITMEX"
@@ -194,7 +252,13 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={"binanceTicker"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.binanceTicker ? "hideItem" : "")
+            }
+            key={"binanceTicker"}
+          >
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BINANCE"
@@ -207,7 +271,13 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={"phemexTicker"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.phemexTicker ? "hideItem" : "")
+            }
+            key={"phemexTicker"}
+          >
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="PHEMEX"
@@ -222,7 +292,13 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={"bybitTicker"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.bybitTicker ? "hideItem" : "")
+            }
+            key={"bybitTicker"}
+          >
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BYBIT"
@@ -238,7 +314,13 @@ const Dashboardpage = () => {
           </div>
 
           {/* -- TICKER END ------------------------ */}
-          <div className="item widget--base" key={"NewsFeed"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.newsfeed ? "hideItem" : "")
+            }
+            key={"NewsFeed"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">
                 Finhub Crypto News
@@ -246,26 +328,49 @@ const Dashboardpage = () => {
             </div>
             <FinHubNewsWidget />
           </div>
-          <div className="item widget--base" key={"twitter"}>
+          <div
+            className={
+              "item widget--base " + (displaySettings.twitter ? "hideItem" : "")
+            }
+            key={"twitter"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">Twitter</h6>{" "}
             </div>
             <TwitterWidget />
           </div>
-          <div className="item widget--base" key={"feargreed"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.feargreed ? "hideItem" : "")
+            }
+            key={"feargreed"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">Fear & Greed</h6>
             </div>
             <FearAndGreedIndex />
           </div>
-          <div className="item widget--base" key={"coinMarket"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.coinMarket ? "hideItem" : "")
+            }
+            key={"coinMarket"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">Coin Market Cap</h6>
             </div>
             <CoinMarketWidget />
           </div>
 
-          <div className="item widget--base" key={"tradingView"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.tradingView ? "hideItem" : "")
+            }
+            key={"tradingView"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">
                 TradingView Chart
@@ -274,7 +379,13 @@ const Dashboardpage = () => {
             <TradingViewChart dashboard={true} />
           </div>
 
-          <div className="item widget--base" key={"tradingViewSpeedometer"}>
+          <div
+            className={
+              "item widget--base " +
+              (displaySettings.tradingViewSpeedometer ? "hideItem" : "")
+            }
+            key={"tradingViewSpeedometer"}
+          >
             <div className="MyDragHandleClassName">
               <h6 className="text-center p-1 m-0 secondary">Buy/Sell</h6>
             </div>
@@ -298,26 +409,54 @@ const DashboardWrapper = styled.div`
   );
 `;
 
-function getFromLS(key) {
+const DashboardFilter = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: fit-content;
+  font-size: 0.8rem !important;
+`;
+
+const DisplayButton = styled.button`
+  display: flex;
+
+  font-size: 0.8rem !important;
+  margin: 4px;
+  color: ${(props) =>
+    props.display ? "var(--dashWidgetBgDark)" : "var(--secondary)"};
+  border: 1px solid var(--primary);
+  background-color: ${(props) =>
+    props.display ? "var(--primary)" : "var(--dashWidgetBgDark)"};
+
+  :focus {
+    outline: 0;
+  }
+`;
+
+function getFromLS(key, mainKey) {
   let ls = {};
   if (global.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(global.localStorage.getItem(mainKey)) || {};
+      console.log("getFromLS", ls);
     } catch (e) {
-      /*Ignore*/
+      console.warn("getFromLs ERROR:");
     }
   }
   return ls[key];
 }
 
-function saveToLS(key, value) {
+function saveToLS(key, value, mainKey) {
   if (global.localStorage) {
     global.localStorage.setItem(
-      "rgl-8",
+      mainKey,
       JSON.stringify({
         [key]: value,
       })
     );
+  } else {
+    console.warn("!!!! saveToLS ERROR");
   }
 }
 
