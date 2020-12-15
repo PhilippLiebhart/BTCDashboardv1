@@ -35,10 +35,10 @@ const useBinanceTicker = () => {
 
       setBinanceTickerData({
         ...binanceTickerData,
-        last: tickData.c,
-        vol: tickData.v,
-        high: tickData.h,
-        low: tickData.l,
+        last: parseFloat(tickData.c),
+        vol: parseFloat(tickData.v),
+        high: parseFloat(tickData.h),
+        low: parseFloat(tickData.l),
       });
     };
   };

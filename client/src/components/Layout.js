@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styled from "styled-components";
 import Footer from "./Footer";
 import SliderNav from "./SliderNav/SliderNav";
@@ -24,3 +26,7 @@ const LayoutWrapper = styled.div`
     /* padding-right: 20px; */
   }
 `;
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};

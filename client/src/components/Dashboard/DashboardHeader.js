@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import { useEffect, useState, useRef, useContext } from "react";
 import styled, { css } from "styled-components";
 // import chartSample from "../../assets/img/chart-sample.svg";
@@ -5,64 +7,71 @@ import averageSymbol from "../../assets/img/symbol-average.svg";
 import { DashboardContext } from "../../context/DashboardContext";
 import Spinner from "../UI/Spinner";
 
-const Dashboardheader = (props) => {
+const Dashboardheader = ({ averagePrice }) => {
   const coinMarketData = useContext(DashboardContext);
 
   const tickDirectionRef = useRef();
-  tickDirectionRef.current = props.averagePrice;
+  tickDirectionRef.current = averagePrice;
 
   const [lastAveragePrice, setLastAveragePrice] = useState();
   const [averagePriceDirection, setAveragePriceDirection] = useState();
 
   useEffect(() => {
-    setLastAveragePrice(props.averagePrice);
+    setLastAveragePrice(averagePrice);
 
     if (lastAveragePrice < tickDirectionRef.current) {
       setAveragePriceDirection("up");
     } else if (lastAveragePrice > tickDirectionRef.current) {
       setAveragePriceDirection("down");
     }
-  }, [props.averagePrice]);
+  }, [averagePrice]);
 
   return (
     <DashboardheaderWrapper>
       <AveragePrice className="header__item" direction={averagePriceDirection}>
         <img src={averageSymbol} alt="" />
         <h1 className="">
-          {props.averagePrice !== "NaN" ? props.averagePrice : <Spinner />}
+          {averagePrice !== "NaN" ? averagePrice : <Spinner />}
         </h1>
       </AveragePrice>
       <div className="header__item">
         <Percent24h direction={coinMarketData?.direction}>
-          <h3>24h Change:</h3>
-          {coinMarketData?.percent24h > 0 ? "+ " : "- "}
-          {coinMarketData?.percent24h}
+          <h3>
+            24h Change:
+            {coinMarketData?.percent24h > 0 ? "+ " : "- "}
+            {coinMarketData?.percent24h}
+          </h3>
         </Percent24h>
       </div>
       <div className="header__item">
-        <Percent24h
-          direction={
-            coinMarketData?.winner24h?.quote?.USD?.percent_change_24h > 0
-              ? "up"
-              : "down"
-          }
-        >
-          <h3>24h Winner:</h3>
-          {coinMarketData?.winner24h?.name} |{" "}
-          {coinMarketData?.winner24h?.quote?.USD?.percent_change_24h.toFixed(2)}
-        </Percent24h>
-      </div>{" "}
-      <div className="header__item">
-        <Percent24h
-          direction={
-            coinMarketData?.loser24h?.quote?.USD?.percent_change_24h > 0
-              ? "up"
-              : "down"
-          }
-        >
-          <h3>24h Loser:</h3>
-          {coinMarketData?.loser24h?.name} |{" "}
-          {coinMarketData?.loser24h?.quote?.USD?.percent_change_24h.toFixed(2)}
+        <Percent24h>
+          <WinnerLoser
+            direction={
+              coinMarketData?.winner24h?.quote?.USD?.percent_change_24h > 0
+                ? "up"
+                : "down"
+            }
+          >
+            24h Winner:
+            {coinMarketData?.winner24h?.name} |{" "}
+            {coinMarketData?.winner24h?.quote?.USD?.percent_change_24h.toFixed(
+              2
+            )}
+          </WinnerLoser>
+
+          <WinnerLoser
+            direction={
+              coinMarketData?.loser24h?.quote?.USD?.percent_change_24h > 0
+                ? "up"
+                : "down"
+            }
+          >
+            24h Loser:
+            {coinMarketData?.loser24h?.name} |{" "}
+            {coinMarketData?.loser24h?.quote?.USD?.percent_change_24h.toFixed(
+              2
+            )}
+          </WinnerLoser>
         </Percent24h>
       </div>
     </DashboardheaderWrapper>
@@ -135,6 +144,7 @@ const DashboardheaderWrapper = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     img {
       display: inline;
@@ -148,18 +158,19 @@ const DashboardheaderWrapper = styled.div`
         width: 15px;
       }
     }
-
-    ul {
-      list-style: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 0;
-      margin: 0;
-    }
   }
 `;
 
-const Percent24h = styled.h3`
+const Percent24h = styled.div`
   color: ${(props) =>
     props.direction === "up" ? "var(--success)" : "var(--danger)"};
 `;
+const WinnerLoser = styled.h3`
+  color: ${(props) =>
+    props.direction === "up" ? "var(--success)" : "var(--danger)"};
+  margin: 2px;
+`;
+
+Dashboardheader.propTypes = {
+  averagePrice: PropTypes.string,
+};

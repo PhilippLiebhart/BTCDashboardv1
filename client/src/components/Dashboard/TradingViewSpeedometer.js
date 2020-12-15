@@ -9,9 +9,9 @@ const TradingViewSpeedometer = () => {
 
   return (
     <Wrapper>
-      <div class="tradingview-widget-container">
+      <div className="tradingview-widget-container">
         <div
-          class="tradingview-widget-container__widget"
+          className="tradingview-widget-container__widget"
           id="speedometer"
         ></div>
       </div>

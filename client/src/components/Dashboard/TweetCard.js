@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styled from "styled-components";
 
 const TweetCard = ({ user, userName, text, tweetId, tweetTime }) => {
@@ -79,3 +81,11 @@ var K = (function () {
     ie: a.match(/MSIE\s([^;]*)/),
   };
 })();
+
+TweetCard.propTypes = {
+  user: PropTypes.string,
+  userName: PropTypes.string,
+  text: PropTypes.string,
+  tweetId: PropTypes.string,
+  tweetTime: PropTypes.string,
+};

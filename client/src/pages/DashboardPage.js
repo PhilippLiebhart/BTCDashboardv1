@@ -127,7 +127,7 @@ const Dashboardpage = () => {
     setAveragePrice(
       (
         (bitmexTickerLastPrice?.last +
-          parseFloat(binanceTickerData?.last) +
+          binanceTickerData?.last +
           phemexTickerLastPrice?.last / 10000 +
           bybitTickerLastPrice?.last / 10000) /
         4
@@ -190,8 +190,8 @@ const Dashboardpage = () => {
                 name="BITMEX"
                 last={bitmexTickerLastPrice?.last}
                 vol={parseFloat(bitmexTickerData?.vol)}
-                high={parseFloat(bitmexTickerData?.high).toFixed(2)}
-                low={parseFloat(bitmexTickerData?.low).toFixed(2)}
+                high={parseFloat(bitmexTickerData?.high?.toFixed(2))}
+                low={parseFloat(bitmexTickerData?.low?.toFixed(2))}
                 status={bitmexConnStatus}
               />
             </div>
@@ -201,10 +201,10 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BINANCE"
-                last={parseFloat(binanceTickerData?.last)}
-                vol={parseFloat(binanceTickerData?.vol).toFixed(2)}
-                high={parseFloat(binanceTickerData?.high).toFixed(2)}
-                low={parseFloat(binanceTickerData?.low).toFixed(2)}
+                last={binanceTickerData?.last}
+                vol={parseFloat(binanceTickerData?.vol?.toFixed(2))}
+                high={parseFloat(binanceTickerData?.high?.toFixed(2))}
+                low={parseFloat(binanceTickerData?.low?.toFixed(2))}
                 status={binanceConnStatus}
               />
             </div>
@@ -214,7 +214,9 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="PHEMEX"
-                last={(phemexTickerLastPrice?.last / 10000).toFixed(2)}
+                last={parseFloat(
+                  (phemexTickerLastPrice?.last / 10000).toFixed(2)
+                )}
                 vol={phemexTickerData?.vol / 10000}
                 high={phemexTickerData?.high / 10000}
                 low={phemexTickerData?.low / 10000}
@@ -227,7 +229,9 @@ const Dashboardpage = () => {
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BYBIT"
-                last={(bybitTickerLastPrice?.last / 10000).toFixed(2)}
+                last={parseFloat(
+                  (bybitTickerLastPrice?.last / 10000).toFixed(2)
+                )}
                 vol={bybitTickerData?.vol / 10000}
                 high={bybitTickerData?.high / 10000}
                 low={bybitTickerData?.low / 10000}

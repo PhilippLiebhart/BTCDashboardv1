@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styled from "styled-components";
 import Spinner from "../UI/Spinner";
 
@@ -107,3 +109,12 @@ const Volume = styled.p`
   }
 `;
 // const Status = styled.span``;
+
+TickerCard.propTypes = {
+  name: PropTypes.string,
+  last: PropTypes.number,
+  vol: PropTypes.number,
+  high: PropTypes.number,
+  low: PropTypes.number,
+  status: PropTypes.string,
+};

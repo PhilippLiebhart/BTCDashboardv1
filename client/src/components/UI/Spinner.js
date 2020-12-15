@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import "./Spinner.css";
 
-export default function Spinner(props) {
+export default function Spinner() {
   return (
     <>
       <SpinnerWrap>

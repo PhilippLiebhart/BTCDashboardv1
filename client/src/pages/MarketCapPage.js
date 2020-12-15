@@ -103,8 +103,6 @@ const MarketCapPage = () => {
     }
   };
 
-  console.log("äää", coinsList);
-
   return (
     <MarketCapPageWrapper>
       <table className="coinMarketTable">

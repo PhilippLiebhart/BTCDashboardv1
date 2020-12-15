@@ -35,6 +35,7 @@ const SliderNav = ({ location, history }) => {
           }
         }}
         expanded={navState.expanded}
+        onToggle={() => setNavState({ expanded: !navState.expanded })}
       >
         <SideNav.Toggle
           onClick={() => setNavState({ expanded: !navState.expanded })}

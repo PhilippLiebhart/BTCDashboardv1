@@ -5,7 +5,7 @@ import useFinhubNewsfeed from "../../hooks/useFinhubNewsfeed";
 import FinhubnewsItem from "./FinhubNewsItem";
 import { useEffect, useState } from "react";
 
-const FinHubNewsWidget = (props) => {
+const FinHubNewsWidget = () => {
   const [finhubNews] = useFinhubNewsfeed();
   const [currentNews, setCurrentNews] = useState();
   const [currentCount, setCurrentCount] = useState(10);

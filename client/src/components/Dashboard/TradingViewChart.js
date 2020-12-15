@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import styled from "styled-components";
 
 import TradingViewWidget, { Themes, BarStyles } from "react-tradingview-widget";
@@ -31,3 +33,7 @@ const TradingViewWrapper = styled.div`
 `;
 
 export default TradingViewChart;
+
+TradingViewChart.propTypes = {
+  dashboard: PropTypes.bool.isRequired,
+};

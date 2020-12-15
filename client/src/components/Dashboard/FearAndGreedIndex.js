@@ -3,7 +3,7 @@ import Spinner from "../UI/Spinner";
 
 import useFearAndGreedIndex from "../../hooks/useFearAndGreedIndex";
 
-const FearAndGreedIndex = (props) => {
+const FearAndGreedIndex = () => {
   const [fearAndGreedIndex] = useFearAndGreedIndex();
 
   const time = new Date(fearAndGreedIndex.timestamp * 1000).toLocaleDateString(

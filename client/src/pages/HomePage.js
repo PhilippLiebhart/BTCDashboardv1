@@ -4,32 +4,16 @@ import logoText from "../assets/img/logo_text.svg";
 
 import HomePageCard from "../components/HomePageCard";
 
-function Homepage(props) {
+function Homepage() {
   return (
     <>
       <HomePageWrapper>
         <div className="homePageGrid">
-          <HomePageCard
-            headline={"Dashboard"}
-            linkText="link to Dashboard"
-            linkURL={"/Dashboard"}
-          />
-          <HomePageCard
-            headline={"Coin Market"}
-            linkText="link to Coin Market"
-            linkURL={"/coinMarketCap"}
-          />
-          <HomePageCard
-            headline={"Chart"}
-            linkText="link tradingView Chart"
-            linkURL={"/tradingView"}
-          />
+          <HomePageCard headline={"Dashboard"} linkURL={"/Dashboard"} />
+          <HomePageCard headline={"Coin Market"} linkURL={"/coinMarketCap"} />
+          <HomePageCard headline={"Chart"} linkURL={"/tradingView"} />
 
-          <HomePageCard
-            headline={"FAQ"}
-            linkText="link to FAQ"
-            linkURL={"/faq"}
-          />
+          <HomePageCard headline={"FAQ"} linkURL={"/faq"} />
         </div>
 
         <div className="introCard">

@@ -36,7 +36,6 @@ const usePhemexTicker = () => {
   const [phemexConnStatus, setPhemexConnStatus] = useState();
   const [phemexTickerLastPrice, setPhemexTickerLastPrice] = useState();
   const [phemexTickerData, setPhemexTickerData] = useState({});
-
   const socketRef = useRef();
 
   const wsInit = () => {
