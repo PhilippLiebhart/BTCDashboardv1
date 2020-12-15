@@ -25,10 +25,10 @@ import TradingViewSpeedometer from "../components/Dashboard/TradingViewSpeedomet
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layoutLG = [
-  { i: "21", x: 0, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "22", x: 3, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "23", x: 6, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "24", x: 9, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "bitmexTicker", x: 0, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "binanceTicker", x: 3, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "phemexTicker", x: 6, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
+  { i: "bybitTicker", x: 9, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
   { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
   { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1 },
   { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1 },
@@ -48,10 +48,10 @@ const layoutLG = [
 ];
 
 const layoutMD = [
-  { i: "21", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "22", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "23", x: 6, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "24", x: 9, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "bitmexTicker", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "binanceTicker", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "phemexTicker", x: 6, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "bybitTicker", x: 9, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
   { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
   { i: "NewsFeed", x: 0, y: 6, w: 4, h: 3, minH: 1 },
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
@@ -71,10 +71,10 @@ const layoutMD = [
 ];
 
 const layoutXS = [
-  { i: "21", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "22", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "23", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "24", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "bitmexTicker", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "binanceTicker", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "phemexTicker", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
+  { i: "bybitTicker", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
   { i: "NewsFeed", x: 0, y: 0, w: 2, h: 3, minH: 1 },
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
   { i: "feargreed", x: 0, y: 0, w: 1, h: 1, minH: 1, minW: 2 },
@@ -181,7 +181,7 @@ const Dashboardpage = () => {
           isResizable={true}
         >
           {/* -- TICKER START ------------------------ */}
-          <div className="item widget--base" key={21}>
+          <div className="item widget--base" key={"bitmexTicker"}>
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BITMEX"
@@ -194,7 +194,7 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={22}>
+          <div className="item widget--base" key={"binanceTicker"}>
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BINANCE"
@@ -207,7 +207,7 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={23}>
+          <div className="item widget--base" key={"phemexTicker"}>
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="PHEMEX"
@@ -222,7 +222,7 @@ const Dashboardpage = () => {
             </div>
           </div>
 
-          <div className="item widget--base" key={24}>
+          <div className="item widget--base" key={"bybitTicker"}>
             <div className="MyDragHandleClassName">
               <TickerCard
                 name="BYBIT"

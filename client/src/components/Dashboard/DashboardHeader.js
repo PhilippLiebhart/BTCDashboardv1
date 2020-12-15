@@ -37,8 +37,7 @@ const Dashboardheader = ({ averagePrice }) => {
       <div className="header__item">
         <Percent24h direction={coinMarketData?.direction}>
           <h3>
-            24h Change:
-            {coinMarketData?.percent24h > 0 ? "+ " : "- "}
+            24h Change: {coinMarketData?.percent24h > 0 ? "+ " : "- "}
             {coinMarketData?.percent24h}
           </h3>
         </Percent24h>
@@ -52,8 +51,7 @@ const Dashboardheader = ({ averagePrice }) => {
                 : "down"
             }
           >
-            24h Winner:
-            {coinMarketData?.winner24h?.name} |{" "}
+            24h Winner: {coinMarketData?.winner24h?.name} |{" "}
             {coinMarketData?.winner24h?.quote?.USD?.percent_change_24h.toFixed(
               2
             )}
@@ -66,8 +64,7 @@ const Dashboardheader = ({ averagePrice }) => {
                 : "down"
             }
           >
-            24h Loser:
-            {coinMarketData?.loser24h?.name} |{" "}
+            24h Loser: {coinMarketData?.loser24h?.name} |{" "}
             {coinMarketData?.loser24h?.quote?.USD?.percent_change_24h.toFixed(
               2
             )}
