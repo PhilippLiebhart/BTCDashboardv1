@@ -92,11 +92,13 @@ const layoutXS = [
   },
 ];
 
-const originalLayouts = getFromLS("layouts") || {
+const baseLayout = {
   lg: layoutLG,
   md: layoutMD,
   xs: layoutXS,
 };
+
+const originalLayouts = getFromLS("layouts") || baseLayout;
 
 const Dashboardpage = () => {
   const coinMarketData = useContext(DashboardContext);
@@ -135,9 +137,9 @@ const Dashboardpage = () => {
     );
   }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
 
-  const onLayoutChange = (layout, layouts) => {
-    setLayoutState({ ...layoutState, layout: layout });
-    saveToLS("layouts", layouts);
+  const onLayoutChange = (currentLayout, allLayouts) => {
+    setLayoutState({ ...layoutState, layouts: allLayouts });
+    saveToLS("layouts", allLayouts);
   };
 
   const onResize = (layouts) => {
@@ -151,13 +153,8 @@ const Dashboardpage = () => {
   };
 
   const resetLayout = () => {
-    setLayoutState({
-      layouts: {
-        lg: layoutLG,
-        md: layoutMD,
-        xs: layoutXS,
-      },
-    });
+    saveToLS("layouts", baseLayout);
+    window.location.reload();
   };
 
   return (
@@ -321,8 +318,6 @@ function saveToLS(key, value) {
         [key]: value,
       })
     );
-
-    // localStorage.setItem("gridLayout", JSON.stringify(layout));
   }
 }
 
