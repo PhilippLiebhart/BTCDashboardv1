@@ -21,6 +21,7 @@ import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
 import TradingViewChart from "../components/Dashboard/TradingViewChart";
 import TradingViewSpeedometer from "../components/Dashboard/TradingViewSpeedometer";
+import useHuobiTicker from "../hooks/Ticker/useHuobiTicker";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -115,8 +116,6 @@ const originalLayouts = getFromLS("layouts", "rgl-8") || baseLayout;
 const originalDisplaySettings =
   getFromLS("displaySettings", "settings") || baseDisplaySettings;
 
-console.log("originalDisplaySettings", originalDisplaySettings);
-
 const Dashboardpage = () => {
   const coinMarketData = useContext(DashboardContext);
 
@@ -136,6 +135,9 @@ const Dashboardpage = () => {
     bitmexTickerData,
     bitmexConnStatus,
   ] = useBitmexTicker();
+
+  const [huobiTickerData] = useHuobiTicker();
+
   const [averagePrice, setAveragePrice] = useState();
 
   const [layoutState, setLayoutState] = useState({
