@@ -16,10 +16,17 @@ import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { useState } from "react";
 
 import logo from "../../assets/img/logo.svg";
-import homeIcon from "../../../src/assets/navItems/homeIcon.png";
-import settingsIcon from "../../../src/assets/navItems/settingsIcon.png";
-import coinmarketIcon from "../../../src/assets/navItems/coinmarketIcon.png";
-import chartIcon from "../../../src/assets/navItems/chartIcon.png";
+import homeIcon from "../../assets/navItems/homeIcon.png";
+import settingsIcon from "../../assets/navItems/settingsIcon.png";
+import coinmarketIcon from "../../assets/navItems/coinmarketIcon.png";
+import chartIcon from "../../assets/navItems/chartIcon.png";
+
+const ROUTE_NAMES = {
+  home: "/",
+  dasboard: "/dashboard",
+  tradingView: "/tradingView",
+  coinMarketCap: "/coinMarketCap",
+};
 
 const SliderNav = ({ location, history }) => {
   const [navState, setNavState] = useState({ expanded: false });
@@ -41,10 +48,7 @@ const SliderNav = ({ location, history }) => {
           onClick={() => setNavState({ expanded: !navState.expanded })}
         />
         <SideNav.Nav defaultSelected="/">
-          <NavItem
-            eventKey=""
-            active={location.pathname === "/" ? true : false}
-          >
+          <NavItem eventKey="" active={location.pathname === "/"}>
             <NavIcon>
               <img src={homeIcon} width="40px" alt="" className="src" />
             </NavIcon>
@@ -54,7 +58,7 @@ const SliderNav = ({ location, history }) => {
           </NavItem>
           <NavItem
             eventKey="dashboard"
-            active={location.pathname === "/Dashboard" ? true : false}
+            active={location.pathname === ROUTE_NAMES.dasboard}
           >
             <NavIcon>
               <img src={logo} width="40px" alt="" className="src" />
@@ -65,7 +69,7 @@ const SliderNav = ({ location, history }) => {
           </NavItem>
           <NavItem
             eventKey="tradingView"
-            active={location.pathname === "/tradingView" ? true : false}
+            active={location.pathname === ROUTE_NAMES.tradingView}
           >
             <NavIcon>
               <img src={chartIcon} width="40px" alt="" className="src" />
@@ -76,7 +80,7 @@ const SliderNav = ({ location, history }) => {
           </NavItem>
           <NavItem
             eventKey="coinMarketCap"
-            active={location.pathname === "/coinMarketCap" ? true : false}
+            active={location.pathname === ROUTE_NAMES.coinMarketCap}
           >
             <NavIcon>
               <img src={coinmarketIcon} width="40px" alt="" className="src" />
@@ -113,7 +117,7 @@ const SliderNavWrapper = styled.div`
   width: 100%;
   height: fit-content;
   .nav-text {
-    margin-left: 70px !important;
+    margin-left: 70px;
   }
   img {
     width: 60%;

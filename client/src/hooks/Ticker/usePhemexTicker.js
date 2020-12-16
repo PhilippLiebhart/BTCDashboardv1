@@ -50,15 +50,18 @@ const usePhemexTicker = () => {
 
     socketRef.current.onmessage = (message) => {
       let tickData = JSON.parse(message.data);
-
       if (tickData?.tick) {
-        setPhemexTickerLastPrice({ ...tickData, last: tickData.tick.last });
+        // setPhemexTickerLastPrice({ ...tickData, last: tickData.tick.last });
       } else if (tickData?.market24h?.symbol === "BTCUSD") {
         setPhemexTickerData({
           ...tickData,
           vol: tickData.market24h?.volume,
           low: tickData.market24h?.low,
           high: tickData.market24h?.high,
+        });
+        setPhemexTickerLastPrice({
+          ...tickData,
+          last: tickData.market24h?.indexPrice,
         });
       } else {
         // console.log("[[!! phemex no matching criteria !!]]");

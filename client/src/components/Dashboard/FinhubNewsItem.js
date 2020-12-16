@@ -24,7 +24,7 @@ const FinhubnewsItem = ({ id, headline, summary, url, time }) => {
           </summary>
           <div className="news-card__content">
             <p>
-              {summary}{" "}
+              {summary}
               <a
                 href={url}
                 className="primary font-weight-bold"
@@ -51,7 +51,6 @@ const NewsItemDate = styled.span`
 
 const FinhubNewsItemWrapper = styled.div`
   padding: 0 16px;
-  //border: 1px solid red;
   margin: 10px 0;
 
   .news-card__header {
@@ -72,7 +71,6 @@ const FinhubNewsItemWrapper = styled.div`
   a {
     right: 16px;
     font-size: 0.7rem;
-    /* position: absolute; */
     float: right;
     margin: 5px;
   }
@@ -99,16 +97,7 @@ const FinhubNewsItemWrapper = styled.div`
       margin-top: 0px;
     }
   }
-  /* details > summary::before {
-    position: absolute;
-    content: "+";
-    left: 0px;
-  }
-  details[open] > summary::after {
-    position: absolute;
-    content: "-";
-    left: 0px;
-  } */
+
   details[open] > summary::before {
     position: absolute;
     content: "";

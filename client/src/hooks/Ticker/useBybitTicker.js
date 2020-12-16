@@ -57,7 +57,6 @@ const useBybitTicker = () => {
           low: tickData.data.low_price_24h_e4,
         });
       } else {
-        // console.log("[[[[bybit no matching message]]]]");
       }
     };
   };

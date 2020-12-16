@@ -17,7 +17,6 @@ const WEBSOCKET_STATUS = {
 const useBinanceTicker = () => {
   const [binanceConnStatus, setBinanceConnStatus] = useState();
   const [binanceTickerData, setBinanceTickerData] = useState({});
-  //console.log("{{{BINANCE TICKER RUNS}}}", binanceConnStatus);
 
   const socketRef = useRef();
 

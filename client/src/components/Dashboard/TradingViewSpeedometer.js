@@ -22,8 +22,6 @@ const TradingViewSpeedometer = () => {
 export default TradingViewSpeedometer;
 
 const Wrapper = styled.div`
-  .tradingview-widget-container {
-  }
   .tradingview-widget-container__widget {
     width: fit-content;
     margin: 0 auto;

@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 import TradingViewWidget, { Themes, BarStyles } from "react-tradingview-widget";
 
-const TradingViewChart = ({ dashboard = false }) => {
+const TradingViewChart = ({ isDashboard = false }) => {
   return (
-    <TradingViewWrapper scaleHeight={dashboard}>
+    <TradingViewWrapper scaleHeight={isDashboard}>
       <div className="container">
         <TradingViewWidget
           symbol="KRAKEN:XBTUSD"

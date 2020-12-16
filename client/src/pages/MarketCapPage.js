@@ -27,16 +27,13 @@ const MarketCapPage = () => {
   }, [coinmarketData]);
 
   const sortByKey = (key) => {
-    console.log("SORT BY KEY", key);
     const list = [...coinsList];
 
     if (sortInfo.direction === "ASC") {
-      console.log("ASC", key);
       list.sort((a, b) => b[key] - a[key]);
       setCoinsList([...list]);
       setSortInfo({ direction: "DESC", key: key });
     } else if (sortInfo.direction === "DESC") {
-      console.log("DESC", key);
       list.sort((a, b) => b[key] - a[key]).reverse();
       setCoinsList([...list]);
       setSortInfo({ direction: "ASC", key: key });
@@ -158,7 +155,7 @@ const MarketCapPageWrapper = styled.div`
   }
 
   tr.row-effect:hover {
-    background-color: var(--DashBgDark) !important;
+    background-color: var(--DashBgDark);
   }
 
   tr.row-effect:hover td {

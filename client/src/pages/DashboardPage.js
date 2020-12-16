@@ -378,7 +378,7 @@ const Dashboardpage = () => {
                 TradingView Chart
               </h6>
             </div>
-            <TradingViewChart dashboard={true} />
+            <TradingViewChart isDashboard={true} />
           </div>
 
           <div

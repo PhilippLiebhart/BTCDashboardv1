@@ -1,15 +1,10 @@
 .item {
   overflow: hidden;
   width: auto;
-  /* height: 136px; */
-  /* padding: 16px; */
   margin: 10px;
-  /* border-radius: 10px; */
   text-align: left;
   align-items: left;
-  /* 
-    background-color: var(--dashWidgetBgDark);
-    color: var(--primary); */
+
   -webkit-box-shadow: 0px 0px 204px -86px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 204px -86px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 204px -86px rgba(0, 0, 0, 0.75);

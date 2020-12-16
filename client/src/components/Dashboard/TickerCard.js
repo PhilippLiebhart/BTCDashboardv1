@@ -52,13 +52,10 @@ const TickerCardWrapper = styled.div`
     text-align: left;
   }
 
-  .col-price {
-  }
-
   .col-right {
-    text-align: left !important;
+    text-align: left;
     @media (max-width: 576px) {
-      text-align: center !important;
+      text-align: center;
     }
   }
 
@@ -69,7 +66,7 @@ const TickerCardWrapper = styled.div`
   hr {
     height: 1px;
     border-color: var(--secondary);
-    width: 100% !important;
+    width: 100%;
     padding: 0;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -96,7 +93,7 @@ const Price = styled.span`
   font-size: 1rem;
   font-weight: 600;
   @media (max-width: 576px) {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
   }
 `;
 
@@ -108,7 +105,6 @@ const Volume = styled.p`
     line-height: 2px;
   }
 `;
-// const Status = styled.span``;
 
 TickerCard.propTypes = {
   name: PropTypes.string,

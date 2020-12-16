@@ -15,10 +15,10 @@ function App() {
       <GlobalStyle />
 
       <Switch>
-        <Route path="/" exact component={Homepage} />
-        <Route path="/Dashboard" exact component={Dashboardpage} />
-        <Route path="/coinMarketCap" exact component={MarketCapPage} />
-        <Route path="/tradingView" exact component={TradingViewChart} />
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/dashboard" component={Dashboardpage} />
+        <Route exact path="/coinMarketCap" component={MarketCapPage} />
+        <Route exact path="/tradingView" component={TradingViewChart} />
         <Route
           path="/tradingViewSpeed"
           exact

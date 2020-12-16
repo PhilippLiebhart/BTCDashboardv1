@@ -5,7 +5,11 @@ import styled from "styled-components";
 const TweetCard = ({ user, userName, text, tweetId, tweetTime }) => {
   return (
     <TweetCardWrapper>
-      <a href={`https://twitter.com/${userName}/status/${tweetId}`} alt="">
+      <a
+        href={`https://twitter.com/${userName}/status/${tweetId}`}
+        alt="Link to tweet"
+        target="blank"
+      >
         <small className="primary font-weight-bold">{user} </small>
         <small className="primary">
           {parseTwitterDate(tweetTime).toString()}
@@ -32,13 +36,13 @@ const TweetCardWrapper = styled.div`
   }
 `;
 
-function parseTwitterDate(tdate) {
-  var system_date = new Date(Date.parse(tdate));
-  var user_date = new Date();
+function parseTwitterDate(tweetDate) {
+  let system_date = new Date(Date.parse(tweetDate));
+  let user_date = new Date();
   if (K.ie) {
-    system_date = Date.parse(tdate.replace(/( \+)/, " UTC$1"));
+    system_date = Date.parse(tweetDate.replace(/( \+)/, " UTC$1"));
   }
-  var diff = Math.floor((user_date - system_date) / 1000);
+  let diff = Math.floor((user_date - system_date) / 1000);
   if (diff <= 1) {
     return "just now";
   }
@@ -75,8 +79,8 @@ function parseTwitterDate(tdate) {
   return "on " + system_date;
 }
 // from http://widgets.twimg.com/j/1/widget.js
-var K = (function () {
-  var a = navigator.userAgent;
+let K = (function () {
+  let a = navigator.userAgent;
   return {
     ie: a.match(/MSIE\s([^;]*)/),
   };

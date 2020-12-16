@@ -1,28 +1,24 @@
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import styled from "styled-components";
 import { DashboardContext } from "../../context/DashboardContext";
 import useCoinmarketCap from "../../hooks/useCoinmarketCap";
 
 const CoinMarketWidget = () => {
   const context = useContext(DashboardContext);
-  const { handleCoinMarketData } = context;
+  const { handleCoinMarketDataContext } = context;
 
   const [coinmarketData] = useCoinmarketCap();
 
   useEffect(() => {
-    const winner24h = coinmarketData?.data?.reduce((p, c) =>
-      p.quote?.USD.percent_change_24h > c.quote?.USD.percent_change_24h ? p : c
-    );
-    const loser24h = coinmarketData?.data?.reduce((p, c) =>
-      p.quote?.USD.percent_change_24h > c.quote?.USD.percent_change_24h ? c : p
-    );
+    setBtc24hDirection(coinmarketData);
+  }, [coinmarketData]);
 
-    if (
-      coinmarketData.data &&
-      coinmarketData.data[0]?.quote.USD.percent_change_24h < 0
-    ) {
-      handleCoinMarketData({
+  const setBtc24hDirection = (coinmarketData) => {
+    const winner24h = get24hWinner(coinmarketData);
+    const loser24h = get24hWLoser(coinmarketData);
+
+    if (isDataAvailable(coinmarketData) < 0) {
+      handleCoinMarketDataContext({
         direction: "down",
         percent24h: coinmarketData.data[0].quote.USD.percent_change_24h.toFixed(
           2
@@ -30,11 +26,8 @@ const CoinMarketWidget = () => {
         winner24h: winner24h,
         loser24h: loser24h,
       });
-    } else if (
-      coinmarketData.data &&
-      coinmarketData.data[0]?.quote.USD.percent_change_24h > 0
-    ) {
-      handleCoinMarketData({
+    } else if (isDataAvailable(coinmarketData) > 0) {
+      handleCoinMarketDataContext({
         direction: "up",
         percent24h: coinmarketData.data[0].quote.USD.percent_change_24h.toFixed(
           2
@@ -43,7 +36,30 @@ const CoinMarketWidget = () => {
         loser24h: loser24h,
       });
     }
-  }, [coinmarketData]);
+  };
+
+  const get24hWinner = (coinmarketData) => {
+    return coinmarketData?.data?.reduce((accumulator, currentValue) =>
+      accumulator.quote?.USD.percent_change_24h >
+      currentValue.quote?.USD.percent_change_24h
+        ? accumulator
+        : currentValue
+    );
+  };
+  const get24hWLoser = (coinmarketData) => {
+    return coinmarketData?.data?.reduce((accumulator, currentValue) =>
+      accumulator.quote?.USD.percent_change_24h >
+      currentValue.quote?.USD.percent_change_24h
+        ? currentValue
+        : accumulator
+    );
+  };
+  const isDataAvailable = (coinmarketData) => {
+    return (
+      coinmarketData.data &&
+      coinmarketData.data[0]?.quote.USD.percent_change_24h
+    );
+  };
 
   return (
     <CoinMarketWrapper>

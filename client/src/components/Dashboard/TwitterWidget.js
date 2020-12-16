@@ -75,7 +75,7 @@ const TimelineWrapper = styled.div`
   hr {
     height: 1px;
     border-color: var(--secondary);
-    width: 95% !important;
+    width: 95%;
     padding: 0;
     border-bottom: none;
     color: var(--secondary);

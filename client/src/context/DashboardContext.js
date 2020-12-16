@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const DashboardContext = React.createContext();
 
@@ -11,13 +10,16 @@ const DashboardContextProvider = (props) => {
     loser24h: "no data",
   });
 
-  const handleCoinMarketData = (props) => {
+  const handleCoinMarketDataContext = (props) => {
     setCoinMarketData({ ...coinMarketData, ...props });
   };
 
   return (
     <DashboardContext.Provider
-      value={{ ...coinMarketData, handleCoinMarketData: handleCoinMarketData }}
+      value={{
+        ...coinMarketData,
+        handleCoinMarketDataContext: handleCoinMarketDataContext,
+      }}
     >
       {props.children}
     </DashboardContext.Provider>

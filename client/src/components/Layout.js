@@ -6,15 +6,13 @@ import SliderNav from "./SliderNav/SliderNav";
 
 function Layout(props) {
   return (
-    <>
-      <LayoutWrapper>
-        <SliderNav />
+    <LayoutWrapper>
+      <SliderNav />
 
-        <main className="main">{props.children}</main>
+      <main className="main">{props.children}</main>
 
-        <Footer />
-      </LayoutWrapper>
-    </>
+      <Footer />
+    </LayoutWrapper>
   );
 }
 

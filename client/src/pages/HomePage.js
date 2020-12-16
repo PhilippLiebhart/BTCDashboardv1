@@ -38,14 +38,11 @@ const HomePageWrapper = styled.div`
   width: 100%;
   margin: 5% auto;
 
-  /* background-color: var(--dashWidgetBgDark); */
   color: var(--primary);
 
   .introCard {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-items: center;
     justify-content: center;
     align-items: center;
 

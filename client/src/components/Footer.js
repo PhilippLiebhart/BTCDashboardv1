@@ -5,30 +5,30 @@ function Footer() {
     <FooterWrapper>
       <footer className="footer">
         <div className="footer-grid">
-          <div className="footer-item">
-            <h6 className="footer-headline">About</h6>
-            <ul className="footer-list">
-              <li className="footer-list-item">Contact Us</li>
-              <li className="footer-list-item">About US</li>
-              <li className="footer-list-item">Stories</li>
-              <li className="footer-list-item">Press</li>
+          <div>
+            <h6>About</h6>
+            <ul>
+              <li>Contact Us</li>
+              <li>About US</li>
+              <li>Stories</li>
+              <li>Press</li>
             </ul>
           </div>
-          <div className="footer-item">
-            <h6 className="footer-headline">Help</h6>
-            <ul className="footer-list">
-              <li className="footer-list-item">FAQ</li>
-              <li className="footer-list-item">How to use</li>
+          <div>
+            <h6>Help</h6>
+            <ul>
+              <li>FAQ</li>
+              <li>How to use</li>
             </ul>
           </div>
 
-          <div className="footer-item">
-            <h6 className="footer-headline">Company</h6>
-            <ul className="footer-list">
-              <li className="footer-list-item">Login</li>
-              <li className="footer-list-item">Register</li>
-              <li className="footer-list-item">Sitemap</li>
-              <li className="footer-list-item">Our Products</li>
+          <div>
+            <h6>Company</h6>
+            <ul>
+              <li>Login</li>
+              <li>Register</li>
+              <li>Sitemap</li>
+              <li>Our Products</li>
             </ul>
           </div>
         </div>
@@ -58,15 +58,15 @@ const FooterWrapper = styled.div`
     margin: 0 auto;
     justify-content: space-evenly;
   }
-  .footer-list {
+  ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .footer-list-item {
+  li {
     margin: 5px 0;
   }
-  .footer-headline {
+  h6 {
     padding: 0;
     margin: 0 0 12px 0;
   }

@@ -42,13 +42,12 @@ const useBitmexTicker = () => {
           low: tickData.data[0].lowPrice,
           high: tickData.data[0].highPrice,
         });
-      } else if (tickData?.data && tickData.data[0]?.fairPrice) {
+      } else if (tickData?.data && tickData.data[0]?.lastPrice) {
         setBitmexTickerLastPrice({
           ...bitmexTickerLastPrice,
-          last: tickData?.data[0]?.fairPrice,
+          last: tickData?.data[0]?.lastPrice,
         });
       } else {
-        // console.log("{{{{{ BITMEX message not matching! }}}}}}");
       }
     };
   };

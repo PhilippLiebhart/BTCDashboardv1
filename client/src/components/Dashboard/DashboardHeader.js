@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 
 import { useEffect, useState, useRef, useContext } from "react";
 import styled, { css } from "styled-components";
-// import chartSample from "../../assets/img/chart-sample.svg";
 import averageSymbol from "../../assets/img/symbol-average.svg";
 import { DashboardContext } from "../../context/DashboardContext";
 import Spinner from "../UI/Spinner";
@@ -90,7 +89,7 @@ const AveragePrice = styled.div`
         `};
 
   color: ${(props) =>
-    props.direction === "up" ? "var(--success)" : "var(--danger)"} !important;
+    props.direction === "up" ? "var(--success)" : "var(--danger)"};
   width: 240px;
   @media (max-width: 576px) {
     width: 130px;
@@ -99,6 +98,8 @@ const AveragePrice = styled.div`
     }
   }
 `;
+
+const breakpoint = "var(--breakpoint-lg)";
 
 const DashboardheaderWrapper = styled.div`
   width: 90%;
