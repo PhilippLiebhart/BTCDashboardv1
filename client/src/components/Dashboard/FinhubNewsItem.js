@@ -71,8 +71,8 @@ const FinhubNewsItemWrapper = styled.div`
   a {
     right: 16px;
     font-size: 0.7rem;
-    float: right;
-    margin: 5px;
+
+    margin: 8px;
   }
   p {
     font-size: 0.8rem;

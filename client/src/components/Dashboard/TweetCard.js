@@ -12,7 +12,7 @@ const TweetCard = ({ user, userName, text, tweetId, tweetTime }) => {
       >
         <small className="primary font-weight-bold">{user} </small>
         <small className="primary">
-          {parseTwitterDate(tweetTime).toString()}
+          {twitterTimeAgo(tweetTime).toString()}
         </small>
 
         <p className="pm-0">{text}</p>
@@ -36,10 +36,10 @@ const TweetCardWrapper = styled.div`
   }
 `;
 
-function parseTwitterDate(tweetDate) {
+function twitterTimeAgo(tweetDate) {
   let system_date = new Date(Date.parse(tweetDate));
   let user_date = new Date();
-  if (K.ie) {
+  if (detectBrowserSetting.matchedSettings) {
     system_date = Date.parse(tweetDate.replace(/( \+)/, " UTC$1"));
   }
   let diff = Math.floor((user_date - system_date) / 1000);
@@ -78,11 +78,10 @@ function parseTwitterDate(tweetDate) {
   }
   return "on " + system_date;
 }
-// from http://widgets.twimg.com/j/1/widget.js
-let K = (function () {
-  let a = navigator.userAgent;
+let detectBrowserSetting = (function () {
+  let userAgent = navigator.userAgent;
   return {
-    ie: a.match(/MSIE\s([^;]*)/),
+    matchedSettings: userAgent.match(/MSIE\s([^;]*)/),
   };
 })();
 

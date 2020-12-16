@@ -14,12 +14,6 @@ const MARKET24HTICK_CONFIG = {
   id: 12345,
 };
 
-// const ORDERBOOK_CONFIG = {
-//   id: 123456,
-//   method: "orderbook.subscribe",
-//   params: ["BTCUSD"],
-// };
-
 const HEARTBEAT = {
   id: 123456,
   method: "server.ping",
@@ -51,7 +45,6 @@ const usePhemexTicker = () => {
     socketRef.current.onmessage = (message) => {
       let tickData = JSON.parse(message.data);
       if (tickData?.tick) {
-        // setPhemexTickerLastPrice({ ...tickData, last: tickData.tick.last });
       } else if (tickData?.market24h?.symbol === "BTCUSD") {
         setPhemexTickerData({
           ...tickData,

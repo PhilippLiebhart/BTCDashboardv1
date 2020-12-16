@@ -35,21 +35,13 @@ const useBybitTicker = () => {
 
     socketRef.current.onmessage = (message) => {
       let tickData = JSON.parse(message.data);
-      if (
-        tickData?.type === "delta" &&
-        tickData?.data?.update &&
-        tickData.data.update[0]?.index_price_e4
-      ) {
+
+      if (hasDeltaUpdateAndIndexPrice(tickData)) {
         setBybitTickerLastPrice({
           ...bybitTickerLastPrice,
           last: tickData.data.update[0]?.index_price_e4,
         });
-      } else if (
-        tickData.type === "snapshot" &&
-        tickData.data?.volume_24h &&
-        tickData.data.high_price_24h_e4 &&
-        tickData.data.low_price_24h_e4
-      ) {
+      } else if (hasSnapshot(tickData)) {
         setBybitTickerData({
           ...bybitTickerData,
           vol: tickData.data.volume_24h,
@@ -72,6 +64,23 @@ const useBybitTicker = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const hasDeltaUpdateAndIndexPrice = (tickData) => {
+    return (
+      tickData?.type === "delta" &&
+      tickData?.data?.update &&
+      tickData.data.update[0]?.index_price_e4
+    );
+  };
+
+  const hasSnapshot = (tickData) => {
+    return (
+      tickData.type === "snapshot" &&
+      tickData.data?.volume_24h &&
+      tickData.data.high_price_24h_e4 &&
+      tickData.data.low_price_24h_e4
+    );
+  };
 
   return [bybitTickerData, bybitTickerLastPrice, bybitConnStatus];
 };

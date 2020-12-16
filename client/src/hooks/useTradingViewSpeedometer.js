@@ -21,9 +21,9 @@ const useTradingViewSpeedometer = (url) => {
     script.innerHTML = JSON.stringify(INPUT_OBJ);
     widgetDiv.appendChild(script);
 
-    // return () => {
-    //   widgetDiv.removeChild(script);
-    // };
+    return () => {
+      widgetDiv.remove(script);
+    };
   }, [url]);
 };
 
