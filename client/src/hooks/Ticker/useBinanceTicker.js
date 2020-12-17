@@ -42,9 +42,7 @@ const useBinanceTicker = () => {
     };
   };
 
-  useEffect(() => {
-    wsInit();
-  }, []);
+  useEffect(wsInit, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return [binanceTickerData, binanceConnStatus];
 };

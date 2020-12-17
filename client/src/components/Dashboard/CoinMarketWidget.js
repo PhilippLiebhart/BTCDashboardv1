@@ -9,11 +9,7 @@ const CoinMarketWidget = () => {
 
   const [coinmarketData] = useCoinmarketCap();
 
-  useEffect(() => {
-    setBtc24hDirection(coinmarketData);
-  }, [coinmarketData]);
-
-  const setBtc24hDirection = (coinmarketData) => {
+  const handleBtc24hDirection = (coinmarketData) => {
     const winner24h = get24hWinner(coinmarketData);
     const loser24h = get24hWLoser(coinmarketData);
 
@@ -37,6 +33,10 @@ const CoinMarketWidget = () => {
       });
     }
   };
+
+  useEffect(() => {
+    handleBtc24hDirection(coinmarketData);
+  }, [coinmarketData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const get24hWinner = (coinmarketData) => {
     return coinmarketData?.data?.reduce((accumulator, currentValue) =>

@@ -13,23 +13,17 @@ const TICK_CONFIG = {
 //   id: 12345,
 // };
 
-// const ORDERBOOK_CONFIG = {
+// const HEARTBEAT = {
 //   id: 123456,
-//   method: "orderbook.subscribe",
-//   params: ["BTCUSD"],
+//   method: "server.ping",
+//   params: [],
 // };
 
-const HEARTBEAT = {
-  id: 123456,
-  method: "server.ping",
-  params: [],
-};
-
-const WEBSOCKET_STATUS = {
-  1: "green",
-  2: "red",
-  3: "yellow",
-};
+// const WEBSOCKET_STATUS = {
+//   1: "green",
+//   2: "red",
+//   3: "yellow",
+// };
 
 const useHuobiTicker = () => {
   // const [huobiConnStatus, setHuobiConnStatus] = useState();
@@ -53,14 +47,16 @@ const useHuobiTicker = () => {
     socketRef.current.onmessage = (message) => {
       let tickData = message.data;
       // socketRef.current.send(message);
-      console.log("################## HUOBI:::", tickData);
-
+      // console.log("tickData", tickData);
       var reader = new FileReader();
+
       reader.addEventListener("loadend", function () {
         // reader.result contains the contents of blob as a typed array
         console.log("READDER RESULT:", reader.result);
+        // var readFile = reader.readAsText(file);
       });
-      reader.readAsText(tickData);
+      // reader.readAsText(file);
+      // console.log("---------------", reader.result);
     };
   };
 

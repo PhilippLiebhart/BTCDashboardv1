@@ -35,5 +35,5 @@ const TradingViewWrapper = styled.div`
 export default TradingViewChart;
 
 TradingViewChart.propTypes = {
-  dashboard: PropTypes.bool.isRequired,
+  dashboard: PropTypes.bool,
 };

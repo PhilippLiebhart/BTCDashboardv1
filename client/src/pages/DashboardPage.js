@@ -14,25 +14,26 @@ import FearAndGreedIndex from "../components/Dashboard/FearAndGreedIndex";
 import FinHubNewsWidget from "../components/Dashboard/FinHubNewsWidget";
 import TickerCard from "../components/Dashboard/TickerCard";
 import CoinMarketWidget from "../components/Dashboard/CoinMarketWidget";
+import TradingViewChart from "../components/Dashboard/TradingViewChart";
+import TradingViewSpeedometer from "../components/Dashboard/TradingViewSpeedometer";
+import DisplaySettingsMenu from "../components/Dashboard/DisplaySettingsMenu";
 
 import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
 import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
-import TradingViewChart from "../components/Dashboard/TradingViewChart";
-import TradingViewSpeedometer from "../components/Dashboard/TradingViewSpeedometer";
 import useHuobiTicker from "../hooks/Ticker/useHuobiTicker";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layoutLG = [
-  { i: "bitmexTicker", x: 0, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "binanceTicker", x: 3, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "phemexTicker", x: 6, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "bybitTicker", x: 9, y: 0, w: 3, h: 1, minW: 3, maxW: 4, maxH: 1 },
-  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
-  { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1 },
-  { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1 },
+  { i: "bitmexTicker", x: 0, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "binanceTicker", x: 3, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "phemexTicker", x: 6, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "bybitTicker", x: 9, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, maxH: 1, minW: 2 },
+  { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1, minW: 3 },
+  { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1, minW: 2 },
   { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
   { i: "tradingView", x: 0, y: 10, w: 11, h: 4, minH: 4, minW: 4 },
   {
@@ -41,7 +42,7 @@ const layoutLG = [
     y: 2,
     w: 3,
     h: 3,
-    minH: 2,
+    minH: 3,
     maxH: 3,
     maxW: 3,
     minW: 3,
@@ -56,7 +57,7 @@ const layoutMD = [
   { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
   { i: "NewsFeed", x: 0, y: 6, w: 4, h: 3, minH: 1 },
   { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
-  { i: "coinMarket", x: 10, y: 0, w: 2, h: 3, minH: 2, minW: 4, maxH: 3 },
+  { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
   { i: "tradingView", x: 0, y: 7, w: 4, h: 4, minH: 4, minW: 4 },
   {
     i: "tradingViewSpeedometer",
@@ -72,23 +73,32 @@ const layoutMD = [
 ];
 
 const layoutXS = [
-  { i: "bitmexTicker", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "binanceTicker", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "phemexTicker", x: 0, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "bybitTicker", x: 2, y: 0, w: 1, h: 1, minW: 1, maxW: 1, maxH: 1 },
-  { i: "NewsFeed", x: 0, y: 0, w: 2, h: 3, minH: 1 },
-  { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
-  { i: "feargreed", x: 0, y: 0, w: 1, h: 1, minH: 1, minW: 2 },
-  { i: "coinMarket", x: 0, y: 0, w: 2, h: 2, minH: 6, minW: 6 },
-  { i: "tradingView", x: 0, y: 0, w: 14, h: 4, minH: 6, minW: 6 },
+  { i: "bitmexTicker", x: 0, y: 0, w: 1, h: 1, maxH: 1 },
+  { i: "binanceTicker", x: 2, y: 0, w: 1, h: 1, maxH: 1 },
+  { i: "phemexTicker", x: 0, y: 0, w: 1, h: 1, maxH: 1 },
+  { i: "bybitTicker", x: 2, y: 0, w: 1, h: 1, maxH: 1 },
+  { i: "NewsFeed", x: 0, y: 0, w: 12, h: 3, minH: 1 },
+  { i: "twitter", x: 0, y: 0, w: 12, h: 3, minH: 1 },
+  { i: "feargreed", x: 0, y: 0, w: 1, h: 1, maxW: 12, maxH: 1 },
+  {
+    i: "coinMarket",
+    x: 0,
+    y: 0,
+    w: 11,
+    h: 3,
+    minH: 3,
+    maxW: 12,
+    minW: 12,
+    maxH: 3,
+  },
+  { i: "tradingView", x: 0, y: 0, w: 12, h: 4, minH: 2 },
   {
     i: "tradingViewSpeedometer",
-    x: 10,
+    x: 0,
     y: 0,
-    w: 4,
+    w: 12,
     h: 3,
     minH: 2,
-    minW: 4,
     maxH: 3,
   },
 ];
@@ -158,7 +168,7 @@ const Dashboardpage = () => {
         4
       ).toFixed(2)
     );
-  }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]);
+  }, [phemexTickerData, bybitTickerData, binanceTickerData, bitmexTickerData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onLayoutChange = (currentLayout, allLayouts) => {
     setLayoutState({ ...layoutState, layouts: allLayouts });
@@ -196,27 +206,13 @@ const Dashboardpage = () => {
 
         <DashboardHeader averagePrice={averagePrice} />
 
-        <DashboardFilter>
-          <button
-            onClick={() =>
-              saveToLS("displaySettings", displaySettings, "settings")
-            }
-          >
-            SAVE settings
-          </button>
-          {Object.entries(displaySettings).map(([key, val]) => {
-            return (
-              <DisplayButton
-                key={key}
-                display={!val}
-                onClick={() => handleDisplaySettings(key)}
-                className="widget--base"
-              >
-                {key}
-              </DisplayButton>
-            );
-          })}
-        </DashboardFilter>
+        <DisplaySettingsMenu
+          saveToLs={() =>
+            saveToLS("displaySettings", displaySettings, "settings")
+          }
+          displaySettings={originalDisplaySettings}
+          handleDisplaySettings={(itemKey) => handleDisplaySettings(itemKey)}
+        />
 
         <ResponsiveGridLayout
           rowHeight={135}
@@ -411,37 +407,11 @@ const DashboardWrapper = styled.div`
   );
 `;
 
-const DashboardFilter = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  width: fit-content;
-  font-size: 0.8rem !important;
-`;
-
-const DisplayButton = styled.button`
-  display: flex;
-
-  font-size: 0.8rem !important;
-  margin: 4px;
-  color: ${(props) =>
-    props.display ? "var(--dashWidgetBgDark)" : "var(--secondary)"};
-  border: 1px solid var(--primary);
-  background-color: ${(props) =>
-    props.display ? "var(--primary)" : "var(--dashWidgetBgDark)"};
-
-  :focus {
-    outline: 0;
-  }
-`;
-
 function getFromLS(key, mainKey) {
   let ls = {};
   if (global.localStorage) {
     try {
       ls = JSON.parse(global.localStorage.getItem(mainKey)) || {};
-      console.log("getFromLS", ls);
     } catch (e) {
       console.warn("getFromLs ERROR:");
     }

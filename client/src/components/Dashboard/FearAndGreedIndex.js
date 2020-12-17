@@ -6,10 +6,6 @@ import useFearAndGreedIndex from "../../hooks/useFearAndGreedIndex";
 const FearAndGreedIndex = () => {
   const [fearAndGreedIndex] = useFearAndGreedIndex();
 
-  const time = new Date(fearAndGreedIndex.timestamp * 1000).toLocaleDateString(
-    "en-US"
-  );
-
   const greedCard = (
     <div className="grid">
       <h4 className="primary pm-0">{fearAndGreedIndex.value} / 100</h4>

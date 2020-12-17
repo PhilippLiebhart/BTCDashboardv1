@@ -4,6 +4,16 @@ import Spinner from "../components/UI/Spinner";
 
 import useCoinmarketCap from "../hooks/useCoinmarketCap";
 
+const LIST_KEYS = {
+  name: "name",
+  dateAdded: "date_added",
+  change1h: "percent_change_1h",
+  change24h: "percent_change_24h",
+  chnage7d: "percent_change_7d",
+  symbol: "symbol",
+  rank: "cmc_rank",
+};
+
 const MarketCapPage = () => {
   const [coinmarketData] = useCoinmarketCap();
 
@@ -26,92 +36,80 @@ const MarketCapPage = () => {
     setCoinsList(transformedArray);
   }, [coinmarketData]);
 
-  const sortByKey = (key) => {
-    const list = [...coinsList];
+  const sortByNumber = (key) => {
+    const sortedList = [...coinsList];
 
     if (sortInfo.direction === "ASC") {
-      list.sort((a, b) => b[key] - a[key]);
-      setCoinsList([...list]);
-      setSortInfo({ direction: "DESC", key: key });
+      sortedList.sort((a, b) => b[key] - a[key]);
+
+      setListsHandler("DESC", key, sortedList);
     } else if (sortInfo.direction === "DESC") {
-      list.sort((a, b) => b[key] - a[key]).reverse();
-      setCoinsList([...list]);
-      setSortInfo({ direction: "ASC", key: key });
+      sortedList.sort((a, b) => b[key] - a[key]).reverse();
+
+      setListsHandler("ASC", key, sortedList);
     } else {
       return;
     }
   };
 
-  const sortByDate = (key) => {
-    const list = [...coinsList];
+  const sortByString = (key) => {
+    const sortedList = [...coinsList];
 
     if (sortInfo.direction === "ASC") {
-      list.sort((a, b) => new Date(b[key]) - new Date(a[key]));
-      setCoinsList([...list]);
-      setSortInfo({ direction: "DESC", key: key });
+      sortedList.sort((stringA, stringB) =>
+        stringA[key].localeCompare(stringB[key])
+      );
+
+      setListsHandler("DESC", key, sortedList);
     } else if (sortInfo.direction === "DESC") {
-      list.sort((a, b) => new Date(b[key]) - new Date(a[key])).reverse();
-      setCoinsList([...list]);
-      setSortInfo({ direction: "ASC", key: key });
+      sortedList.sort((stringA, stringB) =>
+        stringB[key].localeCompare(stringA[key])
+      );
+
+      setListsHandler("ASC", key, sortedList);
+    }
+  };
+
+  const sortByDate = (key) => {
+    const sortedList = [...coinsList];
+
+    if (sortInfo.direction === "ASC") {
+      sortedList.sort(
+        (dateA, dateB) => new Date(dateB[key]) - new Date(dateA[key])
+      );
+
+      setListsHandler("DESC", key, sortedList);
+    } else if (sortInfo.direction === "DESC") {
+      sortedList
+        .sort((dateA, dateB) => new Date(dateB[key]) - new Date(dateA[key]))
+        .reverse();
+      setListsHandler("ASC", key, sortedList);
     } else {
       console.log("NOTHING");
     }
-
-    setCoinsList([...list]);
   };
 
-  const sortHandler = (action) => {
-    switch (action) {
-      case "NAME":
-        const nameKey = "name";
-        sortByKey(nameKey);
-        // list.sort((a, b) => a.name.localeCompare(b.name));
-        // setCoinsList([...list]);
-
-        break;
-      case "SYMBOL":
-        const symbolKey = "symbol";
-        sortByKey(symbolKey);
-
-        break;
-
-      case "PERCENT1h":
-        const percent1hKey = "percent_change_1h";
-        sortByKey(percent1hKey);
-
-        break;
-      case "PERCENT24h":
-        const percent24Key = "percent_change_24h";
-        sortByKey(percent24Key);
-        break;
-
-      case "PERCENT7d":
-        const percent7dKey = "percent_change_7d";
-        sortByKey(percent7dKey);
-
-        break;
-      case "DATE_ADDED":
-        const dateKey = "date_added";
-        sortByDate(dateKey);
-        break;
-
-      default:
-        break;
-    }
+  const setListsHandler = (direction, key, sortedList) => {
+    setSortInfo({ direction: direction, key: key });
+    setCoinsList([...sortedList]);
   };
+
+  console.log("-------------------------", coinmarketData);
 
   return (
     <MarketCapPageWrapper>
       <table className="coinMarketTable">
         <thead>
           <tr>
-            <th>Place</th>
-            <th onClick={() => sortHandler("NAME")}>Name</th>
-            <th onClick={() => sortHandler("SYMBOL")}>symbol</th>
-            <th onClick={() => sortHandler("PERCENT1h")}>1h change</th>
-            <th onClick={() => sortHandler("PERCENT24h")}>24h change</th>
-            <th onClick={() => sortHandler("PERCENT7d")}>7d change</th>
-            <th onClick={() => sortHandler("DATE_ADDED")}>Date added</th>
+            <th onClick={() => sortByNumber(LIST_KEYS.rank)}>Place</th>
+            <th onClick={() => sortByString(LIST_KEYS.name)}>Name</th>
+            <th onClick={() => sortByString(LIST_KEYS.symbol)}>symbol</th>
+            <th onClick={() => sortByNumber(LIST_KEYS.change1h)}>1h change</th>
+            <th onClick={() => sortByNumber(LIST_KEYS.change24h)}>
+              24h change
+            </th>
+            <th onClick={() => sortByNumber(LIST_KEYS.chnage7d)}>7d change</th>
+            <th onClick={() => sortByDate(LIST_KEYS.dateAdded)}>Date added</th>
           </tr>
         </thead>
         <tbody className="tbody">
@@ -122,7 +120,7 @@ const MarketCapPage = () => {
                   up={coin.quote.USD.percent_change_24h > 0}
                   className="row-effect"
                 >
-                  <td>{index + 1}</td>
+                  <td>{coin.cmc_rank}</td>
                   <td>{coin.name}</td>
                   <td>{coin.symbol}</td>
                   <td>{coin.quote.USD.percent_change_1h.toFixed(2)} %</td>

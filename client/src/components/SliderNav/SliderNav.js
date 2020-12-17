@@ -1,12 +1,10 @@
 import { withRouter } from "react-router-dom";
 
 import SideNav, {
-  Toggle,
-  Nav,
   NavItem,
   NavIcon,
   NavText,
-  ClickOutside,
+  // ClickOutside,
 } from "@trendmicro/react-sidenav";
 
 import styled from "styled-components";
@@ -20,6 +18,8 @@ import homeIcon from "../../assets/navItems/homeIcon.png";
 import settingsIcon from "../../assets/navItems/settingsIcon.png";
 import coinmarketIcon from "../../assets/navItems/coinmarketIcon.png";
 import chartIcon from "../../assets/navItems/chartIcon.png";
+
+//todo click outside
 
 const ROUTE_NAMES = {
   home: "/",

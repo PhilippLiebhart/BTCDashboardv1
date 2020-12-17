@@ -23,7 +23,7 @@ const Dashboardheader = ({ averagePrice }) => {
     } else if (lastAveragePrice > tickDirectionRef.current) {
       setAveragePriceDirection("down");
     }
-  }, [averagePrice]);
+  }, [averagePrice, lastAveragePrice]);
 
   return (
     <DashboardheaderWrapper>
@@ -98,8 +98,6 @@ const AveragePrice = styled.div`
     }
   }
 `;
-
-const breakpoint = "var(--breakpoint-lg)";
 
 const DashboardheaderWrapper = styled.div`
   width: 90%;
