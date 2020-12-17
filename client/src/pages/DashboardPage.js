@@ -210,7 +210,7 @@ const Dashboardpage = () => {
           saveToLs={() =>
             saveToLS("displaySettings", displaySettings, "settings")
           }
-          displaySettings={originalDisplaySettings}
+          displaySettings={displaySettings}
           handleDisplaySettings={(itemKey) => handleDisplaySettings(itemKey)}
         />
 
