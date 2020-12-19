@@ -10,7 +10,35 @@ const app = express();
 const port = 4000;
 
 app.use(morgan("dev"));
-app.use(cors());
+
+// ** MIDDLEWARE ** //
+const whitelist = [
+  "http://localhost:4000",
+  "https://shrouded-journey-38552.heroku",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin);
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable");
+      callback(null, true);
+    } else {
+      console.log("Origin rejected");
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
+
+const path = require("path");
+
+// Serve any static files
+app.use(express.static(path.join(__dirname, "../client/build")));
+// Handle React routing, return all requests to React app
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 mongoDB
   .connectDatabase()

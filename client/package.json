@@ -23,6 +23,7 @@
     "react-twitter-widgets": "^1.9.5",
     "web-vitals": "^0.2.4"
   },
+  "proxy": "http://localhost:4000",  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
