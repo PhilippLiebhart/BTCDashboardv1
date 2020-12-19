@@ -6,6 +6,7 @@
   "author": "Philos <philipp@philipp-liebhart.de>",
   "license": "MIT",
   "scripts": {
+    "heroku-postbuild": "cd client && yarn && yarn --only=dev --no-shrinkwrap && yarn run build",
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
