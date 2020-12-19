@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 // ** MIDDLEWARE ** //
 const whitelist = [
   "http://localhost:4000",
-  "https://shrouded-journey-38552.heroku",
+  "https://blooming-tor-11009.herokuapp.com/",
 ];
 
 const corsOptions = {
