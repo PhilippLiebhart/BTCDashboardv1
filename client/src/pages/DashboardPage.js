@@ -50,24 +50,24 @@ const layoutLG = [
 ];
 
 const layoutMD = [
-  { i: "bitmexTicker", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "binanceTicker", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "phemexTicker", x: 6, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "bybitTicker", x: 9, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
-  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, minW: 3 },
-  { i: "NewsFeed", x: 0, y: 6, w: 4, h: 3, minH: 1 },
-  { i: "twitter", x: 0, y: 0, w: 2, h: 3, minH: 1 },
-  { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
-  { i: "tradingView", x: 0, y: 7, w: 4, h: 4, minH: 4, minW: 4 },
+  { i: "bitmexTicker", x: 0, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "binanceTicker", x: 2, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "phemexTicker", x: 4, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "bybitTicker", x: 6, y: 0, w: 2, h: 1, minW: 2, maxW: 4, maxH: 1 },
+  { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, maxH: 1, minW: 2 },
+  { i: "NewsFeed", x: 0, y: 0, w: 4, h: 3, minH: 1, minW: 3 },
+  { i: "twitter", x: 0, y: 0, w: 4, h: 3, minH: 1, minW: 2 },
+  { i: "coinMarket", x: 10, y: 3, w: 2, h: 3, minH: 2, minW: 2, maxH: 3 },
+  { i: "tradingView", x: 0, y: 10, w: 4, h: 4, minH: 4, minW: 4 },
   {
     i: "tradingViewSpeedometer",
-    x: 2,
-    y: 2,
+    x: 11,
+    y: 0,
     w: 2,
     h: 3,
-    minH: 2,
+    minH: 3,
     maxH: 3,
-    maxW: 3,
+    maxW: 2,
     minW: 3,
   },
 ];
@@ -192,17 +192,20 @@ const Dashboardpage = () => {
   };
 
   const handleDisplaySettings = (itemKey) => {
-    console.log("KEY", itemKey);
     setDisplaySettings({
       ...displaySettings,
       [itemKey]: !displaySettings[itemKey],
     });
   };
 
+  useEffect(() => {
+    saveToLS("displaySettings", displaySettings, "settings");
+  }, [displaySettings]);
+
   return (
     <>
       <DashboardWrapper direction={coinMarketData.direction}>
-        <button onClick={() => resetLayout()}>Reset Layout</button>
+        {/* <button onClick={() => resetLayout()}>Reset Layout</button> */}
 
         <DashboardHeader averagePrice={averagePrice} />
 

@@ -47,8 +47,6 @@ const MarketCapPage = () => {
       sortedList.sort((a, b) => b[key] - a[key]).reverse();
 
       setListsHandler("ASC", key, sortedList);
-    } else {
-      return;
     }
   };
 
@@ -84,8 +82,6 @@ const MarketCapPage = () => {
         .sort((dateA, dateB) => new Date(dateB[key]) - new Date(dateA[key]))
         .reverse();
       setListsHandler("ASC", key, sortedList);
-    } else {
-      console.log("NOTHING");
     }
   };
 
@@ -93,8 +89,6 @@ const MarketCapPage = () => {
     setSortInfo({ direction: direction, key: key });
     setCoinsList([...sortedList]);
   };
-
-  console.log("-------------------------", coinmarketData);
 
   return (
     <MarketCapPageWrapper>

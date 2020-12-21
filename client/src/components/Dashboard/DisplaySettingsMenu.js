@@ -7,7 +7,6 @@ const DisplaySettingsMenu = ({
 }) => {
   return (
     <DashboardFilter>
-      <button onClick={saveToLs}>SAVE settings</button>
       {Object.entries(displaySettings).map(([key, val]) => {
         return (
           <DisplayButton
@@ -46,6 +45,18 @@ const DisplayButton = styled.button`
 
   :focus {
     outline: 0;
+  }
+`;
+
+const Button = styled.button`
+  background-color: var(--primary);
+  border-radius: 10px;
+  border: 1px solid var(--secondary);
+  outline: 0;
+
+  :active {
+    background-color: var(--dashWidgetBgDark);
+    color: white;
   }
 `;
 
