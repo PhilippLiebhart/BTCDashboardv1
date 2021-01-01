@@ -215,6 +215,7 @@ const Dashboardpage = () => {
           }
           displaySettings={displaySettings}
           handleDisplaySettings={(itemKey) => handleDisplaySettings(itemKey)}
+          reset={() => resetLayout()}
         />
 
         <ResponsiveGridLayout
