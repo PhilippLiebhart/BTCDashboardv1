@@ -22,7 +22,7 @@ import chartIcon from "../../../assets/navItems/chartIcon.png";
 //todo click outside
 
 const ROUTE_NAMES = {
-  home: "/",
+  home: "/home",
   dasboard: "/dashboard",
   tradingView: "/tradingView",
   coinMarketCap: "/coinMarketCap",

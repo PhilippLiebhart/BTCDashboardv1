@@ -3,24 +3,30 @@ import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/img/logo.svg";
 import homeIcon from "../../assets/navItems/homeIcon.png";
-import settingsIcon from "../../assets/navItems/settingsIcon.png";
 import coinmarketIcon from "../../assets/navItems/coinmarketIcon.png";
 import chartIcon from "../../assets/navItems/chartIcon.png";
+
+const ROUTE_NAMES = {
+  home: "/home",
+  dasboard: "/dashboard",
+  tradingView: "/tradingView",
+  coinMarketCap: "/coinMarketCap",
+};
 
 const MobileNav = (props) => {
   return (
     <>
       <MobileNavWrapper className="widget--base">
-        <NavLink to="/">
+        <NavLink to={ROUTE_NAMES.home} activeClassName="activeLink">
           <img src={homeIcon} width="40px" alt="" className="src" />
         </NavLink>
-        <NavLink to="dashboard">
+        <NavLink to={ROUTE_NAMES.dasboard} activeClassName="activeLink">
           <img src={logo} width="40px" alt="" className="src" />
         </NavLink>
-        <NavLink to="tradingView">
+        <NavLink to={ROUTE_NAMES.tradingView} activeClassName="activeLink">
           <img src={chartIcon} width="40px" alt="" className="src" />
         </NavLink>
-        <NavLink to="coinMarketCap">
+        <NavLink to={ROUTE_NAMES.coinMarketCap} activeClassName="activeLink">
           <img src={coinmarketIcon} width="40px" alt="" className="src" />
         </NavLink>
       </MobileNavWrapper>
@@ -34,11 +40,12 @@ const MobileNavWrapper = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-evenly;
+
   align-items: center;
   width: 100%;
 
-  height: 65px;
-  padding: 5px;
+  height: fit-content;
+  padding: 0;
 
   border-radius: 30px 30px 0 0;
   box-shadow: 0px -0px 30px rgba(0, 0, 0, 0.3);
@@ -46,4 +53,11 @@ const MobileNavWrapper = styled.div`
   bottom: 0%;
 
   background-color: var(--dashBgDark);
+
+  img {
+    padding: 15px 10px 10px 10px;
+  }
+  .activeLink {
+    box-shadow: inset 0px -0px 30px rgba(0, 0, 0, 0.2);
+  }
 `;

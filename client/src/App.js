@@ -11,7 +11,7 @@ import TradingViewSpeedometer from "./components/Dashboard/TradingViewSpeedomete
 import BTCDash404Page from "./pages/BTCDash404Page";
 
 const ROUTES = {
-  home: "/",
+  home: "/home",
   dashboard: "/dashboard",
   coinMarketCap: "/coinMarketCap",
   tradingView: "/tradingView",
