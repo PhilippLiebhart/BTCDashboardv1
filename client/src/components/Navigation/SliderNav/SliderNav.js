@@ -13,11 +13,11 @@ import styled from "styled-components";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import { useState } from "react";
 
-import logo from "../../assets/img/logo.svg";
-import homeIcon from "../../assets/navItems/homeIcon.png";
-import settingsIcon from "../../assets/navItems/settingsIcon.png";
-import coinmarketIcon from "../../assets/navItems/coinmarketIcon.png";
-import chartIcon from "../../assets/navItems/chartIcon.png";
+import logo from "../../../assets/img/logo.svg";
+import homeIcon from "../../../assets/navItems/homeIcon.png";
+import settingsIcon from "../../../assets/navItems/settingsIcon.png";
+import coinmarketIcon from "../../../assets/navItems/coinmarketIcon.png";
+import chartIcon from "../../../assets/navItems/chartIcon.png";
 
 //todo click outside
 

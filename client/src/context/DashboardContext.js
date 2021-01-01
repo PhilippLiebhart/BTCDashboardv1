@@ -10,6 +10,14 @@ const DashboardContextProvider = (props) => {
     loser24h: "no data",
   });
 
+  const [layoutStatus, setLayoutStatus] = useState({
+    breakpoint: "lg",
+  });
+
+  const handleLayoutChange = (props) => {
+    setLayoutStatus({ breakpoint: props.breakpoint });
+  };
+
   const handleCoinMarketDataContext = (props) => {
     setCoinMarketData({ ...coinMarketData, ...props });
   };
@@ -18,7 +26,9 @@ const DashboardContextProvider = (props) => {
     <DashboardContext.Provider
       value={{
         ...coinMarketData,
+        ...layoutStatus,
         handleCoinMarketDataContext: handleCoinMarketDataContext,
+        handleLayoutChange: handleLayoutChange,
       }}
     >
       {props.children}

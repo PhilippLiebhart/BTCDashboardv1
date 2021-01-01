@@ -127,7 +127,8 @@ const originalDisplaySettings =
   getFromLS("displaySettings", "settings") || baseDisplaySettings;
 
 const Dashboardpage = () => {
-  const coinMarketData = useContext(DashboardContext);
+  const dashboardContext = useContext(DashboardContext);
+  const { handleLayoutChange } = dashboardContext;
 
   const [
     phemexTickerLastPrice,
@@ -181,7 +182,8 @@ const Dashboardpage = () => {
 
   const onBreakpointChange = (breakpoint) => {
     layoutState.currentBreakpoint = breakpoint;
-
+    console.log("CURRENT LAYOUT", breakpoint);
+    handleLayoutChange({ breakpoint: breakpoint });
     setLayoutState(layoutState);
   };
 
@@ -204,7 +206,7 @@ const Dashboardpage = () => {
 
   return (
     <>
-      <DashboardWrapper direction={coinMarketData.direction}>
+      <DashboardWrapper direction={dashboardContext.direction}>
         {/* <button onClick={() => resetLayout()}>Reset Layout</button> */}
 
         <DashboardHeader averagePrice={averagePrice} />
