@@ -105,46 +105,46 @@ const DashboardheaderWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
   padding: 5px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: stretch;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
   align-items: center;
   margin-bottom: 0px;
   margin-top: 0px;
   /* height: 100px; */
+  @media (max-width: 1022px) {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    justify-items: center;
+    text-align: center;
+  }
 
   h1 {
     text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
     margin: 0;
     margin-bottom: 10px;
+    font-size: 2.3rem;
     /* @media (max-width: 700px) {
       font-size: 1.2rem;
     } */
+    display: inline;
   }
 
-  h3 {
-    font-size: 1.3rem;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
-    @media (max-width: 830px) {
-      font-size: 0.8rem;
-    }
+ 
   }
 
   .header__item {
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 300px;
+    justify-self: center;
+   
+
 
     img {
       display: inline;
       margin-right: 12px;
-      padding-top: 2px;
+      /* 
+      padding-top: 2px; */
       width: 25px;
     }
     @media (max-width: 700px) {
@@ -152,6 +152,15 @@ const DashboardheaderWrapper = styled.div`
       img {
         width: 15px;
       }
+    }
+
+    h3 {
+
+    font-size: 1rem;
+
+    text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
+    @media (max-width: 830px) {
+      font-size: 0.8rem;
     }
   }
 `;

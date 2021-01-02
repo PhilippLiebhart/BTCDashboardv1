@@ -32,10 +32,10 @@ const layoutLG = [
   { i: "phemexTicker", x: 6, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
   { i: "bybitTicker", x: 9, y: 0, w: 3, h: 1, minW: 2, maxW: 4, maxH: 1 },
   { i: "feargreed", x: 12, y: 0, w: 2, h: 1, minH: 1, maxH: 1, minW: 2 },
-  { i: "NewsFeed", x: 0, y: 0, w: 6, h: 3, minH: 1, minW: 3 },
-  { i: "twitter", x: 6, y: 0, w: 4, h: 3, minH: 1, minW: 2 },
-  { i: "coinMarket", x: 10, y: 0, w: 4, h: 3, minH: 2, minW: 4, maxH: 3 },
-  { i: "tradingView", x: 0, y: 10, w: 11, h: 4, minH: 4, minW: 4 },
+  { i: "NewsFeed", x: 0, y: 0, w: 6, h: 5, minH: 1, minW: 3 },
+  { i: "twitter", x: 6, y: 0, w: 4, h: 5, minH: 1, minW: 2 },
+  { i: "coinMarket", x: 10, y: 0, w: 4, h: 5, minH: 2, minW: 4, maxH: 5 },
+  { i: "tradingView", x: 0, y: 10, w: 11, h: 8, minH: 4, minW: 4 },
   {
     i: "tradingViewSpeedometer",
     x: 11,
@@ -212,9 +212,9 @@ const Dashboardpage = () => {
     if (dashboardContext.breakpoint === "xs") {
       setLayoutSize({ size: 40 });
     } else if (dashboardContext.breakpoint === "md") {
-      setLayoutSize({ size: 135 });
+      setLayoutSize({ size: 90 });
     } else if (dashboardContext.breakpoint === "lg") {
-      setLayoutSize({ size: 135 });
+      setLayoutSize({ size: 90 });
     }
   };
   useEffect(() => {

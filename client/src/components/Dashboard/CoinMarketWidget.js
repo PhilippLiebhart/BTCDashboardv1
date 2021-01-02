@@ -72,7 +72,7 @@ const CoinMarketWidget = () => {
           </tr>
         </thead>
         <tbody>
-          {coinmarketData?.data?.slice(0, 7).map((coin, index) => {
+          {coinmarketData?.data?.slice(0, 15).map((coin, index) => {
             return (
               <tr key={index}>
                 <td className="">{coin.name}</td>
