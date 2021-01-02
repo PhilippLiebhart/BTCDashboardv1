@@ -3,12 +3,30 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Spinner from "../UI/Spinner";
 
+import PHEMEXLogo from "../../assets/exchangeLogos/phemex.svg";
+import BYBITLogo from "../../assets/exchangeLogos/bybit.png";
+import BITMEXLogo from "../../assets/exchangeLogos/bitmex.svg";
+import BINANCELogo from "../../assets/exchangeLogos/binance.svg";
+
+const LOGOS = {
+  PHEMEX: PHEMEXLogo,
+  BYBIT: BYBITLogo,
+  BITMEX: BITMEXLogo,
+  BINANCE: BINANCELogo,
+};
+
 const TickerCard = ({ name, last, vol, high, low, status, layoutStatus }) => {
   const tickerCard = (
     <TickerCardWrapper>
       <div className="row">
         <div className="col-exchangeName">
-          <ExchangeName isMobile={layoutStatus === "xs"}>{name} </ExchangeName>
+          {layoutStatus === "xs" ? (
+            <img src={LOGOS[name]} alt="" width="20px" />
+          ) : (
+            <ExchangeName isMobile={layoutStatus === "xs"}>
+              {name}{" "}
+            </ExchangeName>
+          )}
         </div>
         <div className="col-price">
           <Price className="price" isMobile={layoutStatus === "xs"}>
@@ -50,6 +68,11 @@ const TickerCardWrapper = styled.div`
 
   .col-exchangeName {
     text-align: center;
+
+    img {
+      padding: 0;
+      margin: 0;
+    }
   }
   .col-price {
     text-align: center;

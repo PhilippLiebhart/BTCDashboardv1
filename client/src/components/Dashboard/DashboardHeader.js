@@ -147,11 +147,7 @@ const DashboardheaderWrapper = styled.div`
       padding-top: 2px; */
       width: 25px;
     }
-    @media (max-width: 700px) {
-      /* margin: 15px 0 0 0; */
-      img {
-        width: 15px;
-      }
+
     }
 
     h3 {
