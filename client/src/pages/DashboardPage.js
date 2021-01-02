@@ -216,7 +216,8 @@ const Dashboardpage = () => {
   };
   useEffect(() => {
     getRowHeight();
-  }, [layoutState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
