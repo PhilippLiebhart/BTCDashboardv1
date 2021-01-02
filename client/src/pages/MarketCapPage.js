@@ -143,7 +143,11 @@ const MarketCapPageWrapper = styled.div`
     border-spacing: 0px;
     background-color: var(--dashWidgetBgDarker);
     cursor: crosshair;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
+    @media (min-width: 780px) {
+      margin: 50px auto;
+      font-size: 0.9rem;
+    }
   }
 
   tr.row-effect:hover {

@@ -3,26 +3,32 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Spinner from "../UI/Spinner";
 
-const TickerCard = ({ name, last, vol, high, low, status }) => {
+const TickerCard = ({ name, last, vol, high, low, status, layoutStatus }) => {
   const tickerCard = (
     <TickerCardWrapper>
       <div className="row">
         <div className="col-exchangeName">
-          <ExchangeName>{name}</ExchangeName>
+          <ExchangeName isMobile={layoutStatus === "xs"}>{name} </ExchangeName>
         </div>
-        <div>+15%</div>
-      </div>
-      <hr />
-      <div className="row">
         <div className="col-price">
-          <Price className="price">{last} $</Price>
+          <Price className="price" isMobile={layoutStatus === "xs"}>
+            {last}
+          </Price>
         </div>
-        <div className="col-data">
-          <Volume>Vol {vol}</Volume>
-          <Volume>High {high}</Volume>
-          <Volume>Low {low}</Volume>
+        <div className="col-currency">
+          <Price className="price" isMobile={layoutStatus === "xs"}>
+            {" "}
+            $
+          </Price>
         </div>
       </div>
+      <Hr isMobile={layoutStatus === "xs"} />
+
+      <AdditionalData isMobile={layoutStatus === "xs"}>
+        <Volume>Vol {vol}</Volume>
+        <Volume>High {high}</Volume>
+        <Volume>Low {low}</Volume>
+      </AdditionalData>
     </TickerCardWrapper>
   );
 
@@ -34,72 +40,65 @@ export default TickerCard;
 const TickerCardWrapper = styled.div`
   padding: 16px 16px 16px 16px;
   @media (max-width: 576px) {
-    padding: 10px;
+    padding: 13px 10px 10px 10px;
   }
 
   .row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    align-content: center;
-
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-    }
+    grid-template-columns: 1fr 100px 1fr;
   }
 
   .col-exchangeName {
-    text-align: left;
+    text-align: center;
   }
-
-  .col-right {
-    text-align: left;
-    @media (max-width: 576px) {
-      text-align: center;
-    }
+  .col-price {
+    text-align: center;
   }
-
-  .col-data {
-    width: 100%;
-  }
-
-  hr {
-    height: 1px;
-    border-color: var(--secondary);
-    width: 100%;
-    padding: 0;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
-    @media (max-width: 576px) {
-      margin: 5px auto;
-    }
+  .col-currency {
+    text-align: center;
+    width: 15px;
+    right: 10px;
+    position: relative;
+    justify-self: end;
   }
 `;
 
-const ExchangeName = styled.h1`
-  font-size: 0.8rem;
-  font-weight: 600;
+const Hr = styled.hr`
+  display: ${(props) => (props.isMobile ? "none" : "flex")};
 
+  height: 1px;
+  border-color: var(--secondary);
+  width: 100%;
+  padding: 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
   @media (max-width: 576px) {
-    font-size: 0.8rem;
-    text-align: center;
+    margin: 5px auto;
   }
+`;
+const ExchangeName = styled.div`
+  font-weight: 600;
+  font-size: ${(props) => (props.isMobile ? "1rem" : "0.8rem")};
 `;
 
 const Price = styled.span`
   font-size: 1rem;
   font-weight: 600;
-  @media (max-width: 576px) {
-    font-size: 1.2rem;
-  }
+  font-size: ${(props) => (props.isMobile ? "1rem" : "1rem")};
+`;
+const AdditionalData = styled.div`
+  display: ${(props) => (props.isMobile ? "none" : "flex")};
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 
-const Volume = styled.p`
+const Volume = styled.span`
   font-size: 0.6rem;
-  line-height: 0;
+  /* line-height: 0; */
   font-weight: 500;
   @media (max-width: 576px) {
     line-height: 2px;

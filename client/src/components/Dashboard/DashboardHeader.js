@@ -6,7 +6,7 @@ import averageSymbol from "../../assets/img/symbol-average.svg";
 import { DashboardContext } from "../../context/DashboardContext";
 import Spinner from "../UI/Spinner";
 
-const Dashboardheader = ({ averagePrice }) => {
+const Dashboardheader = ({ averagePrice, layoutStatus }) => {
   const coinMarketData = useContext(DashboardContext);
 
   const tickDirectionRef = useRef();
@@ -27,17 +27,19 @@ const Dashboardheader = ({ averagePrice }) => {
 
   return (
     <DashboardheaderWrapper>
-      <AveragePrice className="header__item" direction={averagePriceDirection}>
+      <AveragePrice
+        className="header__item"
+        direction={averagePriceDirection}
+        isMobile={layoutStatus === "xs"}
+      >
         <img src={averageSymbol} alt="" />
-        <h1 className="">
-          {averagePrice !== "NaN" ? averagePrice : <Spinner />}
-        </h1>
+        <h1>{averagePrice !== "NaN" ? averagePrice : <Spinner />} %</h1>
       </AveragePrice>
       <div className="header__item">
         <Percent24h direction={coinMarketData?.direction}>
           <h3>
-            24h Change: {coinMarketData?.percent24h > 0 ? "+ " : "- "}
-            {coinMarketData?.percent24h}
+            24h Change: {coinMarketData?.percent24h > 0 ? "+ " : " "}
+            {coinMarketData?.percent24h} %
           </h3>
         </Percent24h>
       </div>
@@ -53,7 +55,8 @@ const Dashboardheader = ({ averagePrice }) => {
             24h Winner: {coinMarketData?.winner24h?.name} |{" "}
             {coinMarketData?.winner24h?.quote?.USD?.percent_change_24h.toFixed(
               2
-            )}
+            )}{" "}
+            %
           </WinnerLoser>
 
           <WinnerLoser
@@ -66,7 +69,8 @@ const Dashboardheader = ({ averagePrice }) => {
             24h Loser: {coinMarketData?.loser24h?.name} |{" "}
             {coinMarketData?.loser24h?.quote?.USD?.percent_change_24h.toFixed(
               2
-            )}
+            )}{" "}
+            %
           </WinnerLoser>
         </Percent24h>
       </div>
@@ -90,12 +94,10 @@ const AveragePrice = styled.div`
 
   color: ${(props) =>
     props.direction === "up" ? "var(--success)" : "var(--danger)"};
-  width: 240px;
-  @media (max-width: 576px) {
-    width: 130px;
-    h1 {
-      text-align: center;
-    }
+  width: ${(props) => (props.isMobile ? "350px" : "240px")};
+
+  h1 {
+    font-size: ${(props) => (props.isMobile ? "2.8rem" : "2.5rem")};
   }
 `;
 
@@ -111,18 +113,15 @@ const DashboardheaderWrapper = styled.div`
   align-items: center;
   margin-bottom: 0px;
   margin-top: 0px;
-  height: 100px;
-
-  @media (max-width: 576px) {
-    height: auto;
-  }
+  /* height: 100px; */
 
   h1 {
     text-shadow: -1px -1px 30px rgba(0, 0, 0, 0.2);
-
-    @media (max-width: 700px) {
+    margin: 0;
+    margin-bottom: 10px;
+    /* @media (max-width: 700px) {
       font-size: 1.2rem;
-    }
+    } */
   }
 
   h3 {
@@ -149,7 +148,7 @@ const DashboardheaderWrapper = styled.div`
       width: 25px;
     }
     @media (max-width: 700px) {
-      margin: 15px 0 0 0;
+      /* margin: 15px 0 0 0; */
       img {
         width: 15px;
       }

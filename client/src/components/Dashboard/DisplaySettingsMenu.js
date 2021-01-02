@@ -12,7 +12,7 @@ const DisplaySettingsMenu = ({
         <input type="checkbox" id="expand" />
         <span class="slider"></span>
         <div id="menuItemsWrapper">
-          <DisplayButton onClick={() => reset()}>Reset</DisplayButton>
+          <DisplayButton onClick={() => reset()}>Reset Layout</DisplayButton>
           {Object.entries(displaySettings).map(([key, val]) => {
             return (
               <DisplayButton
@@ -33,9 +33,9 @@ const DisplaySettingsMenu = ({
 
 const DashboardFilterWrapper = styled.div`
   font-size: 0.8rem !important;
-  position: absolute;
+  position: relative;
   top: 10px;
-  left: 80px;
+  left: 12px;
 
   /* SHOW / HIDE MENU */
 
@@ -58,8 +58,9 @@ const DashboardFilterWrapper = styled.div`
   #menuItemsWrapper {
     position: relative;
     z-index: 1000;
-    border: 1px solid white;
-    background: black;
+    border: 2px solid var(--dashWidgetBgDark);
+    background: var(--dashWidgetBgDarker);
+    border-radius: 10px;
     width: fit-content;
     display: grid;
     flex-wrap: wrap;
@@ -68,9 +69,8 @@ const DashboardFilterWrapper = styled.div`
 
     opacity: 0;
 
-    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transform: translateY(-100%);
-
     transition: visibility 0s linear 0.33s, opacity 0.33s linear,
       transform 0.3s ease;
   }

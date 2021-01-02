@@ -16,6 +16,7 @@ const ROUTES = {
   coinMarketCap: "/coinMarketCap",
   tradingView: "/tradingView",
   settings: "/settings",
+  root: "/",
 };
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 
       <Switch>
         <Route exact path={ROUTES.home} component={Homepage} />
+        <Route exact path={ROUTES.root} component={Homepage} />
         <Route exact path={ROUTES.dashboard} component={Dashboardpage} />
         <Route exact path={ROUTES.coinMarketCap} component={MarketCapPage} />
         <Route exact path={ROUTES.tradingView} component={TradingViewPage} />
@@ -35,6 +37,7 @@ function App() {
           component={TradingViewSpeedometer}
         />
         <Route exact path={ROUTES.settings} component={BTCDash404Page} />
+
         <Route path="/404" component={BTCDash404Page} />
         <Redirect from="*" to="/404" />
       </Switch>

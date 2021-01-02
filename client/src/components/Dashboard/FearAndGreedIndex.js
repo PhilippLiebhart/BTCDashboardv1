@@ -23,13 +23,19 @@ const FearAndGreedIndex = () => {
 };
 
 const FearAndGreedWrapper = styled.div`
-  height: 60%;
+  height: 40%;
   border-radius: 10px;
   text-align: center;
   color: var(--primary);
 
   h6 {
     font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
+  }
+  h4 {
+    padding: 0;
+    margin: 0;
   }
 
   .grid {

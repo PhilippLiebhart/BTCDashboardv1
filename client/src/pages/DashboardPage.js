@@ -74,32 +74,32 @@ const layoutMD = [
 
 const layoutXS = [
   { i: "bitmexTicker", x: 0, y: 0, w: 1, h: 1, maxH: 1 },
-  { i: "binanceTicker", x: 2, y: 0, w: 1, h: 1, maxH: 1 },
-  { i: "phemexTicker", x: 0, y: 0, w: 1, h: 1, maxH: 1 },
-  { i: "bybitTicker", x: 2, y: 0, w: 1, h: 1, maxH: 1 },
-  { i: "NewsFeed", x: 0, y: 0, w: 12, h: 3, minH: 1 },
-  { i: "twitter", x: 0, y: 0, w: 12, h: 3, minH: 1 },
-  { i: "feargreed", x: 0, y: 0, w: 1, h: 1, maxW: 12, maxH: 1 },
+  { i: "binanceTicker", x: 1, y: 0, w: 1, h: 1, maxH: 1 },
+  { i: "phemexTicker", x: 0, y: 1, w: 1, h: 1, maxH: 1 },
+  { i: "bybitTicker", x: 1, y: 1, w: 1, h: 1, maxH: 1 },
+  { i: "NewsFeed", x: 1, y: 4, w: 1, h: 6, minH: 1 },
+  { i: "twitter", x: 1, y: 3, w: 1, h: 5, minH: 1 },
+  { i: "feargreed", x: 0, y: 3, w: 1, h: 2, maxW: 2, maxH: 2, minH: 2 },
   {
     i: "coinMarket",
     x: 0,
-    y: 0,
-    w: 11,
-    h: 3,
-    minH: 3,
+    y: 4,
+    w: 1,
+    h: 9,
+    minH: 8,
     maxW: 12,
     minW: 12,
-    maxH: 3,
+    maxH: 8,
   },
-  { i: "tradingView", x: 0, y: 0, w: 12, h: 4, minH: 2 },
+  { i: "tradingView", x: 0, y: 7, w: 12, h: 8, minH: 2 },
   {
     i: "tradingViewSpeedometer",
     x: 0,
-    y: 0,
-    w: 12,
-    h: 3,
-    minH: 2,
-    maxH: 3,
+    y: 6,
+    w: 2,
+    h: 9,
+    minH: 9,
+    maxH: 9,
   },
 ];
 
@@ -159,6 +159,8 @@ const Dashboardpage = () => {
     originalDisplaySettings
   );
 
+  const [layoutSize, setLayoutSize] = useState({ size: 135 });
+
   useEffect(() => {
     setAveragePrice(
       (
@@ -204,12 +206,26 @@ const Dashboardpage = () => {
     saveToLS("displaySettings", displaySettings, "settings");
   }, [displaySettings]);
 
+  const getRowHeight = () => {
+    console.log("$$$$$ HULA $$$$$", dashboardContext.breakpoint);
+
+    if (dashboardContext.breakpoint === "xs") {
+      setLayoutSize({ size: 40 });
+    } else if (dashboardContext.breakpoint === "md") {
+      setLayoutSize({ size: 135 });
+    } else if (dashboardContext.breakpoint === "lg") {
+      setLayoutSize({ size: 135 });
+    }
+  };
+  useEffect(() => {
+    getRowHeight();
+    console.log("+++++++++++++", layoutSize);
+  }, [layoutState]);
+
   return (
     <>
       <DashboardWrapper direction={dashboardContext.direction}>
         {/* <button onClick={() => resetLayout()}>Reset Layout</button> */}
-
-        <DashboardHeader averagePrice={averagePrice} />
 
         <DisplaySettingsMenu
           saveToLs={() =>
@@ -219,9 +235,13 @@ const Dashboardpage = () => {
           handleDisplaySettings={(itemKey) => handleDisplaySettings(itemKey)}
           reset={() => resetLayout()}
         />
+        <DashboardHeader
+          averagePrice={averagePrice}
+          layoutStatus={dashboardContext.breakpoint}
+        />
 
         <ResponsiveGridLayout
-          rowHeight={135}
+          rowHeight={layoutSize.size}
           //cols={16}
           className="layout"
           onResize={onResize}
@@ -252,6 +272,7 @@ const Dashboardpage = () => {
                 high={parseFloat(bitmexTickerData?.high?.toFixed(2))}
                 low={parseFloat(bitmexTickerData?.low?.toFixed(2))}
                 status={bitmexConnStatus}
+                layoutStatus={dashboardContext.breakpoint}
               />
             </div>
           </div>
@@ -271,6 +292,7 @@ const Dashboardpage = () => {
                 high={parseFloat(binanceTickerData?.high?.toFixed(2))}
                 low={parseFloat(binanceTickerData?.low?.toFixed(2))}
                 status={binanceConnStatus}
+                layoutStatus={dashboardContext.breakpoint}
               />
             </div>
           </div>
@@ -292,6 +314,7 @@ const Dashboardpage = () => {
                 high={phemexTickerData?.high / 10000}
                 low={phemexTickerData?.low / 10000}
                 status={connStatus}
+                layoutStatus={dashboardContext.breakpoint}
               />
             </div>
           </div>
@@ -313,6 +336,7 @@ const Dashboardpage = () => {
                 high={bybitTickerData?.high / 10000}
                 low={bybitTickerData?.low / 10000}
                 status={bybitConnStatus}
+                layoutStatus={dashboardContext.breakpoint}
               />
             </div>
           </div>

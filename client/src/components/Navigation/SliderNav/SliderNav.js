@@ -48,7 +48,7 @@ const SliderNav = ({ location, history }) => {
           onClick={() => setNavState({ expanded: !navState.expanded })}
         />
         <SideNav.Nav defaultSelected="/">
-          <NavItem eventKey="" active={location.pathname === "/"}>
+          <NavItem eventKey="" active={location.pathname === ROUTE_NAMES.home}>
             <NavIcon>
               <img src={homeIcon} width="40px" alt="" className="src" />
             </NavIcon>

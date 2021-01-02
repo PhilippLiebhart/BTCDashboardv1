@@ -67,7 +67,6 @@ const CoinMarketWidget = () => {
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">symbol</th>
             <th scope="col">24h % change</th>
             <th scope="col">Year added</th>
           </tr>
@@ -77,7 +76,6 @@ const CoinMarketWidget = () => {
             return (
               <tr key={index}>
                 <td className="">{coin.name}</td>
-                <td className="">{coin.symbol}</td>
                 <td className="">
                   {coin.quote.USD.percent_change_24h.toFixed(2)} %
                 </td>
