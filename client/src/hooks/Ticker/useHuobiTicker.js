@@ -28,7 +28,7 @@ const TICK_CONFIG = {
 const useHuobiTicker = () => {
   // const [huobiConnStatus, setHuobiConnStatus] = useState();
   // const [huobiTickerLastPrice, setHuobiTickerLastPrice] = useState();
-  const [huobiTickerData, setHuobiTickerData] = useState({});
+  const [huobiTickerData] = useState({});
   const socketRef = useRef();
 
   const wsInit = () => {
@@ -45,7 +45,7 @@ const useHuobiTicker = () => {
     };
 
     socketRef.current.onmessage = (message) => {
-      let tickData = message.data;
+      // let tickData = message.data;
       // socketRef.current.send(message);
       // console.log("tickData", tickData);
       var reader = new FileReader();

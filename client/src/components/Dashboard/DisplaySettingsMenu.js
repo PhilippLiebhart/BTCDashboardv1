@@ -142,16 +142,4 @@ const DisplayButton = styled.button`
   }
 `;
 
-const Button = styled.button`
-  background-color: var(--primary);
-  border-radius: 10px;
-  border: 1px solid var(--secondary);
-  outline: 0;
-
-  :active {
-    background-color: var(--dashWidgetBgDark);
-    color: white;
-  }
-`;
-
 export default DisplaySettingsMenu;

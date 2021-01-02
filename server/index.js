@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
@@ -7,7 +9,7 @@ import coinMarketCapAPI from "./modules/coinMarketCapAPI";
 import twitterAPI from "./modules/twitterAPI";
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 5000;
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -23,6 +25,10 @@ mongoDB
 
 // ############## ROUTES ###################
 const Tweet = require("./models/tweet");
+
+app.get("/", (req, res) => {
+  res.send("Hello to BTCDash API");
+});
 
 app.get("/all-tweets", (request, response) => {
   Tweet.find()
