@@ -9,7 +9,6 @@ import SliderNav from "./Navigation/SliderNav/SliderNav";
 
 function Layout(props) {
   const dashboardContext = useContext(DashboardContext);
-  console.log("##########", dashboardContext.breakpoint);
 
   return (
     <LayoutWrapper>

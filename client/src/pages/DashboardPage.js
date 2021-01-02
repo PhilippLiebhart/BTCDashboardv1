@@ -184,7 +184,6 @@ const Dashboardpage = () => {
 
   const onBreakpointChange = (breakpoint) => {
     layoutState.currentBreakpoint = breakpoint;
-    console.log("CURRENT LAYOUT", breakpoint);
     handleLayoutChange({ breakpoint: breakpoint });
     setLayoutState(layoutState);
   };
@@ -207,8 +206,6 @@ const Dashboardpage = () => {
   }, [displaySettings]);
 
   const getRowHeight = () => {
-    console.log("$$$$$ HULA $$$$$", dashboardContext.breakpoint);
-
     if (dashboardContext.breakpoint === "xs") {
       setLayoutSize({ size: 40 });
     } else if (dashboardContext.breakpoint === "md") {
@@ -219,7 +216,6 @@ const Dashboardpage = () => {
   };
   useEffect(() => {
     getRowHeight();
-    console.log("+++++++++++++", layoutSize);
   }, [layoutState]);
 
   return (
