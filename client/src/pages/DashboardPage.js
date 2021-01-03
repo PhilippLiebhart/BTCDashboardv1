@@ -22,7 +22,7 @@ import usePhemexTicker from "../hooks/Ticker/usePhemexTicker";
 import useBybitTicker from "../hooks/Ticker/useBybitTicker";
 import useBinanceTicker from "../hooks/Ticker/useBinanceTicker";
 import useBitmexTicker from "../hooks/Ticker/useBitmexTicker";
-import useHuobiTicker from "../hooks/Ticker/useHuobiTicker";
+// import useHuobiTicker from "../hooks/Ticker/useHuobiTicker";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
