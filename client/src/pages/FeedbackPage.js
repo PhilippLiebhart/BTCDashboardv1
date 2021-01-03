@@ -1,15 +1,25 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { withRouter, Route } from "react-router-dom";
+import Axios from "axios";
+
 import styled from "styled-components";
 
 const FeedbackPage = (props) => {
-  console.log(props, "-------------------------");
-
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = (values) => {
     console.log(values);
+
+    Axios.post("http://localhost:4000/sendemail", {
+      email: values.email,
+      name: values.name,
+      message: values.message,
+    }).then((res) => {
+      console.log("EMAIL RES", res);
+      console.log("EMAIL RES DATA", res.data);
+    });
+
     props.history.replace("/feedback/FeedbackPageSuccess");
   };
 
@@ -17,7 +27,11 @@ const FeedbackPage = (props) => {
     <FeedbackPageWrapper>
       <Route
         path={props.match.path + "/FeedbackPageSuccess"}
-        render={() => <h4>SUCCESSFULLY SENT! THANK YOU!</h4>}
+        render={() => (
+          <h4 style={{ color: "var(--secondary)" }}>
+            SUCCESSFULLY SENT! THANK YOU!
+          </h4>
+        )}
       />
 
       <h1 style={{ color: "var(--primary)" }}>Got Feedback / Questions?</h1>
