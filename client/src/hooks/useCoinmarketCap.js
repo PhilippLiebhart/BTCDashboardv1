@@ -5,7 +5,7 @@ const useCoinmarketCap = () => {
   const [coinmarketData, setCoinMarketData] = useState({});
 
   const fetchCoinmarketData = () => {
-    Axios.get(`http://localhost:4000/coinMarketCap`)
+    Axios.get(`https://btcdashserver.herokuapp.com/coinMarketCap`)
       .then((res) => {
         console.log("useCoinmarketCap RESULT:", res);
         setCoinMarketData(res.data);
