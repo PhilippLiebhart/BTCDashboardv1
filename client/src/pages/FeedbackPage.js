@@ -11,7 +11,7 @@ const FeedbackPage = (props) => {
   const onSubmit = (values) => {
     console.log(values);
 
-    Axios.post("http://localhost:4000/sendemail", {
+    Axios.post("https://btcdashserver.herokuapp.com/sendemail", {
       email: values.email,
       name: values.name,
       message: values.message,
