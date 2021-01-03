@@ -15,7 +15,6 @@ import { useState } from "react";
 
 import logo from "../../../assets/img/logo.svg";
 import homeIcon from "../../../assets/navItems/homeIcon.png";
-import settingsIcon from "../../../assets/navItems/settingsIcon.png";
 import feedbackIcon from "../../../assets/navItems/feedbackIcon.png";
 import coinmarketIcon from "../../../assets/navItems/coinmarketIcon.png";
 import chartIcon from "../../../assets/navItems/chartIcon.png";
