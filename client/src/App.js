@@ -9,6 +9,7 @@ import Layout from "./components/Layout";
 import TradingViewPage from "./pages/TradingViewPage";
 import TradingViewSpeedometer from "./components/Dashboard/TradingViewSpeedometer";
 import BTCDash404Page from "./pages/BTCDash404Page";
+import FeedbackPage from "./pages/FeedbackPage";
 
 const ROUTES = {
   home: "/home",
@@ -16,6 +17,7 @@ const ROUTES = {
   coinMarketCap: "/coinMarketCap",
   tradingView: "/tradingView",
   settings: "/settings",
+  feedback: "/feedback",
   root: "/",
 };
 
@@ -30,6 +32,7 @@ function App() {
         <Route exact path={ROUTES.dashboard} component={Dashboardpage} />
         <Route exact path={ROUTES.coinMarketCap} component={MarketCapPage} />
         <Route exact path={ROUTES.tradingView} component={TradingViewPage} />
+        <Route path={ROUTES.feedback} component={FeedbackPage} />
 
         <Route
           path="/tradingViewSpeed"

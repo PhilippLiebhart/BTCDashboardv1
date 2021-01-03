@@ -7,6 +7,7 @@ import morgan from "morgan";
 import mongoDB from "./modules/mongoDB";
 import coinMarketCapAPI from "./modules/coinMarketCapAPI";
 import twitterAPI from "./modules/twitterAPI";
+import feedbackFormAPI from "./modules/feedbackFormAPI";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -45,4 +46,18 @@ app.get("/coinMarketCap", (request, response) => {
     .catch((err) => {
       console.log("API call error:", err.message);
     });
+});
+
+/// SEND FEEDBACK EMAIL
+var path = require("path");
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public"))); // serving our contact form on '/' route
+// route which captures form details and sends it to your personal mail
+// const dbURI = process.env.DATABASE_URI;
+
+app.post("/sendemail", (req, res, next) => {
+  feedbackFormAPI.sendFeedback(req);
 });
