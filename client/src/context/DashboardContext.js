@@ -11,7 +11,7 @@ const DashboardContextProvider = (props) => {
   });
 
   const [layoutStatus, setLayoutStatus] = useState({
-    breakpoint: "lg",
+    breakpoint: "xs",
   });
 
   const handleLayoutChange = (props) => {

@@ -11,7 +11,7 @@ function Layout(props) {
   const dashboardContext = useContext(DashboardContext);
 
   return (
-    <LayoutWrapper>
+    <LayoutWrapper isMobile={dashboardContext.breakpoint === "xs"}>
       {dashboardContext.breakpoint === "xs" ? <MobileNav /> : <SliderNav />}
 
       <main className="main">{props.children}</main>
@@ -24,7 +24,7 @@ function Layout(props) {
 export default Layout;
 
 const LayoutWrapper = styled.div`
-  padding-left: 57px;
+  padding-left: ${(props) => (props.isMobile ? "0px" : "57px")};
 
   @media only screen and (max-width: 785px) {
     padding: 0;

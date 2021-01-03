@@ -16,6 +16,7 @@ import { useState } from "react";
 import logo from "../../../assets/img/logo.svg";
 import homeIcon from "../../../assets/navItems/homeIcon.png";
 import settingsIcon from "../../../assets/navItems/settingsIcon.png";
+import feedbackIcon from "../../../assets/navItems/feedbackIcon.png";
 import coinmarketIcon from "../../../assets/navItems/coinmarketIcon.png";
 import chartIcon from "../../../assets/navItems/chartIcon.png";
 
@@ -26,6 +27,7 @@ const ROUTE_NAMES = {
   dasboard: "/dashboard",
   tradingView: "/tradingView",
   coinMarketCap: "/coinMarketCap",
+  feedback: "/feedback",
 };
 
 const SliderNav = ({ location, history }) => {
@@ -89,7 +91,18 @@ const SliderNav = ({ location, history }) => {
               <p className="nav-text">Coin Market Cap</p>
             </NavText>
           </NavItem>
-          <NavItem eventKey="settings">
+          <NavItem
+            eventKey="feedback"
+            active={location.pathname === ROUTE_NAMES.feedback}
+          >
+            <NavIcon>
+              <img src={feedbackIcon} width="40px" alt="" className="src" />
+            </NavIcon>
+            <NavText>
+              <p className="nav-text">Coin Market Cap</p>
+            </NavText>
+          </NavItem>
+          {/* <NavItem eventKey="settings">
             <NavIcon>
               <img src={settingsIcon} width="40px" alt="" className="src" />
             </NavIcon>
@@ -103,7 +116,7 @@ const SliderNav = ({ location, history }) => {
             <NavItem eventKey="charts/barchart">
               <NavText>Exchanges</NavText>
             </NavItem>
-          </NavItem>
+          </NavItem> */}
         </SideNav.Nav>
       </SideNav>
     </SliderNavWrapper>
