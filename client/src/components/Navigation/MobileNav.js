@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/img/logo.svg";
 import homeIcon from "../../assets/navItems/homeIcon.png";
 import coinmarketIcon from "../../assets/navItems/coinmarketIcon.png";
+import feedbackIcon from "../../assets/navItems/feedbackIcon.png";
 import chartIcon from "../../assets/navItems/chartIcon.png";
 
 const ROUTE_NAMES = {
@@ -11,6 +12,7 @@ const ROUTE_NAMES = {
   dasboard: "/dashboard",
   tradingView: "/tradingView",
   coinMarketCap: "/coinMarketCap",
+  feedback: "/feedback",
 };
 
 const MobileNav = (props) => {
@@ -28,6 +30,9 @@ const MobileNav = (props) => {
         </NavLink>
         <NavLink to={ROUTE_NAMES.coinMarketCap} activeClassName="activeLink">
           <img src={coinmarketIcon} width="40px" alt="" className="src" />
+        </NavLink>
+        <NavLink to={ROUTE_NAMES.feedback} activeClassName="activeLink">
+          <img src={feedbackIcon} width="40px" alt="" className="src" />
         </NavLink>
       </MobileNavWrapper>
     </>

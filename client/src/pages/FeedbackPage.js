@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { withRouter, Route } from "react-router-dom";
 import Axios from "axios";
@@ -24,75 +23,82 @@ const FeedbackPage = (props) => {
   };
 
   return (
-    <FeedbackPageWrapper>
-      <Route
-        path={props.match.path + "/FeedbackPageSuccess"}
-        render={() => (
-          <h4 style={{ color: "var(--secondary)" }}>
-            SUCCESSFULLY SENT! THANK YOU!
-          </h4>
-        )}
-      />
+    <div style={{ padding: "50px" }}>
+      <FeedbackPageWrapper>
+        <Route
+          path={props.match.path + "/FeedbackPageSuccess"}
+          render={() => (
+            <h4 style={{ color: "var(--secondary)" }}>
+              SUCCESSFULLY SENT! THANK YOU!
+            </h4>
+          )}
+        />
 
-      <h1 style={{ color: "var(--primary)" }}>Got Feedback / Questions?</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputFieldsGrid>
-          <InputfieldWrapper>
-            <input
-              name="name"
-              ref={register({
-                required: "Required",
-                minLength: 2,
-              })}
-            />
-            <label className="label-name">
-              <span className="content-name">Name:* </span>{" "}
-            </label>{" "}
-            {errors.name && errors.name.message && (
-              <p className="error__message">name is required</p>
-            )}
-          </InputfieldWrapper>
+        <h1 style={{ color: "var(--primary)" }}>Got Feedback / Questions?</h1>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <InputFieldsGrid>
+            <InputfieldWrapper>
+              <input
+                name="name"
+                ref={register({
+                  required: "Required",
+                  minLength: 2,
+                  autoComplete: "off",
+                })}
+                autoComplete="off"
+              />
+              <label className="label-name">
+                <span className="content-name">Name:* </span>{" "}
+              </label>{" "}
+              {errors.name && errors.name.message && (
+                <p className="error__message">name is required</p>
+              )}
+            </InputfieldWrapper>
 
-          <InputfieldWrapper>
-            <input
-              name="email"
-              ref={register({
-                required: "Required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "invalid email address",
-                },
-              })}
-            />
-            <label className="label-name">
-              <span className="content-name">e-Mail Adress:*</span>
-            </label>
-            {errors.email && errors.email.message && (
-              <p className="error__message">valid e-mail adress is required</p>
-            )}
-          </InputfieldWrapper>
+            <InputfieldWrapper>
+              <input
+                name="email"
+                ref={register({
+                  required: "Required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "invalid email address",
+                  },
+                })}
+                autoComplete="off"
+              />
+              <label className="label-name">
+                <span className="content-name">e-Mail Adress:*</span>
+              </label>
+              {errors.email && errors.email.message && (
+                <p className="error__message">
+                  valid e-mail adress is required
+                </p>
+              )}
+            </InputfieldWrapper>
 
-          <InputfieldWrapper>
-            <textarea
-              name="message"
-              ref={register({
-                required: "Required",
-              })}
-            />
-            <label className="label-name">
-              <span className="content-name">Message:*</span>
-            </label>
-            {errors.message && errors.message.message && (
-              <p className="error__message">message is required</p>
-            )}
-          </InputfieldWrapper>
-        </InputFieldsGrid>
+            <InputfieldWrapper>
+              <textarea
+                name="message"
+                ref={register({
+                  required: "Required",
+                })}
+              />
+              <label className="label-name">
+                <span className="content-name">Message:*</span>
+              </label>
+              {errors.message && errors.message.message && (
+                <p className="error__message">message is required</p>
+              )}
+            </InputfieldWrapper>
+          </InputFieldsGrid>
 
-        <ButtonSubmit type="submit">
-          <span>Submit</span>
-        </ButtonSubmit>
-      </form>
-    </FeedbackPageWrapper>
+          <ButtonSubmit type="submit">
+            <span>Submit</span>
+          </ButtonSubmit>
+        </form>
+      </FeedbackPageWrapper>
+    </div>
   );
 };
 
@@ -115,8 +121,9 @@ const FeedbackPageWrapper = styled.div`
   }
 
   form {
+    width: 300px;
     input {
-      width: 600px;
+      width: 300px;
       height: 100%;
       padding-top: 15px;
       border: none;
