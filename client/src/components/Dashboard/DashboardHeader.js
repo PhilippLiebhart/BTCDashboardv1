@@ -25,16 +25,21 @@ const Dashboardheader = ({ averagePrice, layoutStatus }) => {
     }
   }, [averagePrice, lastAveragePrice]);
 
+  const headerAveragePrice = (
+    <AveragePrice
+      className="header__item"
+      direction={averagePriceDirection}
+      isMobile={layoutStatus === "xs"}
+    >
+      <img src={averageSymbol} alt="" />
+      <h1>{averagePrice !== "NaN" ? averagePrice : <Spinner />} %</h1>
+    </AveragePrice>
+  );
+
   return (
     <DashboardheaderWrapper>
-      <AveragePrice
-        className="header__item"
-        direction={averagePriceDirection}
-        isMobile={layoutStatus === "xs"}
-      >
-        <img src={averageSymbol} alt="" />
-        <h1>{averagePrice !== "NaN" ? averagePrice : <Spinner />} %</h1>
-      </AveragePrice>
+      {averagePrice !== "NaN" ? headerAveragePrice : <Spinner />}
+
       <div className="header__item">
         <Percent24h direction={coinMarketData?.direction}>
           <h3>
